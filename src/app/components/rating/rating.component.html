@@ -1,0 +1,5 @@
+<ion-item class="five-star">
+  <span slot="start" class="dot"></span>
+  <ion-label>{{name}}</ion-label>
+  <ion-icon name="star" *ngFor="let num of [1,2,3,4,5]" (click)="rate(num)" [ngStyle]="{'color':getColor(num)}"></ion-icon>
+</ion-item>

@@ -1,5 +1,7 @@
 {
   "name": "whatthefuckionic",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
