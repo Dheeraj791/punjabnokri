@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserData } from '../../providers/user-data';
 import { UserOptions } from '../../interfaces/user-options';
 import { User } from '../../models/user';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-login',
@@ -14,12 +15,21 @@ export class LoginPage {
   login: UserOptions;
   submitted = false;
   user: User;
+  selectedType: string;
 
   constructor(
     public userData: UserData,
-    public router: Router
-  ) { 
-    this.user = new User; 
+    public router: Router,
+    private storage: Storage
+  ) {
+    this.user = new User;
+  }
+
+  onNgInit() {
+    this.storage.get('user_type').then(res => {
+      this.selectedType = res;
+    }
+    );
   }
 
   onLogin(form: NgForm) {
@@ -32,6 +42,13 @@ export class LoginPage {
   }
 
   onSignup() {
-    this.router.navigateByUrl('/signup');
+    if (this.selectedType == 'jobseeker') {
+      this.router
+        .navigateByUrl('/signup-jobseeker');
+    }
+    else {
+      this.router
+        .navigateByUrl('/signup-employer');
+    }
   }
 }

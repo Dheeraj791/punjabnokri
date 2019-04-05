@@ -11,7 +11,11 @@ import { Storage } from '@ionic/storage';
 })
 export class TutorialPage {
   showSkip = true;
-  selectedType: string = 'employee';
+  selectedType: string = 'jobseeker';
+  selectedTypes: any = {
+    'employer': 'Job Seeker',
+    'jobseeker': 'Employers'
+  };
 
   @ViewChild('slides') slides: IonSlides;
 
@@ -24,9 +28,17 @@ export class TutorialPage {
   }
 
   startApp() {
-    this.router
-      .navigateByUrl('/signup')
+    if(this.selectedType == 'jobseeker'){
+      this.router
+      .navigateByUrl('/signup-jobseeker')
       .then(() => /*this.storage.set('ion_did_tutorial', 'true') */ '');
+    }
+    else{
+      this.router
+      .navigateByUrl('/signup-employer')
+      .then(() => /*this.storage.set('ion_did_tutorial', 'true') */ '');
+    }
+   
   }
 
   onSlideChangeStart(event) {
@@ -53,13 +65,14 @@ export class TutorialPage {
 
 
   onSignin() {
+    
     this.router.navigateByUrl('/login');
   }
 
   onSwitchUserType() {
 
     this.storage.get('user_type').then(res => {
-      let user_type = (res === 'employee' ? 'employer' : 'employee');
+      let user_type = (res === 'jobseeker' ? 'employer' : 'jobseeker');
       this.storage.set('user_type', user_type);
       this.selectedType = user_type;
     }

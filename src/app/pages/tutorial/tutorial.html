@@ -6,7 +6,7 @@
 
     <ion-buttons slot="end" id="links">
       <button ion-button (click)="onSwitchUserType()" id="user-type">
-        {{selectedType}}
+        {{selectedTypes[selectedType]}}
       </button>
       <button ion-button (click)="onSignin()">
         Sign in
@@ -18,7 +18,7 @@
 
 <ion-content fullscreen id="tutorial">
   <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="true">
-    <div *ngIf="selectedType == 'employee'">
+    <div *ngIf="selectedType == 'jobseeker'">
       <ion-slide>
         <h2 class="slide-title">
             You Deserve Better

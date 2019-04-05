@@ -3,13 +3,14 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserData } from '../../providers/user-data';
 import { User } from '../../models/user';
+import { Storage } from '@ionic/storage';
 
 @Component({
-  selector: 'page-signup',
-  templateUrl: 'signup.html',
-  styleUrls: ['./signup.scss'],
+  selector: 'page-signup-jobseeker',
+  templateUrl: 'signup-jobseeker.html',
+  styleUrls: ['./signup-jobseeker.scss'],
 })
-export class SignupPage {
+export class SignupJobseekerPage {
   user: User;
   submitted = false;
   passwordConfirm: string;
@@ -22,10 +23,12 @@ export class SignupPage {
   industries: any;
   rating: number = 0;
   skills: Array<string>;
+  selectedType: string;
 
   constructor(
     public router: Router,
-    public userData: UserData
+    public userData: UserData,
+    private storage: Storage
   ) {
     this.user = new User;
     this.experienceEntries = [
@@ -64,6 +67,13 @@ export class SignupPage {
       'Skill 9',
       'Skill 10',
     ];
+  }
+
+  onNgInit() {
+    this.storage.get('user_type').then(res => {
+      this.selectedType = res;
+    }
+    );
   }
 
   onSignup(form: NgForm) {
@@ -157,8 +167,12 @@ export class SignupPage {
     );
   }
 
+  onRemoveExperience(i){
+    this.experienceEntries.splice(i, 1);
+  }
+
   onSeeMatches() {
-    this.router.navigateByUrl('/app/tabs/schedule');
+    this.router.navigateByUrl('/app/tabs/matches');
   }
 
   someFunction($event) {

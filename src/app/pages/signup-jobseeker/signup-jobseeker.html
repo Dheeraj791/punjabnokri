@@ -65,7 +65,7 @@
   </form>
 
   <p text-center>
-    <a href="/login">Signin</a>
+    <a href="/login">Sign In</a>
   </p>
 </ion-content>
 
@@ -124,6 +124,7 @@
       <ion-toggle color="success"></ion-toggle>
     </ion-item>
   </form>
+
   <ion-button (click)="onNextStep()" type="submit" expand="block">Next</ion-button>
 
 </ion-content>
@@ -149,7 +150,7 @@
 
   <p text-center bold>My experience</p>
 
-  <div *ngFor="let experience of experienceEntries">
+  <div *ngFor="let experience of experienceEntries; let i = index; ">
     <div class="inline">
       <ion-select placeholder="Years">
         <ion-select-option *ngFor="let year of [1,2,3,4,5,6,7,8,9,10,15,20]" [value]="year">{{year}}</ion-select-option>
@@ -158,11 +159,14 @@
       <ion-select placeholder="Industry">
         <ion-select-option *ngFor="let industry of industries" [value]="industry">{{industry}}</ion-select-option>
       </ion-select>
+      <a (click)="onRemoveExperience(i)"> <ion-icon class="remove-experience" name="remove-circle"></ion-icon></a>
     </div>
     <div style="clear:both;"></div>
   </div>
 
-  <ion-icon name="plus" style="font-size:30px;" (click)="onAddExperience()"></ion-icon>
+  <a (click)="onAddExperience()" class="add-experience text-center">
+      <ion-icon name="add-circle" (click)="onAddExperience()" class="add-experience"></ion-icon>
+  </a>
 
   <div padding>
     <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
@@ -193,8 +197,8 @@
   <h1 text-center>Show off your skills</h1>
 
   <div *ngFor="let skill of skills">
-      <rating [rating]="rating" [name]="skill"></rating>
-    </div>
+    <rating [rating]="rating" [name]="skill"></rating>
+  </div>
 
   <div padding>
     <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
@@ -223,4 +227,9 @@
   <div padding>
     <ion-button (click)="onSeeMatches()" type="submit" expand="block">See Matches</ion-button>
   </div>
+
+  <p>
+    By Signing Up, you agree to our <a routerLink="/terms">Terms & Conditions</a> and <a routerLink="/privacy">Privacy
+      Policy</a>.
+  </p>
 </ion-content>
