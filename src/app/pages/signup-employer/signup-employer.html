@@ -71,9 +71,41 @@
 
 <ion-content *ngIf="step == 2">
 
+  <ion-item>
+    <ion-label position="stacked" color="primary">Business Name</ion-label>
+    <ion-input name="password" type="text" required>
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked" color="primary">Head Office Address</ion-label>
+    <ion-input name="password" type="text" required>
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked" color="primary">About Us</ion-label>
+    <ion-textarea></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked" color="primary">Why join our team</ion-label>
+    <ion-textarea></ion-textarea>
+  </ion-item>
+
+</ion-content>
+
+<ion-content *ngIf="step == 3">
+
   <h1 text-center>My job seeking profile</h1>
 
   <form #seekingprofile="ngForm" novalidate>
+
+    <ion-item>
+      <ion-label position="stacked" color="primary">Job Title</ion-label>
+      <ion-textarea></ion-textarea>
+    </ion-item>
+
     <p text-center>Desired Employment Type</p>
     <ion-item>
       <span slot="start" class="dot"></span>
@@ -128,7 +160,21 @@
 
 </ion-content>
 
-<ion-content *ngIf="step == 3">
+<ion-content *ngIf="step == 4">
+
+  <ion-item>
+    <ion-label position="stacked" color="primary">Job Address</ion-label>
+    <ion-input type="text" required>
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked" color="primary">Job Description</ion-label>
+    <ion-textarea></ion-textarea>
+  </ion-item>
+</ion-content>
+
+<ion-content *ngIf="step == 5">
 
   <h1 text-center>My job seeking profile</h1>
 
@@ -143,7 +189,7 @@
 
 </ion-content>
 
-<ion-content *ngIf="step == 4">
+<ion-content *ngIf="step == 5">
 
   <h1 text-center>Highlight your experience</h1>
 
@@ -158,13 +204,15 @@
       <ion-select placeholder="Industry">
         <ion-select-option *ngFor="let industry of industries" [value]="industry">{{industry}}</ion-select-option>
       </ion-select>
-      <a (click)="onRemoveExperience(i)"> <ion-icon class="remove-experience" name="remove-circle"></ion-icon></a>
+      <a (click)="onRemoveExperience(i)">
+        <ion-icon class="remove-experience" name="remove-circle"></ion-icon>
+      </a>
     </div>
     <div style="clear:both;"></div>
   </div>
 
   <a (click)="onAddExperience()" class="add-experience text-center">
-      <ion-icon name="add-circle" (click)="onAddExperience()" class="add-experience"></ion-icon>
+    <ion-icon name="add-circle" (click)="onAddExperience()" class="add-experience"></ion-icon>
   </a>
 
   <div padding>
@@ -173,7 +221,7 @@
   </div>
 </ion-content>
 
-<ion-content *ngIf="step == 5">
+<ion-content *ngIf="step == 6">
   <h1 text-center>Show off your skills</h1>
 
   <div class="skill-header">
@@ -192,12 +240,12 @@
 
 </ion-content>
 
-<ion-content *ngIf="step == 6">
+<ion-content *ngIf="step == 7">
   <h1 text-center>Show off your skills</h1>
 
   <div *ngFor="let skill of skills">
-      <rating [rating]="rating" [name]="skill"></rating>
-    </div>
+    <rating [rating]="rating" [name]="skill"></rating>
+  </div>
 
   <div padding>
     <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
@@ -206,7 +254,7 @@
 
 </ion-content>
 
-<ion-content *ngIf="step == 7">
+<ion-content *ngIf="step == 8">
 
   <h1 text-center> Preview your profile</h1>
   <div padding>
@@ -216,7 +264,7 @@
 </ion-content>
 
 
-<ion-content *ngIf="step == 8">
+<ion-content *ngIf="step == 9">
   <p padding>
     Now let's go see your matches!
     You can edit your Profile, Experience and Skills
@@ -228,6 +276,7 @@
   </div>
 
   <p>
-      By Signing Up, you agree to our <a routerLink="/terms">Terms & Conditions</a>  and <a routerLink="/privacy">Privacy Policy</a>.
+    By Signing Up, you agree to our <a routerLink="/terms">Terms & Conditions</a> and <a routerLink="/privacy">Privacy
+      Policy</a>.
   </p>
 </ion-content>
