@@ -8,7 +8,14 @@ export class User {
     address: string = '';
     userType: string; 
 
-    constructor() {
-
+    constructor(data?: any) {
+        this.username = data.username; 
+        this.firstname = data.firstname; 
+        this.lastname = data.lastname; 
+        this.email = data.email; 
+        this.password = data.password; 
+        this.address = data.address; 
+        this.address = data.address; 
+        this.userType = data.userType; 
     }
 }

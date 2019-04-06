@@ -149,7 +149,7 @@
 
   <p text-center bold>My experience</p>
 
-  <div *ngFor="let experience of experienceEntries; index as i">
+  <div *ngFor="let experience of experienceEntries; let i = index; ">
     <div class="inline">
       <ion-select placeholder="Years">
         <ion-select-option *ngFor="let year of [1,2,3,4,5,6,7,8,9,10,15,20]" [value]="year">{{year}}</ion-select-option>
@@ -158,12 +158,14 @@
       <ion-select placeholder="Industry">
         <ion-select-option *ngFor="let industry of industries" [value]="industry">{{industry}}</ion-select-option>
       </ion-select>
-      <a (click)="onRemoveExperience()"> <ion-icon name="remove-circle"></ion-icon></a>
+      <a (click)="onRemoveExperience(i)"> <ion-icon class="remove-experience" name="remove-circle"></ion-icon></a>
     </div>
     <div style="clear:both;"></div>
   </div>
-  
-  <ion-icon name="add-circle" (click)="onAddExperience()" class="add-experience"></ion-icon>
+
+  <a (click)="onAddExperience()" class="add-experience text-center">
+      <ion-icon name="add-circle" (click)="onAddExperience()" class="add-experience"></ion-icon>
+  </a>
 
   <div padding>
     <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
