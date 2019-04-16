@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-
+import { Events } from '@ionic/angular';
 import { Subject } from 'rxjs';
 //import { DeviceService } from './device.service';
 
@@ -12,32 +12,45 @@ export class AuthService {
 	redirectUrl: string;
 
 	constructor(
-		private storage: Storage
+		private storage: Storage,
+		private events: Events
 	) {
 
 	}
 
-	authenticate(accessToken, minutes = 20) {
+	authenticate(accessToken) {
 		this.storage.set('accessToken', accessToken);
-		/* expires in ten minutes */
-		this.storage.set('isAuthenticated', true);
-		this.Authenticator.next(true);
+
+		this.storage.set('isAuthenticated', true).then(() => {
+			this.events.publish('user:login');
+			this.Authenticator.next(true);
+		});
+	}
+
+	getToken(): Promise<string> {
+		return this.storage.get('token').then((value) => {
+			return value;
+		});
 	}
 
 	checkAuthetication() {
 		this.Authenticator.next(true);
 	}
 
-	logout() {
+	logout(): Promise<any> {
 		//this.deviceService.deregister();
+		this.storage.remove('accessToken');
+		this.storage.remove('user');
+		return this.storage.remove('isAuthenticated').then(() => {
+			this.events.publish('user:logout');
+		}).then(() => {
+			this.Authenticator.next(false);
+		});
 
-		this.storage.set('accessToken', null);
-		this.storage.set('user', null);
-		this.storage.set('isAuthenticated', false);
-		this.Authenticator.next(false);
 	}
 
 	isAuthenticated(): boolean {
 		return this.storage.get('isAuthenticated') ? true : false;
 	}
+
 }

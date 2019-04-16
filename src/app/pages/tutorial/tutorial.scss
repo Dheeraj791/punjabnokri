@@ -1,26 +1,4 @@
-ion-toolbar {
-  // TODO test transparent and fullscreen
-  --background: transparent;
-  --border-color: transparent;
-  display:flex;
-  justify-content: flex-end;
-  align-items: center;
 
-  #links{
-    padding:10px;
-    button{
-      background-color:transparent;
-      font-size:14px;
-      &:last-child {
-        padding-right:0px;
-      }
-      &#user-type{
-        text-transform:capitalize;
-      }
-    }
-    
-  }
-}
 
 .swiper-slide {
   display: block;
@@ -60,4 +38,12 @@ p {
     bottom:20px;
     bottom:inherit;
  }
+}
+
+ion-slides{
+  height: calc(100vh - 100px) !important;
+  .box{
+    display: block;
+    vertical-align: initial;
+  }
 }

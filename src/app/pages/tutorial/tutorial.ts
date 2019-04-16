@@ -56,6 +56,11 @@ export class TutorialPage {
     });
 
     this.menu.enable(false);
+
+    this.storage.get('user_type').then(res => {
+      this.selectedType = res;
+    }
+    );
   }
 
   ionViewDidLeave() {

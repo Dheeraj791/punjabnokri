@@ -1,0 +1,35 @@
+<div class="circle">
+    <img src="./assets/img/hyrskills-logo.png" height="20">
+</div>
+
+<div>Job Seeker Name</div>
+
+<div>Job Seeker Address</div>
+
+<div class="match-score">
+
+</div>
+
+
+<div>Compatibility</div>
+
+<div class="skill-header">
+    <div class="skill-header-cell">High</div>
+    <div class="skill-header-cell">Low</div>
+</div>
+
+<div *ngFor="let skill of skills">
+    <rating [rating]="rating" [name]="skill"></rating>
+</div>
+
+<div id="selector">
+    <div id="thumbs-down">
+
+    </div>
+    <div id="more-info">
+        <a (click)="onMoreInfo()">More Info</a>
+    </div>
+    <div id="thumbs-up">
+
+    </div>
+</div>

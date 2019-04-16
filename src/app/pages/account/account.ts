@@ -22,7 +22,7 @@ export class AccountPage implements AfterViewInit {
   ) { }
 
   ngAfterViewInit() {
-    this.changeEmail();
+    
   }
 
   updatePicture() {

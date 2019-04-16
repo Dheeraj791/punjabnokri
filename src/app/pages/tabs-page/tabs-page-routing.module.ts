@@ -51,7 +51,21 @@ const routes: Routes = [
             loadChildren: '../account/account.module#AccountModule'
           }
         ]
+      },
+      {
+        path: 'profile',
+        children: [
+          {
+            path: 'candidate/:userId',
+            loadChildren: '../candidate/candidate.module#CandidateModule'
+          },
+          {
+            path: 'business/:businessId',
+            loadChildren: '../business/business.module#BusinessModule'
+          }
+        ]
       }
+     
     ]
   }
 ];

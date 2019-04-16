@@ -3,7 +3,11 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserData } from '../../providers/user-data';
 import { User } from '../../models/user';
+
 import { Storage } from '@ionic/storage';
+import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'page-signup-jobseeker',
@@ -13,6 +17,7 @@ import { Storage } from '@ionic/storage';
 export class SignupJobseekerPage {
   user: User;
   submitted = false;
+  password: string;
   passwordConfirm: string;
   confirm: boolean = false;
   emailValidate: boolean = false;
@@ -28,7 +33,10 @@ export class SignupJobseekerPage {
   constructor(
     public router: Router,
     public userData: UserData,
-    private storage: Storage
+    private storage: Storage,
+    private apiService: ApiService,
+    private authService: AuthService,
+    private userService: UserService
   ) {
     this.user = new User;
     this.experienceEntries = [
@@ -69,7 +77,7 @@ export class SignupJobseekerPage {
     ];
   }
 
-  onNgInit() {
+  ionViewWillEnter() {
     this.storage.get('user_type').then(res => {
       this.selectedType = res;
     }
@@ -78,13 +86,81 @@ export class SignupJobseekerPage {
 
   onSignup(form: NgForm) {
     this.submitted = true;
-
-
     if (form.valid) {
-      this.userData.signup(this.user.email);
-      //this.router.navigateByUrl('/app/tabs/schedule');
+      let password = this.user.password;
+      this.apiService.post('users', this.user).subscribe(
+        (result: any) => {
+          console.log(result);
+          console.log(result.data);
+          this.userService.setUser(result.data);
+          this.apiService.authenticate(result.data.email, password).subscribe(
+            (result: any) => {
+              if (result.access_token) {
+                this.authService.authenticate(result.access_token);
+              }
+            },
+            (error: any) => {
+
+            }
+          );
+          this.onNextStep();
+        },
+        (error: any) => {
+
+        }
+      );
     }
-    this.onNextStep();
+
+  }
+
+  onProfileUpdate() {
+    let profile = this.user.profile;
+    profile['user_id'] = this.user.id;
+    this.apiService.post('users/profile', profile).subscribe(
+        (data: any) => {
+          this.onNextStep();
+        },
+        (error: any) => {
+
+        }
+      );
+  }
+
+  onPurposeUpdate() {
+
+    this.apiService.post('users/purpose', {why:this.user.profile.why }).subscribe(
+        (data: any) => {
+          this.onNextStep();
+        },
+        (error: any) => {
+
+        }
+      );
+  }
+
+
+  onExperienceSubmit() {
+    
+    this.apiService.post('users/experience', { }).subscribe(
+        (data: any) => {
+          this.onNextStep();
+        },
+        (error: any) => {
+
+        }
+      );
+  }
+
+  onSkillSubmit() {
+    
+    this.apiService.post('users/skills', { }).subscribe(
+        (data: any) => {
+          this.onNextStep();
+        },
+        (error: any) => {
+
+        }
+      );
   }
 
   validateEmail(value) {
@@ -167,7 +243,7 @@ export class SignupJobseekerPage {
     );
   }
 
-  onRemoveExperience(i){
+  onRemoveExperience(i) {
     this.experienceEntries.splice(i, 1);
   }
 

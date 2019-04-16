@@ -1,9 +1,23 @@
-<ion-content *ngIf="step == 1">
+<ion-header no-border>
+  <ion-toolbar padding>
+    <ion-buttons slot="start">
+      <img src="./assets/img/hyrskills-logo.png" height="30">
+    </ion-buttons>
+    <ion-buttons slot="end" id="links">
+      <button ion-button routerLink="/tutorial">
+        Tutorial
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <div class="login-logo">
-    <img src="assets/img/hyrskills-logo.png" alt="Ionic logo">
-  </div>
+<ion-content *ngIf="step == 1" padding>
 
+  <!--
+    <div class="login-logo">
+      <img src="assets/img/hyrskills-logo.png" alt="Ionic logo">
+    </div>
+  -->
   <h1 text-center>Let's create an account...</h1>
 
   <form #signupForm="ngForm" novalidate>
@@ -67,9 +81,14 @@
   <p text-center>
     <a href="/login">Sign In</a>
   </p>
+
+  <p>
+    By Signing Up, you agree to our <a routerLink="/terms">Terms & Conditions</a> and <a routerLink="/privacy">Privacy
+      Policy</a>.
+  </p>
 </ion-content>
 
-<ion-content *ngIf="step == 2">
+<ion-content *ngIf="step == 2" padding>
 
   <ion-item>
     <ion-label position="stacked" color="primary">Business Name</ion-label>
@@ -93,9 +112,14 @@
     <ion-textarea></ion-textarea>
   </ion-item>
 
+  <div padding>
+    <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
+    <ion-button (click)="onNextStep()" type="submit" expand="block">Next</ion-button>
+  </div>
+
 </ion-content>
 
-<ion-content *ngIf="step == 3">
+<ion-content *ngIf="step == 3" padding>
 
   <h1 text-center>My job seeking profile</h1>
 
@@ -103,7 +127,7 @@
 
     <ion-item>
       <ion-label position="stacked" color="primary">Job Title</ion-label>
-      <ion-textarea></ion-textarea>
+      <ion-input name="email" type="text" required></ion-input>
     </ion-item>
 
     <p text-center>Desired Employment Type</p>
@@ -160,7 +184,7 @@
 
 </ion-content>
 
-<ion-content *ngIf="step == 4">
+<ion-content *ngIf="step == 4" padding>
 
   <ion-item>
     <ion-label position="stacked" color="primary">Job Address</ion-label>
@@ -169,12 +193,25 @@
   </ion-item>
 
   <ion-item>
+    <ion-label position="stacked" color="primary">Start date</ion-label>
+    <ion-datetime [(ngModel)]="date" display-format="MM DD YYYY" picker-format="MM DD YYYY" placeholder="">
+    </ion-datetime>
+  </ion-item>
+
+  <ion-item>
     <ion-label position="stacked" color="primary">Job Description</ion-label>
     <ion-textarea></ion-textarea>
   </ion-item>
+
+
+  <div padding>
+    <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
+    <ion-button (click)="onNextStep()" type="submit" expand="block">Next</ion-button>
+  </div>
+
 </ion-content>
 
-<ion-content *ngIf="step == 5">
+<ion-content *ngIf="step == 5" padding>
 
   <h1 text-center>My job seeking profile</h1>
 
@@ -189,7 +226,7 @@
 
 </ion-content>
 
-<ion-content *ngIf="step == 5">
+<ion-content *ngIf="step == 5" padding>
 
   <h1 text-center>Highlight your experience</h1>
 
@@ -221,7 +258,7 @@
   </div>
 </ion-content>
 
-<ion-content *ngIf="step == 6">
+<ion-content *ngIf="step == 6" padding>
   <h1 text-center>Show off your skills</h1>
 
   <div class="skill-header">
@@ -240,7 +277,7 @@
 
 </ion-content>
 
-<ion-content *ngIf="step == 7">
+<ion-content *ngIf="step == 7" padding>
   <h1 text-center>Show off your skills</h1>
 
   <div *ngFor="let skill of skills">
@@ -263,8 +300,7 @@
   </div>
 </ion-content>
 
-
-<ion-content *ngIf="step == 9">
+<ion-content *ngIf="step == 9" padding>
   <p padding>
     Now let's go see your matches!
     You can edit your Profile, Experience and Skills

@@ -5,6 +5,7 @@ import { UserData } from '../../providers/user-data';
 import { UserOptions } from '../../interfaces/user-options';
 import { User } from '../../models/user';
 import { Storage } from '@ionic/storage';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'page-login',
@@ -16,16 +17,19 @@ export class LoginPage {
   submitted = false;
   user: User;
   selectedType: string;
+  email: string;
+  password: string;
 
   constructor(
     public userData: UserData,
     public router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private api: ApiService
   ) {
     this.user = new User;
   }
 
-  onNgInit() {
+  ionViewWillEnter() {
     this.storage.get('user_type').then(res => {
       this.selectedType = res;
     }
@@ -36,7 +40,19 @@ export class LoginPage {
     this.submitted = true;
 
     if (form.valid) {
-      this.userData.login(this.login.username);
+      this.api.authenticate(this.email, this.password).subscribe(
+        (data: any) => {
+          if (data.access_token) {
+
+          }
+        },
+        (error: any) => {
+
+
+        }
+      );
+
+
       //this.router.navigateByUrl('/app/tabs/schedule');
     }
   }

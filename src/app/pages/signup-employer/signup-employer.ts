@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserData } from '../../providers/user-data';
 import { User } from '../../models/user';
 import { Storage } from '@ionic/storage';
+import { ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'page-signup-employer',
@@ -28,7 +29,8 @@ export class SignupEmployerPage {
   constructor(
     public router: Router,
     public userData: UserData,
-    private storage: Storage
+    private storage: Storage,
+    private apiService: ApiService
   ) {
     this.user = new User;
     this.experienceEntries = [
@@ -69,7 +71,7 @@ export class SignupEmployerPage {
     ];
   }
 
-  onNgInit() {
+  ionViewWillEnter() {
     this.storage.get('user_type').then(res => {
       this.selectedType = res;
     }
@@ -78,6 +80,18 @@ export class SignupEmployerPage {
 
   onSignup(form: NgForm) {
     this.submitted = true;
+    
+    this.apiService.post('users', this.user).subscribe(
+      (data: any) => {
+        if (data.access_token) {
+          
+        }
+      },
+      (error: any) => {
+     
+       
+      }
+    );
 
 
     if (form.valid) {
@@ -144,7 +158,7 @@ export class SignupEmployerPage {
   }
 
   onNextStep() {
-    if (this.step < 8) {
+    if (this.step < 10) {
       this.step++;
     }
 

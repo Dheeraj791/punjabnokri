@@ -10,6 +10,7 @@ export class UserData {
   _favorites: string[] = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
+  ACCESS_TOKEN = 'accessToken';
 
   constructor(
     public events: Events,
@@ -37,6 +38,7 @@ export class UserData {
       return this.events.publish('user:login');
     });
   }
+
 
   signup(username: string): Promise<any> {
     return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {

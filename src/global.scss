@@ -9,3 +9,27 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+ion-toolbar {
+    // TODO test transparent and fullscreen
+    --background: transparent;
+    --border-color: transparent;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+  
+    #links{
+      padding:10px;
+      button{
+        background-color:transparent;
+        font-size:14px;
+        &:last-child {
+          padding-right:0px;
+        }
+        &#user-type{
+          text-transform:capitalize;
+        }
+      }
+      
+    }
+  }

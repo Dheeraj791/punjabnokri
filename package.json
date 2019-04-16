@@ -9,7 +9,13 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "restore": "rm -rf platforms && rm -rf plugins && ionic cordova build ios && ionic cordova build android",
+    "stagefile": "scp -i ~/garago-software-prod.pem ~/projects/hyrskills/Hyrskills.apk ubuntu@35.182.193.23:/var/www/html/hyr/public",
+    "build-release-staging-ios": "ionic cordova build ios --device --release",
+    "build-release-staging-android": "ionic cordova build android --device --release",
+    "build-release-prod-ios": "ionic cordova build ios --device --release --prod",
+    "build-release-prod-android": "ionic cordova build android --device --release --prod"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +33,7 @@
     "@ionic/storage": "^2.0.1",
     "@types/lodash": "^4.14.123",
     "cordova-android": "7.1.4",
+    "cordova-ios": "4.5.5",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^3.1.2",
@@ -79,7 +86,8 @@
       "cordova-sqlite-storage": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

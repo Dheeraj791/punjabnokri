@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Platform, LoadingController } from '@ionic/angular';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'page-matches',
@@ -15,6 +17,7 @@ export class MatchesPage {
   shownSessions: any = [];
   groups: any = [];
   confDate: string;
+  user: User; 
 
   matches: any = [
     {
@@ -54,12 +57,15 @@ export class MatchesPage {
   activeMatches: any = [];
 
   constructor(
-    public platform: Platform
+    public platform: Platform,
+    private userService: UserService,
+    private loadingController: LoadingController
   ) { }
 
 
   ionViewDidEnter(){
     this.activeMatches = this.matches;
+    this.user = this.userService.getUser(); 
   }
 
   updateListing() {
@@ -78,5 +84,16 @@ export class MatchesPage {
       this.activeMatches = this.matches;
     }
   }
+
+  async openSocial(network: string, fab: HTMLIonFabElement) {
+    const loading = await this.loadingController.create({
+      message: `Posting to ${network}`,
+      duration: (Math.random() * 1000) + 500
+    });
+    await loading.present();
+    await loading.onWillDismiss();
+    fab.close();
+  }
+ 
 }
 

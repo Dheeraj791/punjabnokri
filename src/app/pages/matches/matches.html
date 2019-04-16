@@ -14,17 +14,30 @@
     </ion-segment-button>
   </ion-segment>
 
-  <ion-list #scheduleList [hidden]="shownSessions === 0">
-
-    <ion-item-group *ngFor="let match of activeMatches">
-      <ion-item-divider sticky class="listing">
-        <ion-label>
-          <img src="./assets/img/hyrskills-logo.png" height="20">
-          Business name
-          <a href="/app/tabs/map">Directions</a>
-        </ion-label>
-      </ion-item-divider>
-    </ion-item-group>
+  <ion-list #scheduleList [hidden]="matches.length === 0">
+    <div *ngIf="user.type == 'employer'">
+      <ion-item-group *ngFor="let match of activeMatches">
+        <ion-item-divider sticky class="listing">
+          <ion-label routerLink="/app/tabs/profile/candidate/{{match.id}}">
+            <img src="./assets/img/hyrskills-logo.png" height="20">
+            Business name
+            <a href="/app/tabs/map">Directions</a>
+          </ion-label>
+        </ion-item-divider>
+      </ion-item-group>
+    </div>
+    
+    <div *ngIf="user.type == 'jobseeker'">
+      <ion-item-group *ngFor="let match of activeMatches">
+        <ion-item-divider sticky class="listing">
+          <ion-label routerLink="/app/tabs/profile/business/{{match.id}}">
+            <img src="./assets/img/hyrskills-logo.png" height="20">
+            Business name
+            <a href="/app/tabs/map">Directions</a>
+          </ion-label>
+        </ion-item-divider>
+      </ion-item-group>
+    </div>
     <!--
           <ion-item-sliding *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase"
             [hidden]="session.hide">
