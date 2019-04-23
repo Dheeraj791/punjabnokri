@@ -15,12 +15,10 @@ export class UserService {
 
 	}
 
-	getUser(): User {
-		this.storage.get('user').then(user => {
+	getUser(): Promise<User> {
+		return this.storage.get('user').then(user => {
 			return new User(user);;
 		})
-		return null;
-
 	}
 
 	setUser(user: User) {

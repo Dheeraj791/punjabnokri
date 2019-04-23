@@ -18,6 +18,7 @@ export class MatchesPage {
   groups: any = [];
   confDate: string;
   user: User; 
+  isLoaded: boolean = false; 
 
   matches: any = [
     {
@@ -60,12 +61,18 @@ export class MatchesPage {
     public platform: Platform,
     private userService: UserService,
     private loadingController: LoadingController
-  ) { }
+  ) { 
+
+    this.userService.getUser().then( User => {
+      this.user = User; 
+    }); 
+  }
 
 
   ionViewDidEnter(){
     this.activeMatches = this.matches;
-    this.user = this.userService.getUser(); 
+    //load matches here
+    this.isLoaded = true; 
   }
 
   updateListing() {

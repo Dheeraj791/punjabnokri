@@ -18,7 +18,7 @@
 
 <ion-content fullscreen id="tutorial">
 
-  <div>
+  <div *ngIf="selectedType == 'jobseeker'">
     <ion-slides #slides pager="true">
       <ion-slide>
         <div class="box">
@@ -71,7 +71,7 @@
       </ion-slide>
     </ion-slides>
   </div>
-
+  
   <div *ngIf="selectedType == 'employer'">
     <ion-slides #slides pager="true">
       <ion-slide>

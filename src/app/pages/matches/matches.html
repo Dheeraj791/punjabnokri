@@ -1,6 +1,6 @@
 <header-component></header-component>
 
-<ion-content>
+<ion-content *ngIf="isLoaded">
   <ion-segment [(ngModel)]="segment" (ionChange)="updateListing()">
     <ion-segment-button value="all">
       New

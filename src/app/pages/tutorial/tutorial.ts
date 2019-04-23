@@ -58,7 +58,9 @@ export class TutorialPage {
     this.menu.enable(false);
 
     this.storage.get('user_type').then(res => {
-      this.selectedType = res;
+      if(res){
+        this.storage.set('user_type', this.selectedType);
+      }
     }
     );
   }

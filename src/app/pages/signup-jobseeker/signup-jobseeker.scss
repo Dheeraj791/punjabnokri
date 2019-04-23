@@ -52,8 +52,14 @@ ion-textarea{
 }
 
 .add-experience{
-  font-size:40px;
   display:block;
+  width: 150px;
+  ion-icon{
+    margin-top:10px;
+    font-size:30px;
+    width:30px;
+    display:inline-block;
+  }
   margin:auto;
 }
 

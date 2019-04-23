@@ -72,13 +72,15 @@
 
       <ion-item>
         <ion-label position="stacked" color="primary">Password</ion-label>
-        <ion-input [(ngModel)]="user.password" name="password" type="password" #password="ngModel" required (ngModelChange)="onChangePassword()">
+        <ion-input [(ngModel)]="user.password" name="password" type="password" #password="ngModel" required
+          (ngModelChange)="onChangePassword()">
         </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked" color="primary">Confirm Password</ion-label>
-        <ion-input [(ngModel)]="passwordConfirm" name="confirmpassword" type="password" required (ngModelChange)="onChangePassword()">
+        <ion-input [(ngModel)]="passwordConfirm" name="confirmpassword" type="password" required
+          (ngModelChange)="onChangePassword()">
         </ion-input>
       </ion-item>
 
@@ -142,7 +144,7 @@
     <ion-item>
       <span slot="start" class="dot"></span>
       <ion-label>Afternoons</ion-label>
-      <ion-toggle color="success" name="afternoons"[(ngModel)]="user.profile.afternoons"></ion-toggle>
+      <ion-toggle color="success" name="afternoons" [(ngModel)]="user.profile.afternoons"></ion-toggle>
     </ion-item>
 
     <ion-item>
@@ -166,7 +168,8 @@
     <ion-item>
       <span slot="start" class="dot"></span>
       <ion-label>Actively seeking work</ion-label>
-      <ion-toggle color="success" name="activelyseekingwork" [(ngModel)]="user.profile.activelySeekingWork"></ion-toggle>
+      <ion-toggle color="success" name="activelyseekingwork" [(ngModel)]="user.profile.activelySeekingWork">
+      </ion-toggle>
     </ion-item>
   </form>
 
@@ -179,7 +182,7 @@
   <h1 text-center>My job seeking profile</h1>
 
   <ion-item>
-    <ion-textarea placeholder="Why you should hire me"></ion-textarea>
+    <ion-textarea placeholder="Why you should hire me" [(ngModel)]="user.profile.why"></ion-textarea>
   </ion-item>
 
   <div padding>
@@ -197,11 +200,11 @@
 
   <div *ngFor="let experience of experienceEntries; let i = index; ">
     <div class="inline">
-      <ion-select placeholder="Years">
+      <ion-select placeholder="Years" [(ngModel)]="experience.numberYears">
         <ion-select-option *ngFor="let year of [1,2,3,4,5,6,7,8,9,10,15,20]" [value]="year">{{year}}</ion-select-option>
       </ion-select>
       <span text-center> As a </span>
-      <ion-select placeholder="Industry">
+      <ion-select placeholder="Industry" [(ngModel)]="experience.industry">
         <ion-select-option *ngFor="let industry of industries" [value]="industry">{{industry}}</ion-select-option>
       </ion-select>
       <a (click)="onRemoveExperience(i)">
@@ -212,6 +215,7 @@
   </div>
 
   <a (click)="onAddExperience()" class="add-experience text-center">
+    Add experience
     <ion-icon name="add-circle" class="add-experience"></ion-icon>
   </a>
 
@@ -223,38 +227,25 @@
 
 <ion-content *ngIf="step == 5" padding>
   <h1 text-center>Show off your skills</h1>
+  <h2 text-center>{{selectedSkillCategory}}</h2>
 
   <div class="skill-header">
     <div class="skill-header-cell">Expert</div>
     <div class="skill-header-cell">Intermediate</div>
     <div class="skill-header-cell">Basic</div>
   </div>
-  <div *ngFor="let skill of skills">
-    <rating [rating]="rating" [name]="skill"></rating>
+  <div *ngFor="let skill of selectedSkills; let i = index;">
+    <rating [rating]="rating" [name]="skill.name" (ratingChange)="ratingChange($event, i)"></rating>
   </div>
 
   <div>
-    <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
+    <ion-button (click)="onPreviousCategoryStep()" type="submit" expand="block">Back</ion-button>
     <ion-button (click)="onSkillSubmit()" type="submit" expand="block">Next</ion-button>
   </div>
 
 </ion-content>
 
 <ion-content *ngIf="step == 6" padding>
-  <h1 text-center>Show off your skills</h1>
-
-  <div *ngFor="let skill of skills">
-    <rating [rating]="rating" [name]="skill"></rating>
-  </div>
-
-  <div padding>
-    <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
-    <ion-button (click)="onSkillSubmit()" type="submit" expand="block">Next</ion-button>
-  </div>
-
-</ion-content>
-
-<ion-content *ngIf="step == 7" padding>
 
   <h1 text-center> Preview your profile</h1>
   <div padding>
@@ -263,8 +254,7 @@
   </div>
 </ion-content>
 
-
-<ion-content *ngIf="step == 8" padding>
+<ion-content *ngIf="step == 7" padding>
   <p>
     Now let's go see your matches!
     You can edit your Profile, Experience and Skills

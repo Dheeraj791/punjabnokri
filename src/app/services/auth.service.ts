@@ -28,7 +28,7 @@ export class AuthService {
 	}
 
 	getToken(): Promise<string> {
-		return this.storage.get('token').then((value) => {
+		return this.storage.get('accessToken').then((value) => {
 			return value;
 		});
 	}

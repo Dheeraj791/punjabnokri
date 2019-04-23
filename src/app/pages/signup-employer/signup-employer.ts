@@ -3,8 +3,16 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserData } from '../../providers/user-data';
 import { User } from '../../models/user';
+import { JobPosting } from '../../models/job-posting';
+import { Business } from '../../models/business';
+import { Skill } from '../../models/skill';
+import { SkillData } from '../../providers/skills';
+
 import { Storage } from '@ionic/storage';
-import { ApiService} from '../../services/api.service';
+import { ApiService } from '../../services/api.service';
+import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'page-signup-employer',
@@ -19,18 +27,29 @@ export class SignupEmployerPage {
   emailValidate: boolean = false;
   passwordValidate: boolean = false;
   passwordConfirmValidate: boolean = false;
-  step: number = 1;
+  receivePromotions: boolean = false; 
+  step: number = 5;
   experienceEntries: any;
   industries: any;
   rating: number = 0;
-  skills: Array<string>;
   selectedType: string;
+  jobPosting: JobPosting;
+  business: Business;
+
+  categoryStep: number = 0;
+  skills: Skill[];
+  skillsCategories: any;
+  selectedSkills: any;
+  selectedSkillCategory: any;
 
   constructor(
     public router: Router,
     public userData: UserData,
     private storage: Storage,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private authService: AuthService,
+    private userService: UserService,
+    private skillData: SkillData
   ) {
     this.user = new User;
     this.experienceEntries = [
@@ -57,18 +76,7 @@ export class SignupEmployerPage {
       "Retail"
     ];
 
-    this.skills = [
-      'Skill 1',
-      'Skill 2',
-      'Skill 3',
-      'Skill 4',
-      'Skill 5',
-      'Skill 6',
-      'Skill 7',
-      'Skill 8',
-      'Skill 9',
-      'Skill 10',
-    ];
+  
   }
 
   ionViewWillEnter() {
@@ -76,29 +84,63 @@ export class SignupEmployerPage {
       this.selectedType = res;
     }
     );
+
+    this.jobPosting = new JobPosting;
+    this.business = new Business;
   }
 
   onSignup(form: NgForm) {
     this.submitted = true;
-    
-    this.apiService.post('users', this.user).subscribe(
-      (data: any) => {
-        if (data.access_token) {
-          
+    if (form.valid) {
+      let password = this.user.password;
+      this.apiService.post('users', this.user).subscribe(
+        (result: any) => {
+          this.userService.setUser(result.data);
+          this.apiService.authenticate(result.data.email, password).subscribe(
+            (result: any) => {
+              if (result.access_token) {
+                this.authService.authenticate(result.access_token);
+                this.onNextStep();
+              }
+            },
+            (error: any) => {
+
+            }
+          );
+
+        },
+        (error: any) => {
+
         }
+      );
+    }
+
+  }
+
+  onBusinessUpdate() {
+
+    this.apiService.post('business', { business: this.business }).subscribe(
+      (data: any) => {
+        this.onNextStep();
       },
       (error: any) => {
-     
-       
+
       }
     );
+  }
 
 
-    if (form.valid) {
-      this.userData.signup(this.user.email);
-      //this.router.navigateByUrl('/app/tabs/schedule');
-    }
-    this.onNextStep();
+  onJobPostingUpdate() {
+
+    this.apiService.post('jobposting', { jobposting: this.jobPosting }).subscribe(
+      (result: any) => {
+        this.jobPosting = result.data; 
+        this.onNextStep();
+      },
+      (error: any) => {
+
+      }
+    );
   }
 
   validateEmail(value) {
@@ -171,6 +213,51 @@ export class SignupEmployerPage {
     }
   }
 
+  onNextCategoryStep() {
+    if (this.categoryStep < (this.skillsCategories.length - 1)) {
+      if(this.validateExperience()){
+        this.categoryStep++;
+        this.loadCategoryContent()
+      }
+      else{
+        alert("Please rate all of the skills on the screen.");
+      } 
+    
+    }
+    else {
+      this.onNextStep();
+    }
+  }
+
+  onPreviousCategoryStep() {
+    if (this.categoryStep > 0) {
+      this.categoryStep--;
+      this.loadCategoryContent()
+    }
+    else {
+      this.onPreviousStep();
+    }
+  }
+
+  loadCategoryContent() {
+    let categoryId = this.skillsCategories[this.categoryStep];
+    this.selectedSkills = this.skillData.getSkillsByCategory(this.skills, categoryId);
+    this.selectedSkillCategory = this.skillData.getCategoryNameOnSkills(this.selectedSkills);
+  }
+
+  onExperienceSubmit() {
+
+    this.apiService.post('users/experience', { experienceEntries: this.experienceEntries }).subscribe(
+      (data: any) => {
+        this.onNextStep();
+      },
+      (error: any) => {
+
+      }
+    );
+
+  }
+
   onAddExperience() {
     this.experienceEntries.push(
       {
@@ -181,12 +268,27 @@ export class SignupEmployerPage {
     );
   }
 
+  onRemoveExperience(i) {
+    this.experienceEntries.splice(i, 1);
+  }
+
   onSeeMatches() {
     this.router.navigateByUrl('/app/tabs/matches');
   }
 
-  someFunction($event) {
+  validateExperience() {
+    let validate = true;
+    this.selectedSkills.forEach(selectedSkill => {
+      if (selectedSkill['value'] === null) {
+        validate = false;
+      }
+    });
 
+    return validate;
+  }
+
+  ratingChange($event, i) {
+    this.skills[i]['value'] = $event;
   }
 
 

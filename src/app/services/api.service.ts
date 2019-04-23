@@ -14,36 +14,30 @@ export class ApiService {
     private defaultHeaders = {
         'X-Requested-With': 'XMLHttpRequest',
         'Content-Type': 'application/json; charset=UTF-8',
+        'X-Application': 'mobile'
     };
+
+    token: string = '';
 
     constructor(
         private http: HttpClient,
         private storage: Storage
     ) {
 
+
     }
+    /*
+    * Add additional header parameters
+    */
 
-    private getHeaders(authenticate = true, upload = false) {
+    getHeaders(authenticate: boolean = false) {
         let additionalHeaders = {};
-        let application = 'web';
-
-        if (authenticate) {
-            additionalHeaders = {
-                'Authorization': 'Bearer ' + this.storage.get('accessToken').then((value) => {
-                    return value;
-                }),
-                'X-Application': application
-            };
-        }
-
-        if (upload) {
-            additionalHeaders['Content-Type'] = 'multipart/form-data';
-            additionalHeaders['Accept'] = 'application/json';
-        }
 
         return new HttpHeaders(
             _.assign({}, this.defaultHeaders, additionalHeaders)
         );
+
+
     }
 
     private handleError(error: HttpErrorResponse) {
@@ -77,6 +71,10 @@ export class ApiService {
                 headers: new HttpHeaders(this.defaultHeaders)
             }
         );
+    }
+
+    method(endpoint: string, type: string, params?: any) {
+
     }
 
     get(endpoint: string, params?: any, authenticate = true): Observable<{}> {

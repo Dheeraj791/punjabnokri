@@ -4,8 +4,8 @@ import { UserPreferences } from './user_preferences';
 export class User {
     id: number; 
     username: string = '';
-    firstname: string = '';
-    lastname: string = '';
+    firstName: string = '';
+    lastName: string = '';
     email: string = '';
     password: string = '';
     address: string = '';
@@ -18,8 +18,8 @@ export class User {
         if (data) {
             this.id = data.id; 
             this.username = data.username;
-            this.firstname = data.firstname;
-            this.lastname = data.lastname;
+            this.firstName = data.firstName;
+            this.lastName = data.lastName;
             this.email = data.email;
             this.password = data.password;
             this.address = data.address;
