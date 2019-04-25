@@ -82,6 +82,14 @@ export class SignupJobseekerPage {
       "Retail"
     ];
 
+   
+
+    this.userService.watcher.subscribe((user: User) => {
+      this.loadSkills();
+		});
+  }
+
+  loadSkills(){
     this.apiService.get('skills').subscribe(
       (result: any) => {
         this.skills = Skill.initializeArray(result.data);
