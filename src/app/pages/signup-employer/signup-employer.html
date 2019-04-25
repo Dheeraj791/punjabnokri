@@ -273,27 +273,7 @@
   </div>
 </ion-content>
 
-<ion-content *ngIf="step == 6" padding>
-  <h1 text-center>Required skills...</h1>
-  <h2 text-center>{{selectedSkillCategory}}</h2>
-
-  <div class="skill-header">
-    <div class="skill-header-cell">Expert</div>
-    <div class="skill-header-cell">Intermediate</div>
-    <div class="skill-header-cell">Basic</div>
-  </div>
-  <div *ngFor="let skill of selectedSkills; let i = index;">
-    <rating [rating]="rating" [name]="skill.name" (ratingChange)="ratingChange($event, i)"></rating>
-  </div>
-
-  <div>
-    <ion-button (click)="onPreviousCategoryStep()" type="submit" expand="block">Back</ion-button>
-    <ion-button (click)="onSkillSubmit()" type="submit" expand="block">Next</ion-button>
-  </div>
-
-</ion-content>
-
-<ion-content *ngIf="step == 8">
+<ion-content *ngIf="step == 6">
 
   <h1 text-center> Preview your profile</h1>
   <div padding>
@@ -302,7 +282,7 @@
   </div>
 </ion-content>
 
-<ion-content *ngIf="step == 9" padding>
+<ion-content *ngIf="step == 7" padding>
   <p padding>
     Now let's go see your matches!
     You can edit your Profile, Experience and Skills
