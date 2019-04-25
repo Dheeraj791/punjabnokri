@@ -26,7 +26,7 @@ export class SignupJobseekerPage {
   passwordValidate: boolean = false;
   passwordConfirmValidate: boolean = false;
   receivePromotions: boolean = false;
-  step: number = 5;
+  step: number = 1;
   stepTotalNumber: number = 7;
   experienceEntries: any;
   industries: any;
