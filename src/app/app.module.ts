@@ -19,6 +19,7 @@ import { ApiService } from './services/api.service';
 import { AuthService } from './services/auth.service';
 import { MessageService } from './services/message.service';
 import { UserService } from './services/user.service';
+import { ErrorService } from './services/error.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +40,7 @@ import { UserService } from './services/user.service';
     AuthService,
     MessageService,
     UserService,
+    ErrorService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

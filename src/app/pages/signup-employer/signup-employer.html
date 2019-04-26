@@ -12,12 +12,11 @@
 </ion-header>
 
 <ion-content *ngIf="step == 1" padding>
-
   <!--
-    <div class="login-logo">
-      <img src="assets/img/hyrskills-logo.png" alt="Ionic logo">
-    </div>
-  -->
+  <div class="login-logo">
+    <img src="assets/img/hyrskills-logo.png" alt="Ionic logo">
+  </div>
+-->
   <h1 text-center>Let's create an account...</h1>
 
   <form #signupForm="ngForm" novalidate>
@@ -25,7 +24,7 @@
 
       <ion-item>
         <ion-label position="stacked" color="primary">Fist Name</ion-label>
-        <ion-input [(ngModel)]="user.firstName" name="firstName" type="text" #firstname="ngModel" required>
+        <ion-input [(ngModel)]="user.firstName" name="firstname" type="text" #firstname="ngModel" required>
         </ion-input>
       </ion-item>
 
@@ -37,7 +36,7 @@
 
       <ion-item>
         <ion-label position="stacked" color="primary">Last Name</ion-label>
-        <ion-input [(ngModel)]="user.lastName" name="lastName" type="text" #lastname="ngModel" required>
+        <ion-input [(ngModel)]="user.lastName" name="password" type="text" #lastname="ngModel" required>
         </ion-input>
       </ion-item>
 
@@ -81,18 +80,18 @@
       <ion-item>
         <ion-label position="stacked" color="primary">Confirm Password</ion-label>
         <ion-input [(ngModel)]="passwordConfirm" name="confirmpassword" type="password" required
-          (ngModelChange)="onChangePassword()">
+          (ngModelChange)="onChangeRepeat()">
         </ion-input>
       </ion-item>
 
       <ion-text color="danger">
-        <p [hidden]="!user.password.length" padding-left>
-          Password is required
+        <p *ngIf="user.password && !passwordValidate" padding-left>
+          Password is required and should be a minimum of 6 characters, contain at least one number and one letter.
         </p>
       </ion-text>
 
       <ion-text color="danger">
-        <p [hidden]="user.password && user.password.length > 3 && onChangeRepeat() || submitted == false" padding-left>
+        <p *ngIf="passwordConfirm && !passwordConfirmValidate" padding-left>
           Passwords should match
         </p>
       </ion-text>

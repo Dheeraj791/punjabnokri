@@ -80,18 +80,18 @@
       <ion-item>
         <ion-label position="stacked" color="primary">Confirm Password</ion-label>
         <ion-input [(ngModel)]="passwordConfirm" name="confirmpassword" type="password" required
-          (ngModelChange)="onChangePassword()">
+          (ngModelChange)="onChangeRepeat()">
         </ion-input>
       </ion-item>
 
       <ion-text color="danger">
-        <p [hidden]="!user.password.length" padding-left>
-          Password is required
+        <p *ngIf="user.password && !passwordValidate" padding-left>
+          Password is required and should be a minimum of 6 characters, contain at least one number and one letter.
         </p>
       </ion-text>
 
       <ion-text color="danger">
-        <p [hidden]="user.password && user.password.length > 3 && onChangeRepeat() || submitted == false" padding-left>
+        <p *ngIf="passwordConfirm && !passwordConfirmValidate" padding-left>
           Passwords should match
         </p>
       </ion-text>

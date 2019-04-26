@@ -9,6 +9,8 @@ import { Storage } from '@ionic/storage';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
+import { ErrorService } from '../../services/error.service';
+
 import { SkillData } from '../../providers/skills';
 
 @Component({
@@ -49,6 +51,7 @@ export class SignupJobseekerPage {
     private apiService: ApiService,
     private authService: AuthService,
     private userService: UserService,
+    private errorService: ErrorService,
     private skillData: SkillData
   ) {
     this.user = new User;
@@ -123,14 +126,13 @@ export class SignupJobseekerPage {
                 this.onNextStep();
               }
             },
-            (error: any) => {
-
+            (error:any) => {
+              this.errorService.showAlert('Error', error.message);
             }
           );
-
         },
-        (error: any) => {
-
+        (error:any) => {
+          this.errorService.showAlert('Error', error.message);
         }
       );
     }
@@ -145,7 +147,7 @@ export class SignupJobseekerPage {
         this.onNextStep();
       },
       (error: any) => {
-
+        this.errorService.showAlert('Error', error.message);
       }
     );
   }
@@ -157,7 +159,7 @@ export class SignupJobseekerPage {
         this.onNextStep();
       },
       (error: any) => {
-
+        this.errorService.showAlert('Error', error.message);
       }
     );
 
@@ -171,7 +173,7 @@ export class SignupJobseekerPage {
         this.onNextStep();
       },
       (error: any) => {
-
+        this.errorService.showAlert('Error', error.message);
       }
     );
 
@@ -184,7 +186,7 @@ export class SignupJobseekerPage {
         this.onNextCategoryStep();
       },
       (error: any) => {
-
+        this.errorService.showAlert('Error', error.message);
       }
     );
 
@@ -270,7 +272,7 @@ export class SignupJobseekerPage {
         this.loadCategoryContent()
       }
       else {
-        alert("Please rate all of the skills on the screen.");
+        this.errorService.showAlert('Error', "Please rate all of the skills on the screen.");
       }
 
     }

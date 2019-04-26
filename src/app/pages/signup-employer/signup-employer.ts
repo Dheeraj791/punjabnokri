@@ -12,7 +12,7 @@ import { Storage } from '@ionic/storage';
 import { ApiService } from '../../services/api.service';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
-
+import { ErrorService } from '../../services/error.service';
 
 @Component({
   selector: 'page-signup-employer',
@@ -49,6 +49,7 @@ export class SignupEmployerPage {
     private apiService: ApiService,
     private authService: AuthService,
     private userService: UserService,
+    private errorService: ErrorService,
     private skillData: SkillData
   ) {
     this.user = new User;
@@ -104,13 +105,13 @@ export class SignupEmployerPage {
               }
             },
             (error: any) => {
-
+              this.errorService.showAlert('Error', error.message);
             }
           );
 
         },
         (error: any) => {
-
+          this.errorService.showAlert('Error', error.message);
         }
       );
     }
@@ -124,7 +125,7 @@ export class SignupEmployerPage {
         this.onNextStep();
       },
       (error: any) => {
-
+        this.errorService.showAlert('Error', error.message);
       }
     );
   }
@@ -138,7 +139,7 @@ export class SignupEmployerPage {
         this.onNextStep();
       },
       (error: any) => {
-
+        this.errorService.showAlert('Error', error.message);
       }
     );
   }
@@ -252,7 +253,7 @@ export class SignupEmployerPage {
         this.onNextStep();
       },
       (error: any) => {
-
+        this.errorService.showAlert('Error', error.message);
       }
     );
 
