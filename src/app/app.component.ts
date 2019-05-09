@@ -46,27 +46,27 @@ export class AppComponent {
 
 
   checkForAuthentication() {
+    this.authService.isAuthenticated().then(result =>  {
+      if(result){
+        this.apiService.get('users/me').subscribe(
+          (result: any) => {
+            let user = new User(result.data);
+            this.storage.set('user', user);
+          },
+          (error: any) => {
+            if (error.status === 401) {
+              this.authService.logout();
+            } else {
+              //this.modalService.showAlert(this.popup.title, this.popup.connect);
+            }
+          },
+          () => {
+            //has the user entered an access code yet?
+          }
+        );
+      }
 
-		if (this.authService.isAuthenticated()) {
-			this.apiService.get('users/me').subscribe(
-				(result: any) => {
-					let user = new User(result.data);
-					this.storage.set('user', user);
-				},
-				(error: any) => {
-					if (error.status === 401) {
-						this.authService.logout();
-					} else {
-						//this.modalService.showAlert(this.popup.title, this.popup.connect);
-					}
-				},
-				() => {
-					//has the user entered an access code yet?
-				}
-			);
-    }
-    else{
-      this.router.navigateByUrl('/app/tabs/matches');
-    }
+    });
+
 	}
 }
