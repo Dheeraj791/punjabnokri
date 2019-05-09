@@ -33,7 +33,7 @@ export class AuthService {
 		});
 	}
 
-	checkAuthetication() {
+	checkAuthentication() {
 		this.Authenticator.next(true);
 	}
 
@@ -49,8 +49,10 @@ export class AuthService {
 
 	}
 
-	isAuthenticated(): boolean {
-		return this.storage.get('isAuthenticated') ? true : false;
+	isAuthenticated(): Promise<any> {
+		return this.storage.get('isAuthenticated').then((value) => {
+			return value;
+		});
 	}
 
 }
