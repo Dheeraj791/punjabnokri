@@ -1,6 +1,7 @@
 
 export class Business {
 
+    id: number; 
     headOfficeAddress: string = '';
     telephone: string = '';
     name: string = '';
@@ -9,6 +10,7 @@ export class Business {
 
     constructor(data?: any) {
         if (data) {
+            this.id = data.id; 
             this.headOfficeAddress = data.username;
             this.telephone = data.firstname;
             this.name = data.lastname;

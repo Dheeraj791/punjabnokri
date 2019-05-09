@@ -85,7 +85,7 @@
       </ion-item>
 
       <ion-text color="danger">
-        <p *ngIf="user.password && !passwordValidate" padding-left>
+        <p *ngIf="(user.password && !passwordValidate) || (submitted && !user.password)" padding-left>
           Password is required and should be a minimum of 6 characters, contain at least one number and one letter.
         </p>
       </ion-text>
@@ -119,7 +119,7 @@
 
   <ion-item>
     <ion-label position="stacked" color="primary">Business Name</ion-label>
-    <ion-input id="business-name" name="business-name" type="text" required>
+    <ion-input id="business-name" name="business-name" type="text" required [(ngModel)]="business.name">
     </ion-input>
   </ion-item>
 
@@ -272,7 +272,27 @@
   </div>
 </ion-content>
 
-<ion-content *ngIf="step == 6">
+<ion-content *ngIf="step == 6" padding>
+  <h1 text-center>Show off your skills</h1>
+  <h2 text-center>{{selectedSkillCategory}}</h2>
+
+  <div class="skill-header">
+    <div class="skill-header-cell">Expert</div>
+    <div class="skill-header-cell">Intermediate</div>
+    <div class="skill-header-cell">Basic</div>
+  </div>
+  <div *ngFor="let skill of selectedSkills; let i = index;">
+    <rating [rating]="rating" [name]="skill.name" (ratingChange)="ratingChange($event, i)"></rating>
+  </div>
+
+  <div>
+    <ion-button (click)="onPreviousCategoryStep()" type="submit" expand="block">Back</ion-button>
+    <ion-button (click)="onSkillSubmit()" type="submit" expand="block">Next</ion-button>
+  </div>
+
+</ion-content>
+
+<ion-content *ngIf="step == 7">
 
   <h1 text-center> Preview your profile</h1>
   <div padding>
@@ -281,7 +301,7 @@
   </div>
 </ion-content>
 
-<ion-content *ngIf="step == 7" padding>
+<ion-content *ngIf="step == 8" padding>
   <p padding>
     Now let's go see your matches!
     You can edit your Profile, Experience and Skills

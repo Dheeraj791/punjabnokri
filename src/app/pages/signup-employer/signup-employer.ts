@@ -27,7 +27,7 @@ export class SignupEmployerPage {
   emailValidate: boolean = false;
   passwordValidate: boolean = false;
   passwordConfirmValidate: boolean = false;
-  receivePromotions: boolean = false; 
+  receivePromotions: boolean = false;
   step: number = 1;
   experienceEntries: any;
   industries: any;
@@ -71,13 +71,14 @@ export class SignupEmployerPage {
       }
     ];
 
+
     this.industries = [
-      'Accommodation',
-      "Restaurants",
-      "Retail"
+      'Retail',
+      "Hospitality",
+      "Business Services"
     ];
 
-  
+
   }
 
   ionViewWillEnter() {
@@ -88,6 +89,20 @@ export class SignupEmployerPage {
 
     this.jobPosting = new JobPosting;
     this.business = new Business;
+    this.loadSkills();
+  }
+
+  loadSkills() {
+    this.apiService.get('skills').subscribe(
+      (result: any) => {
+        this.skills = Skill.initializeArray(result.data);
+        this.skillsCategories = this.skillData.getCategories(this.skills);
+        this.loadCategoryContent();
+      },
+      (error: any) => {
+
+      }
+    );
   }
 
   onSignup(form: NgForm) {
@@ -121,7 +136,8 @@ export class SignupEmployerPage {
   onBusinessUpdate() {
 
     this.apiService.post('business', { business: this.business }).subscribe(
-      (data: any) => {
+      (result: any) => {
+        this.business = new Business(result.data);
         this.onNextStep();
       },
       (error: any) => {
@@ -133,15 +149,41 @@ export class SignupEmployerPage {
 
   onJobPostingUpdate() {
 
-    this.apiService.post('jobposting', { jobposting: this.jobPosting }).subscribe(
+    this.apiService.post('jobposting', { businessId: this.business.id, jobposting: this.jobPosting }).subscribe(
       (result: any) => {
-        this.jobPosting = result.data; 
+        this.jobPosting = new JobPosting(result.data);
         this.onNextStep();
       },
       (error: any) => {
         this.errorService.showAlert('Error', error.message);
       }
     );
+  }
+
+  onExperienceSubmit() {
+
+    this.apiService.post('jobposting/experience', { experienceEntries: this.experienceEntries, jobPostingId: this.jobPosting.id }).subscribe(
+      (data: any) => {
+        this.onNextStep();
+      },
+      (error: any) => {
+        this.errorService.showAlert('Error', error.message);
+      }
+    );
+
+  }
+
+  onSkillSubmit() {
+
+    this.apiService.post('jobposting/skills', { skills: this.selectedSkills, jobPostingId: this.jobPosting.id }).subscribe(
+      (data: any) => {
+        this.onNextCategoryStep();
+      },
+      (error: any) => {
+        this.errorService.showAlert('Error', error.message);
+      }
+    );
+
   }
 
   validateEmail(value) {
@@ -216,14 +258,14 @@ export class SignupEmployerPage {
 
   onNextCategoryStep() {
     if (this.categoryStep < (this.skillsCategories.length - 1)) {
-      if(this.validateExperience()){
+      if (this.validateExperience()) {
         this.categoryStep++;
         this.loadCategoryContent()
       }
-      else{
+      else {
         alert("Please rate all of the skills on the screen.");
-      } 
-    
+      }
+
     }
     else {
       this.onNextStep();
@@ -244,19 +286,6 @@ export class SignupEmployerPage {
     let categoryId = this.skillsCategories[this.categoryStep];
     this.selectedSkills = this.skillData.getSkillsByCategory(this.skills, categoryId);
     this.selectedSkillCategory = this.skillData.getCategoryNameOnSkills(this.selectedSkills);
-  }
-
-  onExperienceSubmit() {
-
-    this.apiService.post('users/experience', { experienceEntries: this.experienceEntries }).subscribe(
-      (data: any) => {
-        this.onNextStep();
-      },
-      (error: any) => {
-        this.errorService.showAlert('Error', error.message);
-      }
-    );
-
   }
 
   onAddExperience() {
@@ -288,9 +317,12 @@ export class SignupEmployerPage {
     return validate;
   }
 
-  ratingChange($event, i) {
-    this.skills[i]['value'] = $event;
-  }
 
+  ratingChange($event, i) {
+    this.selectedSkills[i]['value'] = $event;
+    let selectedSkill = this.selectedSkills[i];
+    let index = this.skills.findIndex(skill => skill.id === selectedSkill.id);
+    this.skills[index]['value'] = $event;
+  }
 
 }

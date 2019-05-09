@@ -72,7 +72,7 @@
 
       <ion-item>
         <ion-label position="stacked" color="primary">Password</ion-label>
-        <ion-input [(ngModel)]="user.password" name="password" type="password" #password="ngModel" required
+        <ion-input [(ngModel)]="user.password" name="password" type="password" required
           (ngModelChange)="onChangePassword()">
         </ion-input>
       </ion-item>
@@ -85,7 +85,7 @@
       </ion-item>
 
       <ion-text color="danger">
-        <p *ngIf="user.password && !passwordValidate" padding-left>
+        <p *ngIf="(user.password && !passwordValidate) || (submitted && !user.password)" padding-left>
           Password is required and should be a minimum of 6 characters, contain at least one number and one letter.
         </p>
       </ion-text>
