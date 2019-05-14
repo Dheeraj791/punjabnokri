@@ -36,3 +36,39 @@
     margin-right:20px;
     margin-left:auto;
 }
+
+.main{
+  min-height:150px; 
+  background-color:#5a5a5a;
+}
+
+.total-matches{
+  border-radius:50%; 
+  background-color:#fff; 
+  font-size:30px; 
+  width:100px; 
+  height:100px; 
+  vertical-align: bottom;
+   margin-left:auto; 
+   margin-right:auto; 
+   text-align:center; 
+   padding-top:17px; 
+   position:relative;
+   .inner{
+    width:90px; 
+    height:90px; 
+    border-radius:50%; 
+    border:3px solid #52DBC7; 
+    position:absolute; 
+    left:5px; 
+    bottom:5px; 
+    box-shadow:0 0 2px #e8e8e8;
+    .number{
+      margin-top:20px;
+      color: #52DBC7; 
+    }
+    .label{
+      font-size:12px;
+    }
+   }
+}

@@ -1,6 +1,18 @@
 <header-component (searchStringUpdated)="onFilterString($event)"></header-component>
 
 <ion-content *ngIf="isLoaded">
+  <div class="main">
+    <div class="total-matches">
+      <div class="inner">
+        <div class="number">
+          3
+        </div>
+        <div class="label">
+          Matches
+        </div>
+      </div>
+    </div>
+  </div>
   <ion-segment [(ngModel)]="segment" (ionChange)="updateListing()">
     <ion-segment-button value="all">
       New
@@ -65,24 +77,5 @@
     No Matches Found
   </ion-list-header>
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
-    <ion-fab-button>
-      <ion-icon name="share"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button color="vimeo" (click)="openSocial('Vimeo', fab)">
-        <ion-icon name="logo-vimeo"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="google" (click)="openSocial('Google+', fab)">
-        <ion-icon name="logo-googleplus"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="twitter" (click)="openSocial('Twitter', fab)">
-        <ion-icon name="logo-twitter"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="facebook" (click)="openSocial('Facebook', fab)">
-        <ion-icon name="logo-facebook"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
-
+ 
 </ion-content>

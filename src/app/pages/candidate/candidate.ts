@@ -44,7 +44,7 @@ export class CandidatePage {
   }
 
   onInterested(){
-    this.apiService.post('jobposting', {}).subscribe(
+    this.apiService.put('jobposting', {interested: true}).subscribe(
       (result: any) => {
        
       },
@@ -56,7 +56,7 @@ export class CandidatePage {
   }
 
   onNotInterested(){
-    this.apiService.post('jobposting', {}).subscribe(
+    this.apiService.put('jobposting', {interested: false}).subscribe(
       (result: any) => {
       
       },
