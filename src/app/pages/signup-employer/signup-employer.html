@@ -11,7 +11,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="step == 1" padding>
+<ion-content *ngIf="!start">
+  <chat-component [type]="employer" (chatFinished)="onStart()"></chat-component>
+</ion-content>
+
+
+<ion-content *ngIf="step == 1 && start" padding>
   <!--
   <div class="login-logo">
     <img src="assets/img/hyrskills-logo.png" alt="Ionic logo">
@@ -248,7 +253,8 @@
   <div *ngFor="let experience of experienceEntries; let i = index; ">
     <div class="inline">
       <ion-select placeholder="Years" [(ngModel)]="experience.numberYears">
-        <ion-select-option *ngFor="let year of [1,2,3,4,5,6,7,8,9,10,15,20]" [value]="year">{{year}}</ion-select-option>
+        <ion-select-option *ngFor="let year of [1,2,3,4,5,6,7,8,9,10,15,20]" [value]="year">{{year}}
+        </ion-select-option>
       </ion-select>
       <span text-center> As a </span>
       <ion-select placeholder="Industry" [(ngModel)]="experience.industry">

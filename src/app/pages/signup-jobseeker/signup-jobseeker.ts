@@ -44,6 +44,8 @@ export class SignupJobseekerPage {
   selectedSkills: any;
   selectedSkillCategory: any;
 
+  start: boolean = false; 
+
   constructor(
     public router: Router,
     public userData: UserData,
@@ -84,8 +86,6 @@ export class SignupJobseekerPage {
       "Restaurants",
       "Retail"
     ];
-
-   
 
     this.userService.watcher.subscribe((user: User) => {
       this.loadSkills();
@@ -331,6 +331,10 @@ export class SignupJobseekerPage {
     let selectedSkill = this.selectedSkills[i];
     let index = this.skills.findIndex(skill => skill.id === selectedSkill.id);
     this.skills[index]['value'] = $event;
+  }
+
+  onStart(){
+    this.start = true; 
   }
 
 }

@@ -1,0 +1,9 @@
+<div id="chat-messages" padding>
+    <div class="chat-message" *ngFor="let chatString of chatStrings; let i =index" [hidden]="i > currentMessage">
+        <img class="avatar" aria-hidden="false" src="./assets/img/lauren.png" >
+        <span flex="" class="ng-hide flex" aria-hidden="true"></span>
+        <div class="hs-chat-message hs-chat-message-bubble" ng-bind="message.text">{{chatString}}</div>
+    </div>
+    <div class="load-more" [hidden]="hideLoadMore">...</div>
+</div>
+<ion-button class="btn btn-primary" (click)="onFinish()" *ngIf="finished">Next</ion-button>

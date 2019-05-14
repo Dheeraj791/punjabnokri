@@ -1,0 +1,32 @@
+#chat-messages{
+    max-width:800px; 
+    margin:auto;
+    .chat-message{
+        display:flex; 
+        flex: 1 1 auto;
+        align-items: center;
+  
+
+        img, .avatar{
+            width: 30px;
+            height:40px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .hs-chat-message {
+            margin-top: 8px;
+            max-width: 70%;
+            width: auto;
+            padding: 5px 15px;
+            border-radius: 15px;
+        }
+        
+        .hs-chat-message-bubble {
+            float: left;
+            color: #000;
+            background-color: #e8e8e8;
+        }
+    }
+}
+
+

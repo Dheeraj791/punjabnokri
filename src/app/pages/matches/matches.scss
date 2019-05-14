@@ -14,8 +14,25 @@
   opacity: 1;
 }
 
-ion-label{
+.match{
   display:flex; 
   align-items: center;
-  justify-content: center;
+  width:100%;
+  padding:10px 0px;
+
+}
+
+.score{
+    border-radius: 25px;
+    padding: 6px;
+    font-size: 14px;
+    height: 45px;
+    text-align: center;
+    width: 45px;
+    font-weight: bold;
+    color:white;
+    line-height:32px;
+    background-color:#52DBC7;
+    margin-right:20px;
+    margin-left:auto;
 }

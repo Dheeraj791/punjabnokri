@@ -1,4 +1,4 @@
-<header-component></header-component>
+<header-component (searchStringUpdated)="onFilterString($event)"></header-component>
 
 <ion-content *ngIf="isLoaded">
   <ion-segment [(ngModel)]="segment" (ionChange)="updateListing()">
@@ -14,27 +14,25 @@
     </ion-segment-button>
   </ion-segment>
 
-  <ion-list #scheduleList [hidden]="matches.length === 0">
+  <ion-list #scheduleList [hidden]="jobPostings.length === 0">
     <div *ngIf="user.type == 'employer'">
-      <ion-item-group *ngFor="let match of activeMatches; let i = index">
+      <ion-item-group *ngFor="let jobPosting of activeJobPostings">
         <ion-item-divider sticky class="listing">
-          <ion-label routerLink="/app/tabs/profile/candidate/{{match.id}}">
-              <div class="business-name">Business name {{i}}</div>
-              <div class="grey">Region</div>
-              <div class="score">87</div>
-          </ion-label>
+          <div class="match" routerLink="/app/tabs/profile/candidate/{{jobPosting.id}}">
+            <div class="title">{{jobPosting.title}}</div>
+            <div class="score">{{jobPosting.score}}</div>
+          </div>
         </ion-item-divider>
       </ion-item-group>
     </div>
-    
+
     <div *ngIf="user.type == 'jobseeker'">
-      <ion-item-group *ngFor="let match of activeMatches">
+      <ion-item-group *ngFor="let jobPosting of activeJobPostings">
         <ion-item-divider sticky class="listing">
-          <ion-label routerLink="/app/tabs/profile/business/{{match.id}}">
-            <img src="./assets/img/hyrskills-logo.png" height="20">
-            Business name
-            <a href="/app/tabs/map">Directions</a>
-          </ion-label>
+          <div class="match" routerLink="/app/tabs/profile/candidate/{{jobPosting.id}}">
+            <div class="title">{{jobPosting.title}}</div>
+            <div class="score">{{jobPosting.score}}</div>
+          </div>
         </ion-item-divider>
       </ion-item-group>
     </div>
@@ -63,7 +61,7 @@
       -->
   </ion-list>
 
-  <ion-list-header [hidden]="matches.length > 0">
+  <ion-list-header [hidden]="jobPostings.length > 0">
     No Matches Found
   </ion-list-header>
 

@@ -13,6 +13,9 @@ export class JobPosting {
     maxSalary: string; 
     startDate: string;
     address:string;
+    interested:boolean = false; 
+    score:number = 50; 
+    description: string; 
 
     constructor(data?: any) {
         if (data) {
@@ -26,6 +29,19 @@ export class JobPosting {
             this.weekend = data.weekend;
             this.minSalary = data.minSalary; 
             this.maxSalary = data.maxSalary;
+            this.description =  data.description;
         }
     }
+
+    public static initializeArray(objects: any): JobPosting[] {
+
+		let results: JobPosting[] = [];
+
+		for (let i = 0; i < objects.length; i++) {
+			let obj = new JobPosting(objects[i]);
+			results.push(obj);
+		}
+
+		return results;
+	}
 }

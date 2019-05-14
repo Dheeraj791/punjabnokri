@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Platform, LoadingController } from '@ionic/angular';
+import { ApiService } from '../../services/api.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { JobPosting} from '../../models/job-posting';
+
 
 @Component({
   selector: 'page-candidate',
@@ -8,27 +12,69 @@ import { Platform } from '@ionic/angular';
 })
 export class CandidatePage {
   skills: Array<string>;
+  loaded: boolean = false; 
+  jobPosting: JobPosting; 
 
   constructor(
-    public platform: Platform
+    public platform: Platform,
+    private apiService: ApiService,
+    private route: ActivatedRoute,
+    private loadingCtrl: LoadingController
   ) { 
 
-    this.skills = [
-      'Skill 1',
-      'Skill 2',
-      'Skill 3',
-      'Skill 4',
-      'Skill 5',
-    ];
   }
 
 
   ionViewDidEnter(){
-   
+
+    const profileId = this.route.snapshot.paramMap.get('profileId');
+    this.apiService.get('jobposting/' + profileId, {}).subscribe(
+      (result: any) => {
+       this.loaded = true; 
+       this.jobPosting = new JobPosting(result.data);
+      },
+      (error: any) => {
+
+      }
+    );
   }
 
   onMoreInfo(){
     
+  }
+
+  onInterested(){
+    this.apiService.post('jobposting', {}).subscribe(
+      (result: any) => {
+       
+      },
+      (error: any) => {
+
+      }
+    );
+
+  }
+
+  onNotInterested(){
+    this.apiService.post('jobposting', {}).subscribe(
+      (result: any) => {
+      
+      },
+      (error: any) => {
+
+      }
+    );
+
+  }
+
+  async openSocial(network: string, fab: HTMLIonFabElement) {
+    const loading = await this.loadingCtrl.create({
+      message: `Posting to ${network}`,
+      duration: (Math.random() * 1000) + 500
+    });
+    await loading.present();
+    await loading.onWillDismiss();
+    fab.close();
   }
 
 }
