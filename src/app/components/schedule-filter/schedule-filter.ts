@@ -2,6 +2,8 @@ import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { ConferenceData } from '../../providers/conference-data';
+import { ApiService } from '../../services/api.service';
+import { ErrorService} from '../../services/error.service';
 
 @Component({
   selector: 'page-schedule-filter',
@@ -11,11 +13,13 @@ import { ConferenceData } from '../../providers/conference-data';
 export class ScheduleFilterPage implements AfterViewInit {
 
   minimumScore: number = 50;
-  maxdistance: number = 50;
+  maxDistance: number = 50;
 
   constructor(
     public confData: ConferenceData,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    private apiService: ApiService,
+    private errorService: ErrorService
   ) {
 
   }
@@ -24,8 +28,20 @@ export class ScheduleFilterPage implements AfterViewInit {
     const excludedTrackNames = [];
   }
 
-  applyFilters(){
+  applyFilters() {
+    this.apiService.put('users/settings',
+      {
+        minimumScore: this.minimumScore,
+        maxDistance: this.maxDistance
+      }
+    ).subscribe(
+      (data: any) => {
+        this.errorService.showAlert('Saved', "Your search defaults have been saved.");
+      },
+      (error: any) => {
 
+      }
+    );
   }
 
   dismiss(data?: any) {
@@ -44,7 +60,8 @@ export class ScheduleFilterPage implements AfterViewInit {
     }
   }
 
-  resetFilters(){
-    
+  resetFilters() {
+    this.minimumScore = 50;
+    this.maxDistance = 50;
   }
 }

@@ -1,0 +1,26 @@
+.score{
+    border-radius: 25px;
+    padding: 6px;
+    font-size: 14px;
+    height: 45px;
+    text-align: center;
+    width: 45px;
+    font-weight: bold;
+    color:white;
+    line-height:32px;
+    background-color:#52DBC7;
+    margin-right:20px;
+    float:right;
+}
+
+.header{
+    display:flex; 
+    align-items: center;
+    width:100%;
+    flex:1;
+    margin-bottom:20px;
+    .score{
+        margin-left:auto;
+        margin-right:20px;
+    }
+}

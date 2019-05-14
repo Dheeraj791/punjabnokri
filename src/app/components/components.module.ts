@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RatingComponent } from './rating/rating.component';
 import { HeaderComponent } from './header/header.component';
+import { ChatComponent } from './chat/chat.component';
 import { FormsModule } from '@angular/forms';
 import { ScheduleFilterPage } from './schedule-filter/schedule-filter';
 
@@ -10,6 +11,7 @@ import { ScheduleFilterPage } from './schedule-filter/schedule-filter';
     declarations: [
         RatingComponent,
         HeaderComponent,
+        ChatComponent,
         ScheduleFilterPage
     ],
     imports: [
@@ -20,6 +22,7 @@ import { ScheduleFilterPage } from './schedule-filter/schedule-filter';
     exports: [
         RatingComponent,
         HeaderComponent,
+        ChatComponent,
         ScheduleFilterPage
     ],
     entryComponents: [

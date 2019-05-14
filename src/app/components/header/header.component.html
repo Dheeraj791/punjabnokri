@@ -4,16 +4,16 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
 
-
         <ion-buttons slot="end">
             <ion-button (click)="presentFilter()">
                 <ion-icon slot="icon-only" name="options"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
-
+    <!--
     <ion-toolbar>
-        <ion-searchbar debounce="500" [(ngModel)]="queryText" (ionChange)="updateListing()" placeholder="Search">
+        <ion-searchbar debounce="500" [(ngModel)]="queryText" (ngModelChange)="updateListing($event)" placeholder="Search">
         </ion-searchbar>
     </ion-toolbar>
+    -->
 </ion-header>

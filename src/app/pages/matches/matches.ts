@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Platform, LoadingController } from '@ionic/angular';
 import { User } from '../../models/user';
+import { JobPosting } from '../../models/job-posting';
 import { UserService } from '../../services/user.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'page-matches',
@@ -17,8 +19,10 @@ export class MatchesPage {
   shownSessions: any = [];
   groups: any = [];
   confDate: string;
-  user: User; 
-  isLoaded: boolean = false; 
+  user: User;
+  isLoaded: boolean = false;
+  jobPostings: JobPosting[] = [];
+  activeJobPostings: JobPosting[] = [];
 
   matches: any = [
     {
@@ -60,35 +64,47 @@ export class MatchesPage {
   constructor(
     public platform: Platform,
     private userService: UserService,
-    private loadingController: LoadingController
-  ) { 
+    private loadingController: LoadingController,
+    private apiService: ApiService
+  ) {
 
-    this.userService.getUser().then( User => {
-      this.user = User; 
-    }); 
+    this.userService.getUser().then(User => {
+      this.user = User;
+    });
   }
 
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.activeMatches = this.matches;
     //load matches here
-    this.isLoaded = true; 
+    this.isLoaded = true;
+
+    this.apiService.get('jobposting').subscribe(
+      (result: any) => {
+        this.jobPostings = JobPosting.initializeArray(result.data);
+        this.activeJobPostings = this.jobPostings;
+      },
+      (error: any) => {
+
+      }
+    );
+
   }
 
   updateListing() {
 
     if (this.segment == 'interested') {
-      this.activeMatches = this.matches.filter(item => {
+      this.activeJobPostings = this.jobPostings.filter(item => {
         return item.interested == true;
       });
     }
     else if (this.segment == 'notinterested') {
-      this.activeMatches = this.matches.filter(item => {
+      this.activeJobPostings = this.jobPostings.filter(item => {
         return item.interested == false;
       });
     }
     else {
-      this.activeMatches = this.matches;
+      this.activeJobPostings = this.jobPostings;
     }
   }
 
@@ -101,6 +117,14 @@ export class MatchesPage {
     await loading.onWillDismiss();
     fab.close();
   }
- 
+
+  onFilterString($event){
+    console.log($event);
+    /*
+    * Integrate search string logic
+    */
+
+  }
+
 }
 

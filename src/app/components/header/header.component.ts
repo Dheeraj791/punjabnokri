@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 import { ModalController } from '@ionic/angular';
 
@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit {
   shownSessions: any = [];
   groups: any = [];
   confDate: string;
+
+  @Output() searchStringUpdated: EventEmitter<number> = new EventEmitter();
 
   constructor(  private modalCtrl : ModalController) { 
   
@@ -39,8 +41,9 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  updateListing(){
-    
+  updateListing($event){
+    console.log("ionChange emitted: ",$event.value);
+    this.searchStringUpdated.emit();
   }
 
 }

@@ -42,6 +42,8 @@ export class SignupEmployerPage {
   selectedSkills: any;
   selectedSkillCategory: any;
 
+  start: boolean = false;
+
   constructor(
     public router: Router,
     public userData: UserData,
@@ -323,6 +325,11 @@ export class SignupEmployerPage {
     let selectedSkill = this.selectedSkills[i];
     let index = this.skills.findIndex(skill => skill.id === selectedSkill.id);
     this.skills[index]['value'] = $event;
+  }
+
+  onStart() {
+    alert('start');
+    this.start = true;
   }
 
 }
