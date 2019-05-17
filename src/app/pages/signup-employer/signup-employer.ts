@@ -260,14 +260,17 @@ export class SignupEmployerPage {
 
   onNextCategoryStep() {
     if (this.categoryStep < (this.skillsCategories.length - 1)) {
-      if (this.validateExperience()) {
-        this.categoryStep++;
-        this.loadCategoryContent()
-      }
-      else {
-        alert("Please rate all of the skills on the screen.");
-      }
-
+      this.categoryStep++;
+      this.loadCategoryContent();
+      /*
+        if (this.validateExperience()) {
+          this.categoryStep++;
+          this.loadCategoryContent()
+        }
+        else {
+          alert("Please rate all of the skills on the screen.");
+        }
+      */
     }
     else {
       this.onNextStep();

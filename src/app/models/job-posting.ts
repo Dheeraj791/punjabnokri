@@ -30,6 +30,7 @@ export class JobPosting {
             this.minSalary = data.minSalary; 
             this.maxSalary = data.maxSalary;
             this.description =  data.description;
+            this.interested = data.interested; 
         }
     }
 
