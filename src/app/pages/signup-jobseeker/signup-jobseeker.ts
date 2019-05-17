@@ -44,7 +44,7 @@ export class SignupJobseekerPage {
   selectedSkills: any;
   selectedSkillCategory: any;
 
-  start: boolean = false; 
+  start: boolean = false;
 
   constructor(
     public router: Router,
@@ -89,10 +89,10 @@ export class SignupJobseekerPage {
 
     this.userService.watcher.subscribe((user: User) => {
       this.loadSkills();
-		});
+    });
   }
 
-  loadSkills(){
+  loadSkills() {
     this.apiService.get('skills').subscribe(
       (result: any) => {
         this.skills = Skill.initializeArray(result.data);
@@ -126,12 +126,12 @@ export class SignupJobseekerPage {
                 this.onNextStep();
               }
             },
-            (error:any) => {
+            (error: any) => {
               this.errorService.showAlert('Error', error.message);
             }
           );
         },
-        (error:any) => {
+        (error: any) => {
           this.errorService.showAlert('Error', error.message);
         }
       );
@@ -267,13 +267,18 @@ export class SignupJobseekerPage {
 
   onNextCategoryStep() {
     if (this.categoryStep < (this.skillsCategories.length - 1)) {
-      if (this.validateExperience()) {
-        this.categoryStep++;
-        this.loadCategoryContent()
-      }
-      else {
-        this.errorService.showAlert('Error', "Please rate all of the skills on the screen.");
-      }
+      this.categoryStep++;
+      this.loadCategoryContent()
+      /*
+        if (this.validateExperience()) {
+          this.categoryStep++;
+          this.loadCategoryContent()
+        }
+        else {
+          this.errorService.showAlert('Error', "Please rate all of the skills on the screen.");
+
+        }
+      */
 
     }
     else {
@@ -333,8 +338,8 @@ export class SignupJobseekerPage {
     this.skills[index]['value'] = $event;
   }
 
-  onStart(){
-    this.start = true; 
+  onStart() {
+    this.start = true;
   }
 
 }

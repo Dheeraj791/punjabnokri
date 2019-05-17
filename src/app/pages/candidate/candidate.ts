@@ -14,6 +14,7 @@ export class CandidatePage {
   skills: Array<string>;
   loaded: boolean = false; 
   jobPosting: JobPosting; 
+  profileId: string; 
 
   constructor(
     public platform: Platform,
@@ -27,8 +28,8 @@ export class CandidatePage {
 
   ionViewDidEnter(){
 
-    const profileId = this.route.snapshot.paramMap.get('profileId');
-    this.apiService.get('jobposting/' + profileId, {}).subscribe(
+    this.profileId = this.route.snapshot.paramMap.get('profileId');
+    this.apiService.get('jobposting/' + this.profileId, {}).subscribe(
       (result: any) => {
        this.loaded = true; 
        this.jobPosting = new JobPosting(result.data);
@@ -44,9 +45,9 @@ export class CandidatePage {
   }
 
   onInterested(){
-    this.apiService.put('jobposting', {interested: true}).subscribe(
+    this.apiService.put('jobposting/' + this.profileId, {interested: true}).subscribe(
       (result: any) => {
-       
+        this.jobPosting = new JobPosting(result.data);
       },
       (error: any) => {
 
@@ -56,9 +57,9 @@ export class CandidatePage {
   }
 
   onNotInterested(){
-    this.apiService.put('jobposting', {interested: false}).subscribe(
+    this.apiService.put('jobposting/' + this.profileId, {interested: false}).subscribe(
       (result: any) => {
-      
+        this.jobPosting = new JobPosting(result.data);
       },
       (error: any) => {
 

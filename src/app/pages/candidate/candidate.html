@@ -8,9 +8,12 @@
             <ion-item>
                 {{jobPosting.description}}
             </ion-item>
+            {{jobPosting |json}}
             <ion-item>
-                <ion-button (click)="onInterested()">Interested</ion-button>
-                <ion-button (click)="onNotInterested()">Not Interested</ion-button>
+                <ion-button (click)="onInterested()" [fill]="jobPosting.interested? 'solid': 'outline'">Interested
+                </ion-button>
+                <ion-button (click)="onNotInterested()" [fill]="!jobPosting.interested? 'solid': 'outline'">Not
+                    Interested</ion-button>
             </ion-item>
         </ion-card-content>
 
@@ -37,5 +40,9 @@
         </ion-fab-list>
     </ion-fab>
 
-    <ion-button routerLink="/app/tabs/matches">Back</ion-button>
+
 </div>
+
+<ion-footer padding>
+    <ion-button routerLink="/app/tabs/matches">Back</ion-button>
+</ion-footer>
