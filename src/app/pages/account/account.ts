@@ -2,9 +2,8 @@ import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AlertController } from '@ionic/angular';
-
 import { UserData } from '../../providers/user-data';
-
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'page-account',
@@ -16,8 +15,9 @@ export class AccountPage implements AfterViewInit {
   email: string;
 
   constructor(
-    public alertCtrl: AlertController,
-    public router: Router,
+    private alertCtrl: AlertController,
+    private router: Router,
+    private authService: AuthService,
     public userData: UserData
   ) { }
 
@@ -68,7 +68,7 @@ export class AccountPage implements AfterViewInit {
   }
 
   logout() {
-    this.userData.logout();
+    this.authService.logout();
     this.router.navigateByUrl('/login');
   }
 

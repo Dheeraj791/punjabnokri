@@ -50,7 +50,8 @@ export class AuthService {
 	}
 
 	isAuthenticated(): Promise<any> {
-		return this.storage.get('isAuthenticated').then((value) => {
+		return this.storage.get('isAuthenticated').then((value: boolean) => {
+			console.log(value);
 			return value;
 		});
 	}

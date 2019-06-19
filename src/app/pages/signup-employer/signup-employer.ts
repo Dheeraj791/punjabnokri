@@ -80,7 +80,7 @@ export class SignupEmployerPage {
       "Business Services"
     ];
 
-
+  
   }
 
   ionViewWillEnter() {
@@ -95,6 +95,7 @@ export class SignupEmployerPage {
   }
 
   loadSkills() {
+ 
     this.apiService.get('skills').subscribe(
       (result: any) => {
         this.skills = Skill.initializeArray(result.data);
@@ -248,9 +249,7 @@ export class SignupEmployerPage {
     if (this.step < 10) {
       this.step++;
     }
-
   }
-
 
   onPreviousStep() {
     if (this.step > 1) {
@@ -308,6 +307,7 @@ export class SignupEmployerPage {
   }
 
   onSeeMatches() {
+    this.storage.set('complete', true);
     this.router.navigateByUrl('/app/tabs/matches');
   }
 
@@ -331,8 +331,12 @@ export class SignupEmployerPage {
   }
 
   onStart() {
-    alert('start');
     this.start = true;
+  }
+
+  onReset(){
+    this.start = true; 
+    this.step = 1; 
   }
 
 }

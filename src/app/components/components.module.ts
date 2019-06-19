@@ -6,13 +6,15 @@ import { HeaderComponent } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { FormsModule } from '@angular/forms';
 import { ScheduleFilterPage } from './schedule-filter/schedule-filter';
+import { ConfirmAccount } from './confirm-account/confirm-account.component';
 
 @NgModule({
     declarations: [
         RatingComponent,
         HeaderComponent,
         ChatComponent,
-        ScheduleFilterPage
+        ScheduleFilterPage,
+        ConfirmAccount
     ],
     imports: [
         IonicModule,
@@ -23,10 +25,12 @@ import { ScheduleFilterPage } from './schedule-filter/schedule-filter';
         RatingComponent,
         HeaderComponent,
         ChatComponent,
-        ScheduleFilterPage
+        ScheduleFilterPage,
+        ConfirmAccount
     ],
     entryComponents: [
-        ScheduleFilterPage
+        ScheduleFilterPage,
+        ConfirmAccount
     ]
 })
 export class HyrSkillsModule { }

@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: './pages/login/login.module#LoginModule'
   },
   {
+    path: 'create',
+    loadChildren: './pages/create/create.module#CreateModule'
+  },
+  {
     path: 'signup-jobseeker',
     loadChildren: './pages/signup-jobseeker/signup-jobseeker.module#SignUpJobseekerModule'
   },

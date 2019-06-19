@@ -15,112 +15,7 @@
   <chat-component [type]="employer" (chatFinished)="onStart()"></chat-component>
 </ion-content>
 
-
 <ion-content *ngIf="step == 1 && start" padding>
-  <!--
-  <div class="login-logo">
-    <img src="assets/img/hyrskills-logo.png" alt="Ionic logo">
-  </div>
--->
-  <h1 text-center>Let's create an account...</h1>
-
-  <form #signupForm="ngForm" novalidate>
-    <ion-list>
-
-      <ion-item>
-        <ion-label position="stacked" color="primary">Fist Name</ion-label>
-        <ion-input [(ngModel)]="user.firstName" name="firstname" type="text" #firstname="ngModel" required>
-        </ion-input>
-      </ion-item>
-
-      <ion-text color="danger">
-        <p [hidden]="firstname.valid || submitted == false" padding-left>
-          First name is required
-        </p>
-      </ion-text>
-
-      <ion-item>
-        <ion-label position="stacked" color="primary">Last Name</ion-label>
-        <ion-input [(ngModel)]="user.lastName" name="password" type="text" #lastname="ngModel" required>
-        </ion-input>
-      </ion-item>
-
-      <ion-text color="danger">
-        <p [hidden]="lastname.valid || submitted == false" padding-left>
-          Last name is required
-        </p>
-      </ion-text>
-
-      <ion-item>
-        <ion-label position="stacked" color="primary">Email Address</ion-label>
-        <ion-input [(ngModel)]="user.email" name="email" type="text" #email="ngModel" required>
-        </ion-input>
-      </ion-item>
-
-      <ion-text color="danger">
-        <p [hidden]="email.valid || submitted == false" padding-left>
-          Email is required
-        </p>
-      </ion-text>
-
-      <ion-item>
-        <ion-label position="stacked" color="primary">Telephone Number</ion-label>
-        <ion-input [(ngModel)]="user.telephone" name="telephone" type="text" #telephone="ngModel" required>
-        </ion-input>
-      </ion-item>
-
-      <ion-text color="danger">
-        <p [hidden]="telephone.valid || submitted == false" padding-left>
-          Telephone is required
-        </p>
-      </ion-text>
-
-      <ion-item>
-        <ion-label position="stacked" color="primary">Password</ion-label>
-        <ion-input [(ngModel)]="user.password" name="password" type="password" #password="ngModel" required
-          (ngModelChange)="onChangePassword()">
-        </ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked" color="primary">Confirm Password</ion-label>
-        <ion-input [(ngModel)]="passwordConfirm" name="confirmpassword" type="password" required
-          (ngModelChange)="onChangeRepeat()">
-        </ion-input>
-      </ion-item>
-
-      <ion-text color="danger">
-        <p *ngIf="(user.password && !passwordValidate) || (submitted && !user.password)" padding-left>
-          Password is required and should be a minimum of 6 characters, contain at least one number and one letter.
-        </p>
-      </ion-text>
-
-      <ion-text color="danger">
-        <p *ngIf="passwordConfirm && !passwordConfirmValidate" padding-left>
-          Passwords should match
-        </p>
-      </ion-text>
-
-      <ion-item>
-        <ion-label text-wrap>We work hard to customize your experience. Would you like to hear from us about special
-          promotions
-          and offers?</ion-label>
-        <ion-checkbox slot="start" [(ngModel)]="user.preferences.promotionsOffersOns" name="confirm"></ion-checkbox>
-      </ion-item>
-    </ion-list>
-
-    <div padding>
-      <ion-button (click)="onSignup(signupForm)" type="submit" expand="block">Create</ion-button>
-    </div>
-  </form>
-
-  <p text-center>
-    <a href="/login">Sign In</a>
-  </p>
-
-</ion-content>
-
-<ion-content *ngIf="step == 2" padding>
 
   <ion-item>
     <ion-label position="stacked" color="primary">Business Name</ion-label>
@@ -151,7 +46,7 @@
 
 </ion-content>
 
-<ion-content *ngIf="step == 3" padding>
+<ion-content *ngIf="step == 2" padding>
 
   <h1 text-center>The job posting...</h1>
 
@@ -220,7 +115,7 @@
   </div>
 </ion-content>
 
-<ion-content *ngIf="step == 4" padding>
+<ion-content *ngIf="step == 3" padding>
 
   <ion-item>
     <ion-label position="stacked" color="primary">Job Address</ion-label>
@@ -246,7 +141,7 @@
   </div>
 </ion-content>
 
-<ion-content *ngIf="step == 5" padding>
+<ion-content *ngIf="step == 4" padding>
 
   <h1 text-center>Required experience...</h1>
 
@@ -278,7 +173,7 @@
   </div>
 </ion-content>
 
-<ion-content *ngIf="step == 6" padding>
+<ion-content *ngIf="step == 5" padding>
   <h1 text-center>Show off your skills</h1>
   <h2 text-center>{{selectedSkillCategory}}</h2>
 
@@ -298,7 +193,7 @@
 
 </ion-content>
 
-<ion-content *ngIf="step == 7">
+<ion-content *ngIf="step == 6">
 
   <h1 text-center> Preview your profile</h1>
   <div padding>
@@ -307,7 +202,7 @@
   </div>
 </ion-content>
 
-<ion-content *ngIf="step == 8" padding>
+<ion-content *ngIf="step == 7" padding>
   <p padding>
     Now let's go see your matches!
     You can edit your Profile, Experience and Skills

@@ -61,7 +61,7 @@ export class AppComponent {
             }
           },
           () => {
-            //has the user entered an access code yet?
+           
           }
         );
       }

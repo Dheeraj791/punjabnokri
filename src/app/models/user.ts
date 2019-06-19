@@ -12,6 +12,7 @@ export class User {
     type: string;
     profile: UserProfile; 
     preferences: UserPreferences; 
+    status: string; 
 
     constructor(data?: any) {
        
@@ -24,6 +25,7 @@ export class User {
             this.password = data.password;
             this.address = data.address;
             this.type = data.type;
+            this.status = data.status; 
 
             if(data.profile){
                 this.profile = new UserProfile(data.profile);

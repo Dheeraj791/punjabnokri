@@ -25,7 +25,6 @@ export class CandidatePage {
 
   }
 
-
   ionViewDidEnter(){
 
     this.profileId = this.route.snapshot.paramMap.get('profileId');

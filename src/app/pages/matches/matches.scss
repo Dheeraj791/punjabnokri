@@ -19,7 +19,7 @@
   align-items: center;
   width:100%;
   padding:10px 0px;
-
+  cursor:pointer;
 }
 
 .score{
@@ -40,6 +40,8 @@
 .main{
   min-height:150px; 
   background-color:#5a5a5a;
+  display: flex;
+  align-items: center;
 }
 
 .total-matches{

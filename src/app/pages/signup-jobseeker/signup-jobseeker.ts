@@ -86,10 +86,11 @@ export class SignupJobseekerPage {
       "Restaurants",
       "Retail"
     ];
-
+    /*
     this.userService.watcher.subscribe((user: User) => {
       this.loadSkills();
     });
+    */
   }
 
   loadSkills() {
@@ -110,6 +111,7 @@ export class SignupJobseekerPage {
       this.selectedType = res;
     }
     );
+    this.loadSkills();
   }
 
   onSignup(form: NgForm) {
@@ -317,6 +319,7 @@ export class SignupJobseekerPage {
   }
 
   onSeeMatches() {
+    this.storage.set('complete', true);
     this.router.navigateByUrl('/app/tabs/matches');
   }
 
@@ -340,6 +343,11 @@ export class SignupJobseekerPage {
 
   onStart() {
     this.start = true;
+  }
+
+  onReset(){
+    this.start = true; 
+    this.step = 1; 
   }
 
 }

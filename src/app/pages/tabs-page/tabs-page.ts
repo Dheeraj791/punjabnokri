@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController, IonList, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   templateUrl: 'tabs-page.html'
@@ -23,7 +24,8 @@ export class TabsPage {
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
 
 
@@ -33,10 +35,12 @@ export class TabsPage {
 
   }
 
-
-
-
   openTutorial() {
     this.router.navigate(['tutorial']);
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/login');
   }
 }
