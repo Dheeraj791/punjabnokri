@@ -12,7 +12,7 @@ export class User {
     type: string;
     profile: UserProfile; 
     preferences: UserPreferences; 
-    status: string; 
+    status: string = 'unconfirmed'; 
 
     constructor(data?: any) {
        

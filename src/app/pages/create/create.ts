@@ -8,6 +8,11 @@ import { NgForm } from '@angular/forms';
 import { ErrorService } from 'src/app/services/error.service';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+
+import { Privacy } from '../static/privacy/privacy';
+import { Terms } from '../static/terms/terms';
+
 
 @Component({
   selector: 'page-create',
@@ -26,6 +31,7 @@ export class CreatePage {
   passwordConfirmValidate: boolean = false;
   receivePromotions: boolean = false;
   userType: string;
+  confirmEmail: string; 
 
   constructor(
     private platform: Platform,
@@ -34,7 +40,8 @@ export class CreatePage {
     private authService: AuthService,
     private errorService: ErrorService,
     private storage: Storage,
-    private router: Router
+    private router: Router,
+    private modalController: ModalController
   ) {
 
     this.storage.get('user_type').then(res => {
@@ -124,7 +131,6 @@ export class CreatePage {
   }
 
   onChangeEmail($event) {
-
     let validate = this.validateEmail(this.user.email);
 
     if (validate) {
@@ -135,6 +141,21 @@ export class CreatePage {
     }
   }
 
+  async onTerms(){
+    const modal = await this.modalController.create({
+      component: Terms
+    });
+    await modal.present();
+
+  }
+
+  async onPrivacy(){
+    const modal = await this.modalController.create({
+      component: Privacy
+    });
+    await modal.present();
+
+  }
 
 }
 

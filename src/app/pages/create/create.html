@@ -1,104 +1,117 @@
 <ion-content padding>
-    <!--
+  <!--
     <div class="login-logo">
       <img src="assets/img/hyrskills-logo.png" alt="Ionic logo">
     </div>
   -->
-    <h1 text-center>Let's create an account...</h1>
-  
-    <form #signupForm="ngForm" novalidate>
-      <ion-list>
-  
-        <ion-item>
-          <ion-label position="stacked" color="primary">Fist Name</ion-label>
-          <ion-input [(ngModel)]="user.firstName" name="firstname" type="text" #firstname="ngModel" required>
-          </ion-input>
-        </ion-item>
-  
-        <ion-text color="danger">
-          <p [hidden]="firstname.valid || submitted == false" padding-left>
-            First name is required
-          </p>
-        </ion-text>
-  
-        <ion-item>
-          <ion-label position="stacked" color="primary">Last Name</ion-label>
-          <ion-input [(ngModel)]="user.lastName" name="password" type="text" #lastname="ngModel" required>
-          </ion-input>
-        </ion-item>
-  
-        <ion-text color="danger">
-          <p [hidden]="lastname.valid || submitted == false" padding-left>
-            Last name is required
-          </p>
-        </ion-text>
-  
-        <ion-item>
-          <ion-label position="stacked" color="primary">Email Address</ion-label>
-          <ion-input [(ngModel)]="user.email" name="email" type="text" #email="ngModel" required>
-          </ion-input>
-        </ion-item>
-  
-        <ion-text color="danger">
-          <p [hidden]="email.valid || submitted == false" padding-left>
-            Email is required
-          </p>
-        </ion-text>
-  
-        <ion-item>
-          <ion-label position="stacked" color="primary">Telephone Number</ion-label>
-          <ion-input [(ngModel)]="user.telephone" name="telephone" type="text" #telephone="ngModel" required>
-          </ion-input>
-        </ion-item>
-  
-        <ion-text color="danger">
-          <p [hidden]="telephone.valid || submitted == false" padding-left>
-            Telephone is required
-          </p>
-        </ion-text>
-  
-        <ion-item>
-          <ion-label position="stacked" color="primary">Password</ion-label>
-          <ion-input [(ngModel)]="user.password" name="password" type="password" required
-            (ngModelChange)="onChangePassword()">
-          </ion-input>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="stacked" color="primary">Confirm Password</ion-label>
-          <ion-input [(ngModel)]="passwordConfirm" name="confirmpassword" type="password" required
-            (ngModelChange)="onChangeRepeat()">
-          </ion-input>
-        </ion-item>
-  
-        <ion-text color="danger">
-          <p *ngIf="(user.password && !passwordValidate) || (submitted && !user.password)" padding-left>
-            Password is required and should be a minimum of 6 characters, contain at least one number and one letter.
-          </p>
-        </ion-text>
-  
-        <ion-text color="danger">
-          <p *ngIf="passwordConfirm && !passwordConfirmValidate" padding-left>
-            Passwords should match
-          </p>
-        </ion-text>
-  
-        <ion-item>
-          <ion-label text-wrap>We work hard to customize your experience. Would you like to hear from us about special
-            promotions
-            and offers?</ion-label>
-          <ion-checkbox slot="start" [(ngModel)]="user.preferences.promotionsOffersOns" name="confirm"></ion-checkbox>
-        </ion-item>
-      </ion-list>
-  
-      <div padding>
-        <ion-button (click)="onSignup(signupForm)" type="submit" expand="block">Create</ion-button>
-      </div>
-    </form>
-  
-    <p text-center>
-      <a href="/login">Sign In</a>
-    </p>
-  
-  </ion-content>
-  
+  <h1 text-center>Let's create an account...</h1>
+
+  <form #signupForm="ngForm" novalidate>
+    <ion-list>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Fist Name</ion-label>
+        <ion-input [(ngModel)]="user.firstName" name="firstname" type="text" #firstname="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="firstname.valid || submitted == false" padding-left>
+          First name is required
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Last Name</ion-label>
+        <ion-input [(ngModel)]="user.lastName" name="password" type="text" #lastname="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="lastname.valid || submitted == false" padding-left>
+          Last name is required
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Email Address</ion-label>
+        <ion-input [(ngModel)]="user.email" name="email" type="text" #email="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="email.valid || submitted == false" padding-left>
+          Email is required
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Confirm Email Address</ion-label>
+        <ion-input [(ngModel)]="confirmEmail" name="email" type="text" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p *ngIf="user.email.length != 0 && user.email !== confirmEmail" padding-left>
+          Email confirmation has to match email
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Telephone Number</ion-label>
+        <ion-input [(ngModel)]="user.telephone" name="telephone" type="text" #telephone="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="telephone.valid || submitted == false" padding-left>
+          Telephone is required
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Password</ion-label>
+        <ion-input [(ngModel)]="user.password" name="password" type="password" required
+          (ngModelChange)="onChangePassword()">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Confirm Password</ion-label>
+        <ion-input [(ngModel)]="passwordConfirm" name="confirmpassword" type="password" required
+          (ngModelChange)="onChangeRepeat()">
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p *ngIf="(user.password && !passwordValidate) || (submitted && !user.password)" padding-left>
+          Password is required and should be a minimum of 6 characters, contain at least one number and one letter.
+        </p>
+      </ion-text>
+
+      <ion-text color="danger">
+        <p *ngIf="passwordConfirm && !passwordConfirmValidate" padding-left>
+          Passwords should match
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label text-wrap>We work hard to customize your experience. Would you like to hear from us about special
+          promotions
+          and offers?</ion-label>
+        <ion-checkbox slot="start" [(ngModel)]="user.preferences.promotionsOffersOns" name="confirm"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+    <div padding>
+      <ion-button (click)="onSignup(signupForm)" type="submit" expand="block">Create</ion-button>
+    </div>
+
+    <p text-center>By Signing up, you agree to our <a (click)="onTerms()"> Terms & Conditions</a> and <a (click)="onPrivacy()">Privacy Policy</a>.</p>
+  </form>
+
+  <p text-center>
+    <a href="/login">Sign In</a>
+  </p>
+
+</ion-content>

@@ -146,6 +146,7 @@ export class SignupJobseekerPage {
     profile['user_id'] = this.user.id;
     this.apiService.post('users/profile', profile).subscribe(
       (data: any) => {
+        this.userService.setUser(data.result); 
         this.onNextStep();
       },
       (error: any) => {
@@ -158,6 +159,7 @@ export class SignupJobseekerPage {
 
     this.apiService.post('users/purpose', { why: this.user.profile.why }).subscribe(
       (data: any) => {
+        this.userService.setUser(data.result); 
         this.onNextStep();
       },
       (error: any) => {
@@ -172,6 +174,7 @@ export class SignupJobseekerPage {
 
     this.apiService.post('users/experience', { experienceEntries: this.experienceEntries }).subscribe(
       (data: any) => {
+        this.userService.setUser(data.result); 
         this.onNextStep();
       },
       (error: any) => {
@@ -185,6 +188,7 @@ export class SignupJobseekerPage {
 
     this.apiService.post('users/skills', { skills: this.selectedSkills }).subscribe(
       (data: any) => {
+        this.userService.setUser(data.result); 
         this.onNextCategoryStep();
       },
       (error: any) => {

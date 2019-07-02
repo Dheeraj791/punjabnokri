@@ -3,16 +3,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicStorageModule } from '@ionic/storage'
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
 import { AuthInterceptor } from './providers/authInterceptor'
 //import services
 import { ApiService } from './services/api.service';
@@ -20,10 +18,19 @@ import { AuthService } from './services/auth.service';
 import { MessageService } from './services/message.service';
 import { UserService } from './services/user.service';
 import { ErrorService } from './services/error.service';
+import { AuthGuard } from './guards/auth.guard';
+import { Privacy } from './pages/static/privacy/privacy';
+import { Terms } from './pages/static/terms/terms';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent, 
+    Privacy,
+    Terms],
+  entryComponents: [
+    Privacy,
+    Terms
+  ],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -36,11 +43,14 @@ import { ErrorService } from './services/error.service';
   providers: [
     StatusBar,
     SplashScreen,
-    ApiService, 
+    ApiService,
     AuthService,
     MessageService,
     UserService,
     ErrorService,
+    AuthGuard,
+    Privacy,
+    Terms,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

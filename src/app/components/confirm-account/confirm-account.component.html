@@ -1,0 +1,17 @@
+<div id="confirm-account">
+    <p>Your email address has not be confirmed. To confirm your email address, check your inbox for a confirmation code.
+    </p>
+    <p> Have not received it? </p>
+    <a (click)="onResend()">Resend email</a>
+
+    <div *ngIf="codeSent">
+        <ion-item>
+            <ion-label>Code</ion-label>
+            <ion-input name="code" type="text" required [(ngModel)]="sentCode">
+            </ion-input>
+        </ion-item>
+
+        <ion-button (click)="onSubmit()" type="submit" expand="block">Submit</ion-button>
+    </div>
+
+</div>

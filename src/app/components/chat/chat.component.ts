@@ -12,8 +12,8 @@ export class ChatComponent implements OnInit {
 
     chatStringsJobSeeker: Array<string> = [
         'Hey! I\'m Lauren from HyrSkills.',
-        'To find your perfect job, we need to ask you a few questions … Oh, and don’t worry, we don’t need your resume.',
         'As you know, we focus on the things that matter like your skills, experience, availability, and salary expectations.',
+        'To find your perfect job, we need to ask you a few questions … Oh, and don’t worry, we don’t need your resume.',
         'Now let’s create your profile!'
     ];
 

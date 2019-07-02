@@ -6,6 +6,8 @@ import { UserOptions } from '../../interfaces/user-options';
 import { User } from '../../models/user';
 import { Storage } from '@ionic/storage';
 import { ApiService } from '../../services/api.service';
+import { ErrorService } from '../../services/error.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'page-login',
@@ -24,7 +26,9 @@ export class LoginPage {
     public userData: UserData,
     public router: Router,
     private storage: Storage,
-    private api: ApiService
+    private api: ApiService,
+    private errorService: ErrorService,
+    private authService: AuthService
   ) {
     this.user = new User;
   }
@@ -41,14 +45,13 @@ export class LoginPage {
 
     if (form.valid) {
       this.api.authenticate(this.email, this.password).subscribe(
-        (data: any) => {
-          if (data.access_token) {
-
+        (result: any) => {
+          if (result.access_token) {
+            this.authService.authenticate(result.access_token);
           }
         },
         (error: any) => {
-
-
+          this.errorService.showAlert('Error', error.message);
         }
       );
 
@@ -58,13 +61,7 @@ export class LoginPage {
   }
 
   onSignup() {
-    if (this.selectedType == 'jobseeker') {
-      this.router
-        .navigateByUrl('/signup-jobseeker');
-    }
-    else {
-      this.router
-        .navigateByUrl('/signup-employer');
-    }
+    this.router
+      .navigateByUrl('/create');
   }
 }

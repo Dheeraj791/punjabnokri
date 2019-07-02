@@ -1,4 +1,5 @@
 <header-component (searchStringUpdated)="onFilterString($event)"></header-component>
+<confirm-account *ngIf="user.status === 'unconfirmed'"></confirm-account>
 
 <ion-content *ngIf="isLoaded">
   <div class="main">
