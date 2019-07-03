@@ -1,3 +1,17 @@
+<ion-header no-border>
+  <ion-toolbar padding>
+    <ion-buttons slot="start">
+      <img src="./assets/img/hyrskills-logo.png" height="30">
+    </ion-buttons>
+    <ion-buttons slot="end" id="links">
+      <button ion-button routerLink="/tutorial">
+        Tutorial
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
 <ion-content *ngIf="!start">
   <chat-component [type]="userType" (chatFinished)="onStart()"></chat-component>
 </ion-content>
