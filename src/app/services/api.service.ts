@@ -44,12 +44,11 @@ export class ApiService {
         let err = new ApiError('An unknown error occured');
 
         if (error instanceof HttpErrorResponse) {
-        
-            //Check for invalid fields
-            if (error.error.invalid_fields) {
+
+            if (error.error.invalid_fields ) {
                 err.message = _.values(error.error.invalid_fields).join(' ');
             } else {
-                err.message = error.message || JSON.stringify(error);
+                err.message = error.error.message || JSON.stringify(error);
             }
            
             err.status = error.status;
@@ -75,6 +74,8 @@ export class ApiService {
             {
                 headers: new HttpHeaders(this.defaultHeaders)
             }
+        ).pipe(
+            catchError(this.handleError)
         );
     }
 

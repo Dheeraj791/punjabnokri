@@ -82,9 +82,9 @@ export class SignupJobseekerPage {
     ];
 
     this.industries = [
-      'Accommodation',
-      "Restaurants",
-      "Retail"
+      'Retail',
+      "Hospitality",
+      "Business Services"
     ];
     /*
     this.userService.watcher.subscribe((user: User) => {
