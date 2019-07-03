@@ -18,6 +18,7 @@ export class TutorialPage {
   };
 
   @ViewChild('slides') slides: IonSlides;
+  loggedIn: boolean = false;
 
   constructor(
     private menu: MenuController,
@@ -29,9 +30,8 @@ export class TutorialPage {
   }
 
   startApp() {
-    this.authService.isAuthenticated().then(isLoggedIn => {
    
-      if (!isLoggedIn) {
+      if (!this.loggedIn) {
         this.router.navigateByUrl('/create');
       }
       else {
@@ -46,7 +46,7 @@ export class TutorialPage {
             .then(() => /*this.storage.set('ion_did_tutorial', 'true') */ '');
         }
       }
-    });
+
   }
 
   onSlideChangeStart(event) {
@@ -56,6 +56,9 @@ export class TutorialPage {
   }
 
   ionViewWillEnter() {
+    this.authService.isAuthenticated().then(isLoggedIn => {
+      this.loggedIn = isLoggedIn;
+    }); 
 
     this.storage.get('ion_did_tutorial').then(res => {
       if (res === true) {
@@ -72,6 +75,8 @@ export class TutorialPage {
       }
     }
     );
+
+
   }
 
   ionViewDidLeave() {
@@ -84,6 +89,14 @@ export class TutorialPage {
     this.router.navigateByUrl('/login');
   }
 
+  onLogout() {
+    this.authService.logout().then(res => {
+      this.router.navigateByUrl('/login');
+    }
+    );
+
+  }
+
   onSwitchUserType() {
 
     this.storage.get('user_type').then(res => {
@@ -93,4 +106,6 @@ export class TutorialPage {
     }
     );
   }
+
+
 }
