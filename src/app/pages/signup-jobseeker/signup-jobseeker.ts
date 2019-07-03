@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserData } from '../../providers/user-data';
 import { User } from '../../models/user';
@@ -45,6 +44,7 @@ export class SignupJobseekerPage {
   selectedSkillCategory: any;
 
   start: boolean = false;
+  loaded: boolean = false;
 
   constructor(
     public router: Router,
@@ -56,28 +56,34 @@ export class SignupJobseekerPage {
     private errorService: ErrorService,
     private skillData: SkillData
   ) {
+
+    this.userService.getUser().then(user => {
+      this.user = user;
+      this.loaded = true;
+    });
     this.user = new User;
+
     this.experienceEntries = [
       {
-        "id": null,
-        "category_id": null,
-        "numberYears": 0,
-        "title": "",
-        "industry": ""
+        'id': null,
+        'category_id': null,
+        'numberYears': 0,
+        'title': '',
+        'industry': ''
       },
       {
-        "id": null,
-        "category_id": null,
-        "numberYears": 0,
-        "title": "",
-        "industry": ""
+        'id': null,
+        'category_id': null,
+        'numberYears': 0,
+        'title': '',
+        'industry': ''
       },
       {
-        "id": null,
-        "category_id": null,
-        "numberYears": 0,
-        "title": "",
-        "industry": ""
+        'id': null,
+        'category_id': null,
+        'numberYears': 0,
+        'title': '',
+        'industry': ''
       }
     ];
 
@@ -114,39 +120,18 @@ export class SignupJobseekerPage {
     this.loadSkills();
   }
 
-  onSignup(form: NgForm) {
-    this.submitted = true;
-    if (form.valid) {
-      let password = this.user.password;
-      this.apiService.post('users', this.user).subscribe(
-        (result: any) => {
-          this.userService.setUser(result.data);
-          this.apiService.authenticate(result.data.email, password).subscribe(
-            (result: any) => {
-              if (result.access_token) {
-                this.authService.authenticate(result.access_token);
-                this.onNextStep();
-              }
-            },
-            (error: any) => {
-              this.errorService.showAlert('Error', error.message);
-            }
-          );
-        },
-        (error: any) => {
-          this.errorService.showAlert('Error', error.message);
-        }
-      );
-    }
-
-  }
 
   onProfileUpdate() {
-    let profile = this.user.profile;
+
+    if (this.user.profile.maxDesiredSalary < this.user.profile.minDesiredSalary) {
+      this.errorService.showAlert('Error', 'Max salary must exceed minimum salary.');
+    }
+
+    const profile = this.user.profile;
     profile['user_id'] = this.user.id;
     this.apiService.post('users/profile', profile).subscribe(
       (data: any) => {
-        this.userService.setUser(data.result); 
+        this.userService.setUser(data.result);
         this.onNextStep();
       },
       (error: any) => {
@@ -159,7 +144,7 @@ export class SignupJobseekerPage {
 
     this.apiService.post('users/purpose', { why: this.user.profile.why }).subscribe(
       (data: any) => {
-        this.userService.setUser(data.result); 
+        this.userService.setUser(data.result);
         this.onNextStep();
       },
       (error: any) => {
@@ -174,7 +159,7 @@ export class SignupJobseekerPage {
 
     this.apiService.post('users/experience', { experienceEntries: this.experienceEntries }).subscribe(
       (data: any) => {
-        this.userService.setUser(data.result); 
+        this.userService.setUser(data.result);
         this.onNextStep();
       },
       (error: any) => {
@@ -188,7 +173,7 @@ export class SignupJobseekerPage {
 
     this.apiService.post('users/skills', { skills: this.selectedSkills }).subscribe(
       (data: any) => {
-        this.userService.setUser(data.result); 
+        this.userService.setUser(data.result);
         this.onNextCategoryStep();
       },
       (error: any) => {
@@ -196,62 +181,6 @@ export class SignupJobseekerPage {
       }
     );
 
-  }
-
-  validateEmail(value) {
-    let reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    var RegularExp = new RegExp(reg);
-    if (RegularExp.test(value)) {
-      this.emailValidate = true;
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
-  validatePassword(value) {
-    let reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
-    var RegularExp = new RegExp(reg);
-    if (RegularExp.test(value)) {
-      this.passwordValidate = true;
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
-
-  onChangePassword() {
-    let validate = this.validatePassword(this.user.password);
-    if (validate) {
-      this.passwordValidate = true;
-    }
-    else {
-      this.passwordValidate = false;
-    }
-  }
-
-  onChangeRepeat() {
-    if (this.user.password == this.passwordConfirm) {
-      this.passwordConfirmValidate = true;
-    }
-    else {
-      this.passwordConfirmValidate = false;
-    }
-  }
-
-  onChangeEmail($event) {
-
-    let validate = this.validateEmail(this.user.email);
-
-    if (validate) {
-      this.emailValidate = true;
-    }
-    else {
-      this.emailValidate = false;
-    }
   }
 
   onNextStep() {
@@ -286,8 +215,7 @@ export class SignupJobseekerPage {
         }
       */
 
-    }
-    else {
+    } else {
       this.onNextStep();
     }
   }
@@ -296,14 +224,13 @@ export class SignupJobseekerPage {
     if (this.categoryStep > 0) {
       this.categoryStep--;
       this.loadCategoryContent()
-    }
-    else {
+    } else {
       this.onPreviousStep();
     }
   }
 
   loadCategoryContent() {
-    let categoryId = this.skillsCategories[this.categoryStep];
+    const categoryId = this.skillsCategories[this.categoryStep];
     this.selectedSkills = this.skillData.getSkillsByCategory(this.skills, categoryId);
     this.selectedSkillCategory = this.skillData.getCategoryNameOnSkills(this.selectedSkills);
   }
@@ -311,9 +238,11 @@ export class SignupJobseekerPage {
   onAddExperience() {
     this.experienceEntries.push(
       {
-        "numberYears": 0,
-        "title": "",
-        "industry": ""
+        'id': null,
+        'category_id': null,
+        'numberYears': 0,
+        'title': '',
+        'industry': ''
       }
     );
   }
@@ -340,13 +269,13 @@ export class SignupJobseekerPage {
 
   ratingChange($event, i) {
     this.selectedSkills[i]['value'] = $event;
-    let selectedSkill = this.selectedSkills[i];
-    let index = this.skills.findIndex(skill => skill.id === selectedSkill.id);
+    const selectedSkill = this.selectedSkills[i];
+    const index = this.skills.findIndex(skill => skill.id === selectedSkill.id);
     this.skills[index]['value'] = $event;
   }
 
-  onReset(){
-    this.step = 1; 
+  onReset() {
+    this.step = 1;
   }
 
 }

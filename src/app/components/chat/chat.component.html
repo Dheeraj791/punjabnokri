@@ -1,3 +1,4 @@
+
 <div id="chat-messages" padding>
     <div class="chat-message" *ngFor="let chatString of chatStrings; let i =index" [hidden]="i > currentMessage">
         <img class="avatar" aria-hidden="false" src="./assets/img/lauren.png" >
@@ -6,4 +7,8 @@
     </div>
     <div class="load-more" [hidden]="hideLoadMore">...</div>
 </div>
-<ion-button expand="block" (click)="onFinish()" *ngIf="finished">Next</ion-button>
+
+<div padding>
+    <ion-button expand="block" (click)="onFinish()" *ngIf="finished">Next</ion-button>
+    <a (click)="onFinish()" *ngIf="!finished">Skip</a>
+</div>

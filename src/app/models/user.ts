@@ -2,7 +2,7 @@ import { UserProfile } from './user_profile';
 import { UserPreferences } from './user_preferences';
 
 export class User {
-    id: number; 
+    id: number;
     username: string = '';
     firstName: string = '';
     lastName: string = '';
@@ -10,14 +10,14 @@ export class User {
     password: string = '';
     address: string = '';
     type: string;
-    profile: UserProfile; 
-    preferences: UserPreferences; 
-    status: string = 'unconfirmed'; 
+    profile: UserProfile;
+    preferences: UserPreferences;
+    status: string = 'unconfirmed';
 
     constructor(data?: any) {
-       
+
         if (data) {
-            this.id = data.id; 
+            this.id = data.id;
             this.username = data.username;
             this.firstName = data.firstName;
             this.lastName = data.lastName;
@@ -25,23 +25,20 @@ export class User {
             this.password = data.password;
             this.address = data.address;
             this.type = data.type;
-            this.status = data.status; 
+            this.status = data.status;
 
-            if(data.profile){
+            if (data.profile) {
                 this.profile = new UserProfile(data.profile);
-            }
-            else{
+            } else {
                 this.profile = new UserProfile();
             }
 
-            if(data.preferences){
+            if (data.preferences) {
                 this.preferences = new UserPreferences(data.preferences);
-            }
-            else{
+            } else {
                 this.preferences = new UserPreferences();
             }
-        }
-        else{
+        } else {
             this.preferences = new UserPreferences();
             this.profile = new UserProfile();
         }

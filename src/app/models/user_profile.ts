@@ -8,7 +8,9 @@ export class UserProfile {
     evening: boolean;
     weekend: boolean;
     desiredSalary: number;
-    activelySeekingWork: boolean; 
+    minDesiredSalary: number;
+    maxDesiredSalary: number;
+    activelySeekingWork: boolean;
     why: string; 
 
     constructor(data?: any) {
@@ -20,7 +22,9 @@ export class UserProfile {
             this.evening = data.evening;
             this.weekend = data.weekend;
             this.desiredSalary = data.desiredSalary;
-            this.activelySeekingWork = data.activelySeekingWork;
+            this.minDesiredSalary = data.minDesiredSalary;
+            this.maxDesiredSalary = data.maxDesiredSalary;
+            this.activelySeekingWork = data.activelySeeking;
             this.why = data.why;
         }
     }

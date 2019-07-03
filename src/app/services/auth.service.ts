@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Events } from '@ionic/angular';
 import { Subject } from 'rxjs';
-//import { DeviceService } from './device.service';
-
 
 @Injectable()
 export class AuthService {
@@ -51,7 +49,6 @@ export class AuthService {
 
 	isAuthenticated(): Promise<any> {
 		return this.storage.get('isAuthenticated').then((value: boolean) => {
-			console.log(value);
 			return value;
 		});
 	}

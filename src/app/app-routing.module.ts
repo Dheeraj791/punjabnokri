@@ -16,16 +16,18 @@ const routes: Routes = [
     loadChildren: './pages/create/create.module#CreateModule'
   },
   {
+    path: 'tutorial',
+    loadChildren: './pages/tutorial/tutorial.module#TutorialModule'
+  },
+  {
     path: 'signup-jobseeker',
-    loadChildren: './pages/signup-jobseeker/signup-jobseeker.module#SignUpJobseekerModule'
+    loadChildren: './pages/signup-jobseeker/signup-jobseeker.module#SignUpJobseekerModule',
+    canActivate: [AuthGuard]
   },
   {
     path: 'signup-employer',
-    loadChildren: './pages/signup-employer/signup-employer.module#SignUpEmployerModule'
-  },
-  {
-    path: 'tutorial',
-    loadChildren: './pages/tutorial/tutorial.module#TutorialModule'
+    loadChildren: './pages/signup-employer/signup-employer.module#SignUpEmployerModule',
+    canActivate: [AuthGuard]
   },
   {
     path: 'app',

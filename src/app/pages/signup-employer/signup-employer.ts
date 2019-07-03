@@ -43,6 +43,7 @@ export class SignupEmployerPage {
   selectedSkillCategory: any;
 
   start: boolean = false;
+  loaded: boolean = false;
 
   constructor(
     public router: Router,
@@ -54,33 +55,35 @@ export class SignupEmployerPage {
     private errorService: ErrorService,
     private skillData: SkillData
   ) {
-    this.user = new User;
+
+    this.userService.getUser().then(user => {
+      this.user = user;
+      this.loaded = true;
+    });
+
     this.experienceEntries = [
       {
-        "numberYears": 0,
-        "title": "",
-        "industry": ""
+        'numberYears': 0,
+        'title': '',
+        'industry': ''
       },
       {
-        "numberYears": 0,
-        "title": "",
-        "industry": ""
+        'numberYears': 0,
+        'title': '',
+        'industry': ''
       },
       {
-        "numberYears": 0,
-        "title": "",
-        "industry": ""
+        'numberYears': 0,
+        'title': '',
+        'industry': ''
       }
     ];
 
-
     this.industries = [
       'Retail',
-      "Hospitality",
-      "Business Services"
+      'Hospitality',
+      'Business Services'
     ];
-
-  
   }
 
   ionViewWillEnter() {
@@ -95,7 +98,7 @@ export class SignupEmployerPage {
   }
 
   loadSkills() {
- 
+
     this.apiService.get('skills').subscribe(
       (result: any) => {
         this.skills = Skill.initializeArray(result.data);
@@ -111,7 +114,7 @@ export class SignupEmployerPage {
   onSignup(form: NgForm) {
     this.submitted = true;
     if (form.valid) {
-      let password = this.user.password;
+      const password = this.user.password;
       this.apiService.post('users', this.user).subscribe(
         (result: any) => {
           this.userService.setUser(result.data);
@@ -165,7 +168,9 @@ export class SignupEmployerPage {
 
   onExperienceSubmit() {
 
-    this.apiService.post('jobposting/experience', { experienceEntries: this.experienceEntries, jobPostingId: this.jobPosting.id }).subscribe(
+    this.apiService.post('jobposting/experience',
+      { experienceEntries: this.experienceEntries, jobPostingId: this.jobPosting.id }
+    ).subscribe(
       (data: any) => {
         this.onNextStep();
       },
@@ -178,7 +183,9 @@ export class SignupEmployerPage {
 
   onSkillSubmit() {
 
-    this.apiService.post('jobposting/skills', { skills: this.selectedSkills, jobPostingId: this.jobPosting.id }).subscribe(
+    this.apiService.post('jobposting/skills',
+      { skills: this.selectedSkills, jobPostingId: this.jobPosting.id }
+    ).subscribe(
       (data: any) => {
         this.onNextCategoryStep();
       },
@@ -187,62 +194,6 @@ export class SignupEmployerPage {
       }
     );
 
-  }
-
-  validateEmail(value) {
-    let reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    var RegularExp = new RegExp(reg);
-    if (RegularExp.test(value)) {
-      this.emailValidate = true;
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
-  validatePassword(value) {
-    let reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
-    var RegularExp = new RegExp(reg);
-    if (RegularExp.test(value)) {
-      this.passwordValidate = true;
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
-
-  onChangePassword() {
-    let validate = this.validatePassword(this.user.password);
-    if (validate) {
-      this.passwordValidate = true;
-    }
-    else {
-      this.passwordValidate = false;
-    }
-  }
-
-  onChangeRepeat() {
-    if (this.user.password == this.passwordConfirm) {
-      this.passwordConfirmValidate = true;
-    }
-    else {
-      this.passwordConfirmValidate = false;
-    }
-  }
-
-  onChangeEmail($event) {
-
-    let validate = this.validateEmail(this.user.email);
-
-    if (validate) {
-      this.emailValidate = true;
-    }
-    else {
-      this.emailValidate = false;
-    }
   }
 
   onNextStep() {
@@ -287,7 +238,7 @@ export class SignupEmployerPage {
   }
 
   loadCategoryContent() {
-    let categoryId = this.skillsCategories[this.categoryStep];
+    const categoryId = this.skillsCategories[this.categoryStep];
     this.selectedSkills = this.skillData.getSkillsByCategory(this.skills, categoryId);
     this.selectedSkillCategory = this.skillData.getCategoryNameOnSkills(this.selectedSkills);
   }
@@ -295,9 +246,9 @@ export class SignupEmployerPage {
   onAddExperience() {
     this.experienceEntries.push(
       {
-        "numberYears": 0,
-        "title": "",
-        "industry": ""
+        'numberYears': 0,
+        'title': '',
+        'industry': ''
       }
     );
   }
@@ -325,13 +276,13 @@ export class SignupEmployerPage {
 
   ratingChange($event, i) {
     this.selectedSkills[i]['value'] = $event;
-    let selectedSkill = this.selectedSkills[i];
-    let index = this.skills.findIndex(skill => skill.id === selectedSkill.id);
+    const selectedSkill = this.selectedSkills[i];
+    const index = this.skills.findIndex(skill => skill.id === selectedSkill.id);
     this.skills[index]['value'] = $event;
   }
 
-  onReset(){
-    this.step = 1; 
+  onReset() {
+    this.step = 1;
   }
 
 }

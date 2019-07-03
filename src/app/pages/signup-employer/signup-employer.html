@@ -12,7 +12,7 @@
 </ion-header>
 
 
-<ion-content *ngIf="step == 1" padding>
+<ion-content *ngIf="step == 1 && loaded" padding>
 
   <ion-item>
     <ion-label position="stacked" color="primary">Business Name</ion-label>
@@ -145,10 +145,10 @@
   <div *ngFor="let experience of experienceEntries; let i = index; ">
     <div class="inline">
       <ion-select placeholder="Years" [(ngModel)]="experience.numberYears">
-        <ion-select-option *ngFor="let year of [1,2,3,4,5,6,7,8,9,10,15,20]" [value]="year">{{year}}
+        <ion-select-option *ngFor="let year of [1,2,3,4,5,6,7,8,9,10,15,20]" [value]="year">{{year}} year{{ year > 1 ? 's': ''}}
         </ion-select-option>
       </ion-select>
-      <span text-center> As a </span>
+      <span text-center> in </span>
       <ion-select placeholder="Industry" [(ngModel)]="experience.industry">
         <ion-select-option *ngFor="let industry of industries" [value]="industry">{{industry}}</ion-select-option>
       </ion-select>

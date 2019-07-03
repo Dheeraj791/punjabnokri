@@ -31,8 +31,8 @@ export class CreatePage {
   passwordConfirmValidate: boolean = false;
   receivePromotions: boolean = false;
   userType: string;
-  confirmEmail: string; 
-  start: boolean = false; 
+  confirmEmail: string;
+  start: boolean = false;
 
   constructor(
     private platform: Platform,
@@ -46,16 +46,16 @@ export class CreatePage {
   ) {
 
     this.storage.get('user_type').then(res => {
+      this.user = new User;
       this.userType = res;
+      this.user.type = this.userType;
     });
-
-    this.user = new User;
   }
 
   onSignup(form: NgForm) {
     this.submitted = true;
     if (form.valid) {
-      let password = this.user.password;
+      const password = this.user.password;
       this.apiService.post('users', this.user).subscribe(
         (result: any) => {
           this.userService.setUser(result.data);
@@ -63,7 +63,7 @@ export class CreatePage {
             (result: any) => {
               if (result.access_token) {
                 this.authService.authenticate(result.access_token);
-                if (this.userType == 'jobseeker') {
+                if (this.userType === 'jobseeker') {
                   this.router.navigateByUrl('/signup-jobseeker');
                 }
                 else {
@@ -88,8 +88,8 @@ export class CreatePage {
   }
 
   validateEmail(value) {
-    let reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    var RegularExp = new RegExp(reg);
+    const reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const RegularExp = new RegExp(reg);
     if (RegularExp.test(value)) {
       this.emailValidate = true;
       return true;
@@ -100,8 +100,8 @@ export class CreatePage {
   }
 
   validatePassword(value) {
-    let reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
-    var RegularExp = new RegExp(reg);
+    const reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
+    const RegularExp = new RegExp(reg);
     if (RegularExp.test(value)) {
       this.passwordValidate = true;
       return true;
@@ -113,7 +113,7 @@ export class CreatePage {
 
 
   onChangePassword() {
-    let validate = this.validatePassword(this.user.password);
+    const validate = this.validatePassword(this.user.password);
     if (validate) {
       this.passwordValidate = true;
     }
@@ -132,7 +132,7 @@ export class CreatePage {
   }
 
   onChangeEmail($event) {
-    let validate = this.validateEmail(this.user.email);
+    const validate = this.validateEmail(this.user.email);
 
     if (validate) {
       this.emailValidate = true;
@@ -142,7 +142,7 @@ export class CreatePage {
     }
   }
 
-  async onTerms(){
+  async onTerms() {
     const modal = await this.modalController.create({
       component: Terms
     });
@@ -150,7 +150,7 @@ export class CreatePage {
 
   }
 
-  async onPrivacy(){
+  async onPrivacy() {
     const modal = await this.modalController.create({
       component: Privacy
     });

@@ -13,159 +13,172 @@
 
 
 
-<ion-content *ngIf="step == 1" padding>
+  <ion-content *ngIf="step == 1 && loaded" padding>
 
-  <h1 text-center>My job seeking profile</h1>
+    <h1 text-center>My job seeking profile</h1>
 
-  <form #seekingprofile="ngForm" novalidate>
-    <p text-center>Desired Employment Type</p>
+    <form #seekingprofile="ngForm" novalidate>
+      <p text-center>Desired Employment Type</p>
+
+      <ion-item>
+        <span slot="start" class="dot"></span>
+        <ion-label>Full Time</ion-label>
+        <ion-toggle color="success" name="full-time" [(ngModel)]="user.profile.fullTime"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <span slot="start" class="dot"></span>
+        <ion-label>Part Time</ion-label>
+        <ion-toggle color="success" name="part-time" [(ngModel)]="user.profile.partTime"></ion-toggle>
+      </ion-item>
+
+      <p text-center>My Availability</p>
+      <ion-item>
+        <span slot="start" class="dot"></span>
+        <ion-label>Mornings</ion-label>
+        <ion-toggle color="success" name="mornings" [(ngModel)]="user.profile.morning"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <span slot="start" class="dot"></span>
+        <ion-label>Afternoons</ion-label>
+        <ion-toggle color="success" name="afternoons" [(ngModel)]="user.profile.afternoon"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <span slot="start" class="dot"></span>
+        <ion-label>Evenings</ion-label>
+        <ion-toggle color="success" name="evenings" [(ngModel)]="user.profile.evening"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <span slot="start" class="dot"></span>
+        <ion-label>Weekends</ion-label>
+        <ion-toggle color="success" name="weekends" [(ngModel)]="user.profile.weekend"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <span slot="start" class="dot"></span>
+        <ion-label>Actively seeking work</ion-label>
+        <ion-toggle color="success" name="activelyseekingwork" [(ngModel)]="user.profile.activelySeekingWork">
+        </ion-toggle>
+      </ion-item>
+
+      <p text-center>Salary expectations</p>
+
+      <ion-item>
+        <span slot="start" class="dot"></span>
+        <ion-label>Minimum Salary</ion-label>
+        <ion-input name="minimumSalary" name="minimumSalary" type="text" required
+          [(ngModel)]="user.profile.minDesiredSalary">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <span slot="start" class="dot"></span>
+        <ion-label>Maximum Salary</ion-label>
+        <ion-input name="maximumSalary" name="maximumSalary" type="text" required
+          [(ngModel)]="user.profile.maxDesiredSalary">
+        </ion-input>
+      </ion-item>
+
+    </form>
+
+    <ion-button (click)="onProfileUpdate()" type="submit" expand="block">Next</ion-button>
+
+  </ion-content>
+
+  <ion-content *ngIf="step == 2" padding>
+
+    <h1 text-center>My job seeking profile</h1>
 
     <ion-item>
-      <span slot="start" class="dot"></span>
-      <ion-label>Full Time</ion-label>
-      <ion-toggle color="success" name="full-time" [(ngModel)]="user.profile.fullTime"></ion-toggle>
+      <ion-textarea placeholder="Why you should hire me" [(ngModel)]="user.profile.why"></ion-textarea>
     </ion-item>
 
-    <ion-item>
-      <span slot="start" class="dot"></span>
-      <ion-label>Part Time</ion-label>
-      <ion-toggle color="success" name="part-time" [(ngModel)]="user.profile.partTime"></ion-toggle>
-    </ion-item>
-
-    <p text-center>My Availability</p>
-    <ion-item>
-      <span slot="start" class="dot"></span>
-      <ion-label>Mornings</ion-label>
-      <ion-toggle color="success" name="mornings" [(ngModel)]="user.profile.mornings"></ion-toggle>
-    </ion-item>
-
-    <ion-item>
-      <span slot="start" class="dot"></span>
-      <ion-label>Afternoons</ion-label>
-      <ion-toggle color="success" name="afternoons" [(ngModel)]="user.profile.afternoons"></ion-toggle>
-    </ion-item>
-
-    <ion-item>
-      <span slot="start" class="dot"></span>
-      <ion-label>Evenings</ion-label>
-      <ion-toggle color="success" name="evenings" [(ngModel)]="user.profile.evenings"></ion-toggle>
-    </ion-item>
-
-    <ion-item>
-      <span slot="start" class="dot"></span>
-      <ion-label>Weekends</ion-label>
-      <ion-toggle color="success" name="weekends" [(ngModel)]="user.profile.weekends"></ion-toggle>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Desired Salary</ion-label>
-      <ion-input name="telephone" name="telephone" type="text" required [(ngModel)]="user.profile.desiredSalary">
-      </ion-input>
-    </ion-item>
-
-    <ion-item>
-      <span slot="start" class="dot"></span>
-      <ion-label>Actively seeking work</ion-label>
-      <ion-toggle color="success" name="activelyseekingwork" [(ngModel)]="user.profile.activelySeekingWork">
-      </ion-toggle>
-    </ion-item>
-  </form>
-
-  <ion-button (click)="onProfileUpdate()" type="submit" expand="block">Next</ion-button>
-
-</ion-content>
-
-<ion-content *ngIf="step == 2" padding>
-
-  <h1 text-center>My job seeking profile</h1>
-
-  <ion-item>
-    <ion-textarea placeholder="Why you should hire me" [(ngModel)]="user.profile.why"></ion-textarea>
-  </ion-item>
-
-  <div padding>
-    <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
-    <ion-button (click)="onPurposeUpdate()" type="submit" expand="block">Next</ion-button>
-  </div>
-
-</ion-content>
-
-<ion-content *ngIf="step == 3" padding>
-
-  <h1 text-center>Highlight your experience</h1>
-
-  <p text-center bold>My experience</p>
-
-  <div *ngFor="let experience of experienceEntries; let i = index; ">
-    <div class="inline">
-      <ion-select placeholder="Years" [(ngModel)]="experience.numberYears">
-        <ion-select-option *ngFor="let year of [1,2,3,4,5,6,7,8,9,10,15,20]" [value]="year">{{year}} year {{ year > 1 ? 's': ''}}
-        </ion-select-option>
-      </ion-select>
-      <span text-center> in </span>
-      <ion-select placeholder="Industry" [(ngModel)]="experience.industry">
-        <ion-select-option *ngFor="let industry of industries" [value]="industry">{{industry}}</ion-select-option>
-      </ion-select>
-      <a (click)="onRemoveExperience(i)">
-        <ion-icon class="remove-experience" name="remove-circle"></ion-icon>
-      </a>
+    <div padding>
+      <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
+      <ion-button (click)="onPurposeUpdate()" type="submit" expand="block">Next</ion-button>
     </div>
-    <div style="clear:both;"></div>
-  </div>
 
-  <a (click)="onAddExperience()" class="add-experience text-center">
-    Add experience
-    <ion-icon name="add-circle" class="add-experience"></ion-icon>
-  </a>
+  </ion-content>
 
-  <div padding>
-    <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
-    <ion-button (click)="onExperienceSubmit()" type="submit" expand="block">Next</ion-button>
-  </div>
-</ion-content>
+  <ion-content *ngIf="step == 3" padding>
 
-<ion-content *ngIf="step == 4" padding>
-  <h1 text-center>Show off your skills</h1>
-  <h2 text-center>{{selectedSkillCategory}}</h2>
+    <h1 text-center>Highlight your experience</h1>
 
-  <div class="skill-header">
-    <div class="skill-header-cell">Expert</div>
-    <div class="skill-header-cell">Intermediate</div>
-    <div class="skill-header-cell">Basic</div>
-  </div>
-  <div *ngFor="let skill of selectedSkills; let i = index;">
-    <rating [rating]="rating" [name]="skill.name" (ratingChange)="ratingChange($event, i)"></rating>
-  </div>
+    <p text-center bold>My experience</p>
 
-  <div>
-    <ion-button (click)="onPreviousCategoryStep()" type="submit" expand="block">Back</ion-button>
-    <ion-button (click)="onSkillSubmit()" type="submit" expand="block">Next</ion-button>
-  </div>
+    <div *ngFor="let experience of experienceEntries; let i = index; ">
+      <div class="inline">
+        <ion-select placeholder="Years" [(ngModel)]="experience.numberYears">
+          <ion-select-option *ngFor="let year of [1,2,3,4,5,6,7,8,9,10,15,20]" [value]="year">{{year}} year{{ year > 1 ? 's': ''}}
+          </ion-select-option>
+        </ion-select>
+        <span text-center> in </span>
+        <ion-select placeholder="Industry" [(ngModel)]="experience.industry">
+          <ion-select-option *ngFor="let industry of industries" [value]="industry">{{industry}}</ion-select-option>
+        </ion-select>
+        <a (click)="onRemoveExperience(i)">
+          <ion-icon class="remove-experience" name="remove-circle"></ion-icon>
+        </a>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
 
-</ion-content>
+    <a (click)="onAddExperience()" class="add-experience text-center">
+      Add experience
+      <ion-icon name="add-circle" class="add-experience"></ion-icon>
+    </a>
 
-<ion-content *ngIf="step == 5" padding>
+    <div padding>
+      <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
+      <ion-button (click)="onExperienceSubmit()" type="submit" expand="block">Next</ion-button>
+    </div>
+  </ion-content>
 
-  <h1 text-center> Preview your profile</h1>
-  <div padding>
-    <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
-    <ion-button (click)="onNextStep()" type="submit" expand="block">Next</ion-button>
-  </div>
-</ion-content>
+  <ion-content *ngIf="step == 4" padding>
+    <h1 text-center>Show off your skills</h1>
+    <h2 text-center>{{selectedSkillCategory}}</h2>
 
-<ion-content *ngIf="step == 6" padding>
-  <p>
-    Now let's go see your matches!
-    You can edit your Profile, Experience and Skills
-    at any time and see new matches
-  </p>
+    <div class="skill-header">
+      <div class="skill-header-cell">Expert</div>
+      <div class="skill-header-cell">Intermediate</div>
+      <div class="skill-header-cell">Basic</div>
+    </div>
+    <div *ngFor="let skill of selectedSkills; let i = index;">
+      <rating [rating]="rating" [name]="skill.name" (ratingChange)="ratingChange($event, i)"></rating>
+    </div>
 
-  <div>
-    <ion-button (click)="onSeeMatches()" type="submit" expand="block">See Matches</ion-button>
-  </div>
+    <div>
+      <ion-button (click)="onPreviousCategoryStep()" type="submit" expand="block">Back</ion-button>
+      <ion-button (click)="onSkillSubmit()" type="submit" expand="block">Next</ion-button>
+    </div>
 
-  <p>
-    By Signing Up, you agree to our <a routerLink="/terms">Terms & Conditions</a> and <a routerLink="/privacy">Privacy
-      Policy</a>.
-  </p>
-</ion-content>
+  </ion-content>
+
+  <ion-content *ngIf="step == 5" padding>
+
+    <h1 text-center> Preview your profile</h1>
+    <div padding>
+      <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
+      <ion-button (click)="onNextStep()" type="submit" expand="block">Next</ion-button>
+    </div>
+  </ion-content>
+
+  <ion-content *ngIf="step == 6" padding>
+    <p>
+      Now let's go see your matches!
+      You can edit your Profile, Experience and Skills
+      at any time and see new matches
+    </p>
+
+    <div>
+      <ion-button (click)="onSeeMatches()" type="submit" expand="block">See Matches</ion-button>
+    </div>
+
+    <p>
+      By Signing Up, you agree to our <a routerLink="/terms">Terms & Conditions</a> and <a routerLink="/privacy">Privacy
+        Policy</a>.
+    </p>
+  </ion-content>
