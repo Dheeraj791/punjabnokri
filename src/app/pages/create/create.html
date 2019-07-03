@@ -1,4 +1,8 @@
-<ion-content padding>
+<ion-content *ngIf="!start">
+  <chat-component [type]="userType" (chatFinished)="onStart()"></chat-component>
+</ion-content>
+
+<ion-content padding *ngIf="start">
   <!--
     <div class="login-logo">
       <img src="assets/img/hyrskills-logo.png" alt="Ionic logo">

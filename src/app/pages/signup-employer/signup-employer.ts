@@ -330,12 +330,7 @@ export class SignupEmployerPage {
     this.skills[index]['value'] = $event;
   }
 
-  onStart() {
-    this.start = true;
-  }
-
   onReset(){
-    this.start = true; 
     this.step = 1; 
   }
 

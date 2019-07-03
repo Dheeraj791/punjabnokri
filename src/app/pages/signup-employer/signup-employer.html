@@ -11,11 +11,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="!start">
-  <chat-component [type]="employer" (chatFinished)="onStart()"></chat-component>
-</ion-content>
 
-<ion-content *ngIf="step == 1 && start" padding>
+<ion-content *ngIf="step == 1" padding>
 
   <ion-item>
     <ion-label position="stacked" color="primary">Business Name</ion-label>

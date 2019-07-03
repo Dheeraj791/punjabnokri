@@ -32,6 +32,7 @@ export class CreatePage {
   receivePromotions: boolean = false;
   userType: string;
   confirmEmail: string; 
+  start: boolean = false; 
 
   constructor(
     private platform: Platform,
@@ -155,6 +156,10 @@ export class CreatePage {
     });
     await modal.present();
 
+  }
+
+  onStart() {
+    this.start = true;
   }
 
 }
