@@ -33,7 +33,7 @@ export class CreatePage {
   userType: string;
   confirmEmail: string;
   start: boolean = false;
-  show: boolean = false; 
+  show: boolean = false;
 
   constructor(
     private platform: Platform,
@@ -53,13 +53,12 @@ export class CreatePage {
     });
   }
 
-  ionViewWillEnter(){
-    this.start = false; 
-    this.show = true; 
+  ionViewWillEnter() {
+    this.start = false;
   }
 
-  ionViewWillExit(){
-    this.show = false; 
+  ionViewDidLeave() {
+    this.start = true;
   }
 
   onSignup(form: NgForm) {
