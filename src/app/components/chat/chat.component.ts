@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
+import { Storage } from '@ionic/storage';
 
 @Component({
     selector: 'chat-component',
@@ -36,42 +36,48 @@ export class ChatComponent implements OnInit {
     finished: boolean = false;
 
     constructor(
-
+        private storage: Storage
     ) {
 
     }
 
     ngOnInit() {
-        if (this.type == 'employer') {
-            this.chatStrings = this.chatStringsEmployer;
-            this.maxMessage = 5;
-        }
-        else {
-            this.chatStrings = this.chatStringsJobSeeker;
-            this.maxMessage = 4;
-        }
-        this.interval = setInterval(() => {
-            if (this.currentMessage < this.maxMessage) {
-                this.currentMessage++;
+        this.storage.get('user_type').then(res => {
+            if (this.type === 'employer') {
+                this.chatStrings = this.chatStringsEmployer;
+                this.maxMessage = 5;
             }
             else {
-                clearInterval(this.interval);
-                clearInterval(this.moreInterval);
-                this.finished = true;
-                this.hideLoadMore = true; 
-                
-
+                this.chatStrings = this.chatStringsJobSeeker;
+                this.maxMessage = 4;
             }
-        }, 3000);
+            this.interval = setInterval(() => {
+                if (this.currentMessage < this.maxMessage) {
+                    this.currentMessage++;
+                }
+                else {
+                    clearInterval(this.interval);
+                    clearInterval(this.moreInterval);
+                    this.finished = true;
+                    this.hideLoadMore = true; 
+                    
+    
+                }
+            }, 3000);
+    
+            this.moreInterval = setInterval(() => {
+                this.hideLoadMore = !this.hideLoadMore;
+            }, 1500);
+          });
+    }
 
-        this.moreInterval = setInterval(() => {
-            this.hideLoadMore = !this.hideLoadMore;
-        }, 1500);
+    ngOnDestroy(){
+        clearInterval(this.interval);
+        clearInterval(this.moreInterval);
     }
 
     onFinish(){
        this.chatFinished.emit();
     }
-
 
 }

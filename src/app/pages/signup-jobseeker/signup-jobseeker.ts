@@ -89,8 +89,8 @@ export class SignupJobseekerPage {
 
     this.industries = [
       'Retail',
-      "Hospitality",
-      "Business Services"
+      'Hospitality',
+      'Business Services'
     ];
     /*
     this.userService.watcher.subscribe((user: User) => {
