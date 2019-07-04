@@ -62,6 +62,10 @@ const routes: Routes = [
           {
             path: 'business/:businessId',
             loadChildren: '../business/business.module#BusinessModule'
+          },
+          {
+            path: 'job-posting/:jobPostingId',
+            loadChildren: '../job-posting/job-posting.module#JobPostingModule'
           }
         ]
       }

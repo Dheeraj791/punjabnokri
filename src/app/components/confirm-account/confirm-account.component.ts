@@ -14,6 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 export class ConfirmAccount implements OnInit {
     sentCode: boolean = false;
     user: User;
+    code:string;
     constructor(
         private apiService: ApiService,
         private errorService: ErrorService,
@@ -29,7 +30,6 @@ export class ConfirmAccount implements OnInit {
     onResend() {
         this.apiService.post('users/resendconfirm', {}).subscribe(
             (result: any) => {
-
                 this.sentCode = true;
                 this.errorService.showAlert('Success', 'Please check your inbox for the confirmation link.');
             },
@@ -41,7 +41,7 @@ export class ConfirmAccount implements OnInit {
     }
 
     onSubmit() {
-        this.apiService.post('users/confirmcode', {}).subscribe(
+        this.apiService.post('users/confirmcode', {code: this.code}).subscribe(
             (result: any) => {
                 this.user.status = 'approved';
                 this.userService.setUser(this.user);

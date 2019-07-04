@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { ApiService } from '../../services/api.service';
+import { Business } from '../../models/business';
 
 @Component({
     selector: 'business-profile-component',
@@ -9,15 +11,38 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 export class BusinessProfileComponent implements OnInit {
 
     @Output() searchStringUpdated: EventEmitter<number> = new EventEmitter();
-    @Input() var: number;
+    @Input() business: Business;
 
     constructor(
-
+        private apiService: ApiService
     ) {
 
     }
-
     ngOnInit() {
+
+    }
+
+    onInterested() {
+        this.apiService.put('jobposting/' + this.business.id, { interested: true }).subscribe(
+            (result: any) => {
+                this.business = new Business(result.data);
+            },
+            (error: any) => {
+
+            }
+        );
+
+    }
+
+    onNotInterested() {
+        this.apiService.put('jobposting/' + this.business.id, { interested: false }).subscribe(
+            (result: any) => {
+                this.business = new Business(result.data);
+            },
+            (error: any) => {
+
+            }
+        );
 
     }
 

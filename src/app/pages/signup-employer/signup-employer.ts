@@ -61,6 +61,10 @@ export class SignupEmployerPage {
       this.loaded = true;
     });
 
+    this.userService.watcher.subscribe((user: User) => {
+      this.user = user;
+    });
+
     this.experienceEntries = [
       {
         'numberYears': 0,
@@ -144,6 +148,7 @@ export class SignupEmployerPage {
     this.apiService.post('business', { business: this.business }).subscribe(
       (result: any) => {
         this.business = new Business(result.data);
+        this.userService.setUser(result.data);
         this.onNextStep();
       },
       (error: any) => {
@@ -158,6 +163,7 @@ export class SignupEmployerPage {
     this.apiService.post('jobposting', { businessId: this.business.id, jobposting: this.jobPosting }).subscribe(
       (result: any) => {
         this.jobPosting = new JobPosting(result.data);
+        this.userService.setUser(result.data);
         this.onNextStep();
       },
       (error: any) => {
@@ -172,6 +178,7 @@ export class SignupEmployerPage {
       { experienceEntries: this.experienceEntries, jobPostingId: this.jobPosting.id }
     ).subscribe(
       (data: any) => {
+        this.userService.setUser(data.data);
         this.onNextStep();
       },
       (error: any) => {
@@ -187,6 +194,7 @@ export class SignupEmployerPage {
       { skills: this.selectedSkills, jobPostingId: this.jobPosting.id }
     ).subscribe(
       (data: any) => {
+        this.userService.setUser(data.data);
         this.onNextCategoryStep();
       },
       (error: any) => {

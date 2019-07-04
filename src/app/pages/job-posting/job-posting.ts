@@ -6,11 +6,11 @@ import { JobPosting } from '../../models/job-posting';
 
 
 @Component({
-  selector: 'page-candidate',
-  templateUrl: 'candidate.html',
-  styleUrls: ['./candidate.scss']
+  selector: 'page-job-posting',
+  templateUrl: 'job-posting.html',
+  styleUrls: ['./job-posting.scss']
 })
-export class CandidatePage {
+export class JobPostingPage {
   skills: Array<string>;
   loaded: boolean = false;
   jobPosting: JobPosting;

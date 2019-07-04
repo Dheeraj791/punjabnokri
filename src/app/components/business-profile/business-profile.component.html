@@ -1,17 +1,17 @@
 <ion-card>
     <ion-card-content>
         <div class="header">
-            <h1>{{jobPosting.title}}</h1>
-            <div class="score">{{jobPosting.score}}</div>
+            <h1>{{business.title}}</h1>
+            <div class="score">{{business.score}}</div>
         </div>
         <ion-item>
-            {{jobPosting.description}}
+            {{business.description}}
         </ion-item>
 
         <ion-item>
-            <ion-button (click)="onInterested()" [fill]="jobPosting.interested? 'solid': 'outline'">Interested
+            <ion-button (click)="onInterested()" [fill]="business.interested? 'solid': 'outline'">Interested
             </ion-button>
-            <ion-button (click)="onNotInterested()" [fill]="!jobPosting.interested? 'solid': 'outline'">Not
+            <ion-button (click)="onNotInterested()" [fill]="!business.interested? 'solid': 'outline'">Not
                 Interested</ion-button>
         </ion-item>
     </ion-card-content>

@@ -24,6 +24,7 @@ export class MatchesPage {
   jobPostings: JobPosting[] = [];
   activeJobPostings: JobPosting[] = [];
   totalMatches: number = 0; 
+  activeCount: number;
 
   matches: any = [
     {
@@ -84,6 +85,7 @@ export class MatchesPage {
       (result: any) => {
         this.jobPostings = JobPosting.initializeArray(result.data);
         this.activeJobPostings = this.jobPostings;
+        this.activeCount = this.activeJobPostings.length;
         this.totalMatches = this.jobPostings.length;
       },
       (error: any) => {
@@ -108,6 +110,8 @@ export class MatchesPage {
     else {
       this.activeJobPostings = this.jobPostings;
     }
+
+    this.activeCount = this.activeJobPostings.length;
 
    
   }

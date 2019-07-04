@@ -31,6 +31,18 @@ export class LoginPage {
     private authService: AuthService
   ) {
     this.user = new User;
+    this.authService.Authenticator.subscribe((authenticated: boolean) => {
+		  if(authenticated){
+        this.router.navigateByUrl('/app/tabs/matches');
+      }
+    });
+
+    this.authService.isAuthenticated().then(isLoggedIn => {
+      if(isLoggedIn){
+        this.router.navigateByUrl('/app/tabs/matches');
+      }
+    });
+    
   }
 
   ionViewWillEnter() {

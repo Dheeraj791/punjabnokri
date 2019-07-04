@@ -61,7 +61,11 @@ export class SignupJobseekerPage {
       this.user = user;
       this.loaded = true;
     });
-   
+
+    this.userService.watcher.subscribe((user: User) => {
+      this.user = user;
+    });
+
     this.experienceEntries = [
       {
         'id': null,

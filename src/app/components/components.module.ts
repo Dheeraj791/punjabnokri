@@ -9,6 +9,7 @@ import { ScheduleFilterPage } from './schedule-filter/schedule-filter';
 import { ConfirmAccount } from './confirm-account/confirm-account.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { CandidateProfileComponent } from './candidate-profile/candidate-profile.component';
+import { JobPostingComponent } from './job-posting/job-posting.component';
 import { SocialComponent } from './social/social.component';
 
 @NgModule({
@@ -20,7 +21,8 @@ import { SocialComponent } from './social/social.component';
         ConfirmAccount,
         SocialComponent,
         BusinessProfileComponent,
-        CandidateProfileComponent
+        CandidateProfileComponent,
+        JobPostingComponent
     ],
     imports: [
         IonicModule,
@@ -35,14 +37,16 @@ import { SocialComponent } from './social/social.component';
         ConfirmAccount,
         SocialComponent,
         BusinessProfileComponent,
-        CandidateProfileComponent
+        CandidateProfileComponent,
+        JobPostingComponent
     ],
     entryComponents: [
         ScheduleFilterPage,
         ConfirmAccount,
         SocialComponent,
         BusinessProfileComponent,
-        CandidateProfileComponent
+        CandidateProfileComponent,
+        JobPostingComponent
     ]
 })
 export class HyrSkillsModule { }

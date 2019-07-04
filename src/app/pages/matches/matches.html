@@ -6,7 +6,7 @@
     <div class="total-matches">
       <div class="inner">
         <div class="number">
-          {{totalMatches}}
+          {{activeCount}}
         </div>
         <div class="label">
           Matches
@@ -16,7 +16,7 @@
   </div>
   <ion-segment [(ngModel)]="segment" (ionChange)="updateListing()">
     <ion-segment-button value="all">
-      New
+      All
     </ion-segment-button>
     <ion-segment-button value="interested">
       Interested

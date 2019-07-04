@@ -12,7 +12,7 @@ export class BusinessPage {
 
   constructor(
     public platform: Platform
-  ) { 
+  ) {
     this.skills = [
       'Skill 1',
       'Skill 2',
@@ -23,11 +23,11 @@ export class BusinessPage {
   }
 
 
-  ionViewDidEnter(){
-   
+  ionViewDidEnter() {
+
   }
 
-  onMoreInfo(){
+  onMoreInfo() {
 
   }
 
