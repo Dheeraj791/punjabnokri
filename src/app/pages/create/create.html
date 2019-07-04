@@ -13,7 +13,7 @@
 
 
 <ion-content *ngIf="!start">
-  <chat-component [type]="userType" (chatFinished)="onStart()" (chatMessage)="onMessage()"></chat-component>
+  <chat-component [type]="userType" (chatFinished)="onStart()" *ngIf="show"></chat-component>
 </ion-content>
 
 <ion-content padding *ngIf="start">
