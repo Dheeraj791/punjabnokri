@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
     styleUrls: ['./chat.component.scss']
 })
 
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
 
 
     chatStringsJobSeeker: Array<string> = [
@@ -26,14 +26,16 @@ export class ChatComponent implements OnInit {
     ];
 
     chatStrings: any = [];
-    currentMessage = 0;
     maxMessage = 0;
     @Input() type: string;
+    @Output() chatMessage = new EventEmitter();
     @Output() chatFinished = new EventEmitter();
     showLoadMore: boolean = true;
     interval: any;
     moreInterval: any;
     finished: boolean = false;
+    intervals = [];
+    currentMessage = 0; 
 
     constructor(
         private storage: Storage
@@ -42,13 +44,23 @@ export class ChatComponent implements OnInit {
     }
 
     ionViewDidEnter() {
-       
+
     }
 
+    ngOnInit() {
+        this.initMessages();
+    }
 
-    ngOnInit(){
+    ngOnDestroy() {
+        this.currentMessage = 0;
+        this.intervals.forEach((interval) => {
+            clearTimeout(interval);
+        });
+    }
+
+    initMessages() {
         this.storage.get('user_type').then(res => {
-            if (this.type === 'employer') {
+            if (res === 'employer') {
                 this.chatStrings = this.chatStringsEmployer;
                 this.maxMessage = 5;
                 this.showChatMessage(1500);
@@ -66,10 +78,12 @@ export class ChatComponent implements OnInit {
 
             }
         });
+       
     }
 
     showChatMessage(timerInterval, last = false) {
-        setTimeout(
+
+        let interval = setTimeout(
             () => {
                 this.currentMessage++;
                 if (this.maxMessage - 2 < this.currentMessage) {
@@ -77,10 +91,13 @@ export class ChatComponent implements OnInit {
                 }
             }, timerInterval);
 
+        this.intervals.push(interval);
+
         if (!last) {
             setTimeout(() => { this.toggleLoadMore(true); }, timerInterval + 500);
             setTimeout(() => { this.toggleLoadMore(false); }, timerInterval + 1900);
         }
+       
     }
 
     toggleLoadMore(show) {
