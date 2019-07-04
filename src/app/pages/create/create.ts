@@ -52,6 +52,10 @@ export class CreatePage {
     });
   }
 
+  ionViewWillEnter(){
+    this.start = false; 
+  }
+
   onSignup(form: NgForm) {
     this.submitted = true;
     if (form.valid) {
