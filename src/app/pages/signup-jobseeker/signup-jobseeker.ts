@@ -61,8 +61,7 @@ export class SignupJobseekerPage {
       this.user = user;
       this.loaded = true;
     });
-    this.user = new User;
-
+   
     this.experienceEntries = [
       {
         'id': null,

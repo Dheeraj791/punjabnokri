@@ -1,47 +1,6 @@
-<div *ngIf="loaded">
-    <ion-card>
-        <ion-card-content>
-            <div class="header">
-                <h1>{{jobPosting.title}}</h1>
-                <div class="score">{{jobPosting.score}}</div>
-            </div>
-            <ion-item>
-                {{jobPosting.description}}
-            </ion-item>
-           
-            <ion-item>
-                <ion-button (click)="onInterested()" [fill]="jobPosting.interested? 'solid': 'outline'">Interested
-                </ion-button>
-                <ion-button (click)="onNotInterested()" [fill]="!jobPosting.interested? 'solid': 'outline'">Not
-                    Interested</ion-button>
-            </ion-item>
-        </ion-card-content>
-
-    </ion-card>
-
-
-    <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
-        <ion-fab-button>
-            <ion-icon name="share"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-list side="top">
-            <ion-fab-button color="vimeo" (click)="openSocial('Vimeo', fab)">
-                <ion-icon name="logo-vimeo"></ion-icon>
-            </ion-fab-button>
-            <ion-fab-button color="google" (click)="openSocial('Google+', fab)">
-                <ion-icon name="logo-googleplus"></ion-icon>
-            </ion-fab-button>
-            <ion-fab-button color="twitter" (click)="openSocial('Twitter', fab)">
-                <ion-icon name="logo-twitter"></ion-icon>
-            </ion-fab-button>
-            <ion-fab-button color="facebook" (click)="openSocial('Facebook', fab)">
-                <ion-icon name="logo-facebook"></ion-icon>
-            </ion-fab-button>
-        </ion-fab-list>
-    </ion-fab>
-
-
-</div>
+<ion-content *ngIf="loaded">
+ 
+</ion-content>
 
 <ion-footer padding>
     <ion-button routerLink="/app/tabs/matches">Back</ion-button>

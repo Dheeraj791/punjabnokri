@@ -5,7 +5,7 @@
         <span flex="" class="ng-hide flex" aria-hidden="true"></span>
         <div class="hs-chat-message hs-chat-message-bubble" ng-bind="message.text">{{chatString}}</div>
     </div>
-    <div class="load-more" [hidden]="hideLoadMore">...</div>
+    <div class="load-more" *ngIf="showLoadMore">...</div>
 </div>
 
 <div padding>

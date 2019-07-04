@@ -7,6 +7,9 @@ import { ChatComponent } from './chat/chat.component';
 import { FormsModule } from '@angular/forms';
 import { ScheduleFilterPage } from './schedule-filter/schedule-filter';
 import { ConfirmAccount } from './confirm-account/confirm-account.component';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
+import { CandidateProfileComponent } from './candidate-profile/candidate-profile.component';
+import { SocialComponent } from './social/social.component';
 
 @NgModule({
     declarations: [
@@ -14,7 +17,10 @@ import { ConfirmAccount } from './confirm-account/confirm-account.component';
         HeaderComponent,
         ChatComponent,
         ScheduleFilterPage,
-        ConfirmAccount
+        ConfirmAccount,
+        SocialComponent,
+        BusinessProfileComponent,
+        CandidateProfileComponent
     ],
     imports: [
         IonicModule,
@@ -26,11 +32,17 @@ import { ConfirmAccount } from './confirm-account/confirm-account.component';
         HeaderComponent,
         ChatComponent,
         ScheduleFilterPage,
-        ConfirmAccount
+        ConfirmAccount,
+        SocialComponent,
+        BusinessProfileComponent,
+        CandidateProfileComponent
     ],
     entryComponents: [
         ScheduleFilterPage,
-        ConfirmAccount
+        ConfirmAccount,
+        SocialComponent,
+        BusinessProfileComponent,
+        CandidateProfileComponent
     ]
 })
 export class HyrSkillsModule { }

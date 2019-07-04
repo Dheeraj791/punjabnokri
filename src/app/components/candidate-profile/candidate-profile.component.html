@@ -1,0 +1,18 @@
+<ion-card>
+    <ion-card-content>
+        <div class="header">
+            <h1>{{jobPosting.title}}</h1>
+            <div class="score">{{jobPosting.score}}</div>
+        </div>
+        <ion-item>
+            {{jobPosting.description}}
+        </ion-item>
+
+        <ion-item>
+            <ion-button (click)="onInterested()" [fill]="jobPosting.interested? 'solid': 'outline'">Interested
+            </ion-button>
+            <ion-button (click)="onNotInterested()" [fill]="!jobPosting.interested? 'solid': 'outline'">Not
+                Interested</ion-button>
+        </ion-item>
+    </ion-card-content>
+</ion-card>
