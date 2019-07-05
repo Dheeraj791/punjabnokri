@@ -1,6 +1,7 @@
-<header-component (searchStringUpdated)="onFilterString($event)"></header-component>
-<confirm-account *ngIf="user.status === 'unconfirmed'"></confirm-account>
-
+<div *ngIf="isLoaded">
+  <header-component (searchStringUpdated)="onFilterString($event)"></header-component>
+  <confirm-account *ngIf="user.status === 'unconfirmed'"></confirm-account>
+</div>
 <ion-content *ngIf="isLoaded">
   <div class="main">
     <div class="total-matches">
@@ -78,5 +79,5 @@
     No Matches Found
   </ion-list-header>
 
- 
+
 </ion-content>

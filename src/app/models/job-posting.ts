@@ -1,7 +1,7 @@
 
 export class JobPosting {
 
-    id:number; 
+    id: number;
     title: string;
     fullTime: boolean;
     partTime: boolean;
@@ -9,40 +9,42 @@ export class JobPosting {
     afternoon: boolean;
     evening: boolean;
     weekend: boolean;
-    minSalary: string; 
-    maxSalary: string; 
+    minSalary: string;
+    maxSalary: string;
     startDate: string;
-    address:string;
-    interested:boolean = false; 
-    score:number = 50; 
-    description: string; 
+    address: string;
+    interested: boolean = false;
+    score: number = 50;
+    description: string;
 
     constructor(data?: any) {
         if (data) {
-            this.id = data.id || null; 
-            this.title = data.title; 
+            this.id = data.id || null;
+            this.title = data.title;
             this.fullTime = data.fullTime;
             this.partTime = data.partTime;
             this.morning = data.morning;
             this.afternoon = data.afternoon;
             this.evening = data.evening;
             this.weekend = data.weekend;
-            this.minSalary = data.minSalary; 
+            this.minSalary = data.minSalary;
             this.maxSalary = data.maxSalary;
-            this.description =  data.description;
-            this.interested = data.interested; 
+            this.description = data.description;
+            this.interested = data.interested;
+            this.address = data.address;
+
         }
     }
 
     public static initializeArray(objects: any): JobPosting[] {
 
-		let results: JobPosting[] = [];
+        let results: JobPosting[] = [];
 
-		for (let i = 0; i < objects.length; i++) {
-			let obj = new JobPosting(objects[i]);
-			results.push(obj);
-		}
+        for (let i = 0; i < objects.length; i++) {
+            let obj = new JobPosting(objects[i]);
+            results.push(obj);
+        }
 
-		return results;
-	}
+        return results;
+    }
 }

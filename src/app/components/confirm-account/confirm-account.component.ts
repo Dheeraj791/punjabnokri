@@ -14,13 +14,17 @@ import { UserService } from 'src/app/services/user.service';
 export class ConfirmAccount implements OnInit {
     sentCode: boolean = false;
     user: User;
-    code:string;
+    code: string;
+
+    @Output() codeSubmitted: EventEmitter<any> = new EventEmitter();
     constructor(
         private apiService: ApiService,
         private errorService: ErrorService,
         private userService: UserService
     ) {
-
+        this.userService.getUser().then((user: User) => {
+            this.user = user;
+        });
     }
 
     ngOnInit() {
@@ -41,10 +45,15 @@ export class ConfirmAccount implements OnInit {
     }
 
     onSubmit() {
-        this.apiService.post('users/confirmcode', {code: this.code}).subscribe(
+        if (this.code === '') {
+            return;
+        }
+        this.codeSubmitted.emit();
+        this.apiService.post('users/confirmcode', { code: this.code }).subscribe(
             (result: any) => {
                 this.user.status = 'approved';
                 this.userService.setUser(this.user);
+                this.codeSubmitted.emit(true);
                 this.errorService.showAlert('Success', 'Your account has been confirmed.');
             },
             (error: any) => {

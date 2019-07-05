@@ -21,8 +21,8 @@ export class UserService {
 	}
 
 	setUser(user: User) {
-		this.storage.set('user', user);
-		this.watcher.next(user);
-		return;
+		this.storage.set('user', user).then(user => {
+			this.watcher.next(user);
+		});
 	}
 }

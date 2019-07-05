@@ -1,5 +1,7 @@
 import { UserProfile } from './user_profile';
 import { UserPreferences } from './user_preferences';
+import { Business } from './business';
+import { JobPosting } from './job-posting';
 
 export class User {
     id: number;
@@ -13,6 +15,8 @@ export class User {
     profile: UserProfile;
     preferences: UserPreferences;
     status: string = 'unconfirmed';
+    business: Business; 
+    jobPosting: JobPosting; 
 
     constructor(data?: any) {
 
@@ -38,9 +42,13 @@ export class User {
             } else {
                 this.preferences = new UserPreferences();
             }
+            this.business = data.business; 
+            this.jobPosting = data.jobPosting; 
         } else {
             this.preferences = new UserPreferences();
             this.profile = new UserProfile();
+            this.business = new Business; 
+            this.jobPosting = new JobPosting; 
         }
     }
 }

@@ -23,7 +23,7 @@ export class MatchesPage {
   isLoaded: boolean = false;
   jobPostings: JobPosting[] = [];
   activeJobPostings: JobPosting[] = [];
-  totalMatches: number = 0; 
+  totalMatches: number = 0;
   activeCount: number;
 
   matches: any = [
@@ -70,8 +70,12 @@ export class MatchesPage {
     private apiService: ApiService
   ) {
 
-    this.userService.getUser().then(User => {
-      this.user = User;
+    this.userService.getUser().then((user: User) => {
+      this.user = user;
+    });
+
+    this.userService.watcher.subscribe((user: User) => {
+      this.user = user;
     });
   }
 
@@ -79,7 +83,7 @@ export class MatchesPage {
   ionViewDidEnter() {
     this.activeMatches = this.matches;
     //load matches here
-    this.isLoaded = true;
+  
 
     this.apiService.get('jobposting').subscribe(
       (result: any) => {
@@ -87,9 +91,10 @@ export class MatchesPage {
         this.activeJobPostings = this.jobPostings;
         this.activeCount = this.activeJobPostings.length;
         this.totalMatches = this.jobPostings.length;
+        this.isLoaded = true;
       },
       (error: any) => {
-
+        this.isLoaded = true;
       }
     );
 
@@ -113,7 +118,7 @@ export class MatchesPage {
 
     this.activeCount = this.activeJobPostings.length;
 
-   
+
   }
 
   async openSocial(network: string, fab: HTMLIonFabElement) {
@@ -126,7 +131,7 @@ export class MatchesPage {
     fab.close();
   }
 
-  onFilterString($event){
+  onFilterString($event) {
     console.log($event);
     /*
     * Integrate search string logic

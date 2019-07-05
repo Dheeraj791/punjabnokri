@@ -145,10 +145,11 @@ export class SignupEmployerPage {
 
   onBusinessUpdate() {
 
-    this.apiService.post('business', { business: this.business }).subscribe(
+    this.apiService.post('business', { business: this.user.business }).subscribe(
       (result: any) => {
         this.business = new Business(result.data);
         this.userService.setUser(result.data);
+        this.business = this.user.business;
         this.onNextStep();
       },
       (error: any) => {
@@ -160,7 +161,7 @@ export class SignupEmployerPage {
 
   onJobPostingUpdate() {
 
-    this.apiService.post('jobposting', { businessId: this.business.id, jobposting: this.jobPosting }).subscribe(
+    this.apiService.post('jobposting', { businessId: this.business.id, jobposting: this.user.jobPosting }).subscribe(
       (result: any) => {
         this.jobPosting = new JobPosting(result.data);
         this.userService.setUser(result.data);
