@@ -23,6 +23,8 @@ export class JobPostingPage {
     private loadingCtrl: LoadingController
   ) {
 
+    
+
   }
 
   ionViewDidEnter() {
