@@ -3,9 +3,8 @@
     <ion-buttons slot="start">
       <img src="./assets/img/hyrskills-logo.png" height="30">
     </ion-buttons>
-
     <ion-buttons slot="end" id="links">
-      <button ion-button (click)="onSwitchUserType()" id="user-type">
+      <button ion-button (click)="onSwitchUserType()" id="user-type" *ngIf="!loggedIn">
         {{selectedTypes[selectedType]}}
       </button>
       <button ion-button (click)="onSignin()" *ngIf="!loggedIn">
@@ -15,7 +14,6 @@
         Logout
       </button>
     </ion-buttons>
-
   </ion-toolbar>
 </ion-header>
 

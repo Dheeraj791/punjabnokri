@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { MenuController, IonSlides } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'page-tutorial',
@@ -18,34 +20,43 @@ export class TutorialPage {
   };
 
   @ViewChild('slides') slides: IonSlides;
-  loggedIn: boolean = false;
+  loggedIn: boolean;
+  user: User;
 
   constructor(
     private menu: MenuController,
     private router: Router,
     private storage: Storage,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {
+    this.loggedIn = false;
 
+    this.userService.getUser().then(user => {
+      this.user = user;
+    });
   }
 
   startApp() {
-   
-      if (!this.loggedIn) {
-        this.router.navigateByUrl('/create');
-      }
-      else {
-        if (this.selectedType == 'jobseeker') {
+
+    if (!this.loggedIn) {
+      this.router.navigateByUrl('/create');
+    } else {
+      let type;
+      if (this.user.type) {
+        type = this.user.type;
+      } else {
+        type = this.selectedType;
+        if (type === 'jobseeker') {
           this.router
-            .navigateByUrl('/signup-jobseeker')
-            .then(() => /*this.storage.set('ion_did_tutorial', 'true') */ '');
-        }
-        else {
+            .navigateByUrl('/signup-jobseeker');
+        } else {
           this.router
-            .navigateByUrl('/signup-employer')
-            .then(() => /*this.storage.set('ion_did_tutorial', 'true') */ '');
+            .navigateByUrl('/signup-employer');
         }
       }
+
+    }
 
   }
 
@@ -58,7 +69,7 @@ export class TutorialPage {
   ionViewWillEnter() {
     this.authService.isAuthenticated().then(isLoggedIn => {
       this.loggedIn = isLoggedIn;
-    }); 
+    });
 
     this.storage.get('ion_did_tutorial').then(res => {
       if (res === true) {
