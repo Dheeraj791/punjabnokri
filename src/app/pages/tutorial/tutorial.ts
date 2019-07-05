@@ -47,17 +47,16 @@ export class TutorialPage {
         type = this.user.type;
       } else {
         type = this.selectedType;
-        if (type === 'jobseeker') {
-          this.router
-            .navigateByUrl('/signup-jobseeker');
-        } else {
-          this.router
-            .navigateByUrl('/signup-employer');
-        }
       }
 
+      if (type === 'jobseeker') {
+        this.router
+          .navigateByUrl('/signup-jobseeker');
+      } else {
+        this.router
+          .navigateByUrl('/signup-employer');
+      }
     }
-
   }
 
   onSlideChangeStart(event) {
