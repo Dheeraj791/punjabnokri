@@ -15,8 +15,8 @@ export class User {
     profile: UserProfile;
     preferences: UserPreferences;
     status: string = 'unconfirmed';
-    business: Business; 
-    jobPosting: JobPosting; 
+    business: Business;
+    jobPosting: JobPosting;
 
     constructor(data?: any) {
 
@@ -42,13 +42,13 @@ export class User {
             } else {
                 this.preferences = new UserPreferences();
             }
-            this.business = data.business; 
-            this.jobPosting = data.jobPosting; 
+            this.business = data.business;
+            this.jobPosting = data.jobPosting;
         } else {
             this.preferences = new UserPreferences();
             this.profile = new UserProfile();
-            this.business = new Business; 
-            this.jobPosting = new JobPosting; 
+            this.business = new Business;
+            this.jobPosting = new JobPosting;
         }
     }
 }

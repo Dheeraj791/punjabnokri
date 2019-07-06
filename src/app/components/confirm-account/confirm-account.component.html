@@ -1,9 +1,9 @@
 <div id="confirm-account">
     <p>Your email address has not be confirmed. To confirm your email address, check your inbox for a confirmation code.
     </p>
-
-    <a (click)="onResend()">Resend email</a>
-
+    <p>
+        <a (click)="onResend()">Resend email</a>
+    </p>
     <div>
         <ion-item>
             <ion-input name="code" type="text" required [(ngModel)]="code">
