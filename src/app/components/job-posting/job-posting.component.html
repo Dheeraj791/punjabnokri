@@ -1,0 +1,25 @@
+<ion-card>
+
+    <ion-card-content>
+        <div class="header">
+            <h1></h1>
+            <div></div>
+        </div>
+        <ion-item>
+
+        </ion-item>
+
+        <ion-item>
+
+        </ion-item>
+
+
+
+        <ion-item *ngIf="enableActions">
+            <ion-button (click)="onInterested()" [fill]="jobPosting.interested? 'solid': 'outline'">Interested
+            </ion-button>
+            <ion-button (click)="onNotInterested()" [fill]="!jobPosting.interested? 'solid': 'outline'">Not
+                Interested</ion-button>
+        </ion-item>
+    </ion-card-content>
+</ion-card>

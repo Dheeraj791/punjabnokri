@@ -60,10 +60,6 @@ const routes: Routes = [
             loadChildren: '../candidate/candidate.module#CandidateModule'
           },
           {
-            path: 'business/:businessId',
-            loadChildren: '../business/business.module#BusinessModule'
-          },
-          {
             path: 'job-posting/:jobPostingId',
             loadChildren: '../job-posting/job-posting.module#JobPostingModule'
           }

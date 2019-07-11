@@ -45,7 +45,7 @@ export class SignupJobseekerPage {
 
   start: boolean = false;
   loaded: boolean = false;
-
+  temp: User; 
   constructor(
     public router: Router,
     public userData: UserData,
@@ -57,6 +57,7 @@ export class SignupJobseekerPage {
     private skillData: SkillData
   ) {
 
+
     this.userService.getUser().then(user => {
       this.user = user;
       this.loaded = true;
@@ -65,30 +66,6 @@ export class SignupJobseekerPage {
     this.userService.watcher.subscribe((user: User) => {
       this.user = user;
     });
-
-    this.experienceEntries = [
-      {
-        'id': null,
-        'category_id': null,
-        'numberYears': 0,
-        'title': '',
-        'industry': ''
-      },
-      {
-        'id': null,
-        'category_id': null,
-        'numberYears': 0,
-        'title': '',
-        'industry': ''
-      },
-      {
-        'id': null,
-        'category_id': null,
-        'numberYears': 0,
-        'title': '',
-        'industry': ''
-      }
-    ];
 
     this.industries = [
       'Retail',
@@ -126,7 +103,7 @@ export class SignupJobseekerPage {
 
   onProfileUpdate() {
 
-    if (this.user.profile.maxDesiredSalary < this.user.profile.minDesiredSalary) {
+    if (this.user.profile.desiredSalaryMin > this.user.profile.desiredSalaryMax) {
       this.errorService.showAlert('Error', 'Max salary must exceed minimum salary.');
     }
 
@@ -134,7 +111,7 @@ export class SignupJobseekerPage {
     profile['user_id'] = this.user.id;
     this.apiService.post('users/profile', profile).subscribe(
       (result: any) => {
-        this.userService.setUser(result.data);
+        this.user = new User(result.data);
         this.onNextStep();
       },
       (error: any) => {
@@ -147,7 +124,7 @@ export class SignupJobseekerPage {
 
     this.apiService.post('users/purpose', { why: this.user.profile.why }).subscribe(
       (result: any) => {
-        this.userService.setUser(result.data);
+        this.user = new User(result.data);
         this.onNextStep();
       },
       (error: any) => {
@@ -160,9 +137,9 @@ export class SignupJobseekerPage {
 
   onExperienceSubmit() {
 
-    this.apiService.post('users/experience', { experienceEntries: this.experienceEntries }).subscribe(
+    this.apiService.post('users/experience', { experience: this.user.experience }).subscribe(
       (result: any) => {
-        this.userService.setUser(result.data);
+        this.user = new User(result.data);
         this.onNextStep();
       },
       (error: any) => {
@@ -176,8 +153,9 @@ export class SignupJobseekerPage {
 
     this.apiService.post('users/skills', { skills: this.selectedSkills }).subscribe(
       (result: any) => {
-        this.userService.setUser(result.data);
+        this.user = new User(result.data);
         this.onNextCategoryStep();
+        this.loadSkills();
       },
       (error: any) => {
         this.errorService.showAlert('Error', error.message);
@@ -206,7 +184,7 @@ export class SignupJobseekerPage {
   onNextCategoryStep() {
     if (this.categoryStep < (this.skillsCategories.length - 1)) {
       this.categoryStep++;
-      this.loadCategoryContent()
+      this.loadCategoryContent();
       /*
         if (this.validateExperience()) {
           this.categoryStep++;
@@ -239,19 +217,11 @@ export class SignupJobseekerPage {
   }
 
   onAddExperience() {
-    this.experienceEntries.push(
-      {
-        'id': null,
-        'category_id': null,
-        'numberYears': 0,
-        'title': '',
-        'industry': ''
-      }
-    );
+    this.user.addExperience();
   }
 
   onRemoveExperience(i) {
-    this.experienceEntries.splice(i, 1);
+    this.user.experience.splice(i, 1);
   }
 
   onSeeMatches() {

@@ -1,16 +1,4 @@
-<ion-header no-border>
-  <ion-toolbar padding>
-    <ion-buttons slot="start">
-      <img src="./assets/img/hyrskills-logo.png" height="30">
-    </ion-buttons>
-    <ion-buttons slot="end" id="links">
-      <button ion-button routerLink="/tutorial">
-        Tutorial
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
+<header-public-component [showHome]="true"></header-public-component>
 
 <ion-content *ngIf="step == 1 && loaded" padding>
   <confirm-account *ngIf="user.status === 'unconfirmed'"></confirm-account>
@@ -195,6 +183,7 @@
 <ion-content *ngIf="step == 6">
 
   <h1 text-center> Preview your profile</h1>
+  <candidate-profile-component></candidate-profile-component>
   <div padding>
     <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
     <ion-button (click)="onNextStep()" type="submit" expand="block">Next</ion-button>

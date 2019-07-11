@@ -42,9 +42,30 @@ ion-toolbar {
  ion-input {
   input {
     text-align: right;
-    /* IF YOU ALSO WANT TO PUSH PLACHEHOLDER TO THE RIGHT USE THE FOLLOWING, IF NOT JUST DELETE THE ::-webkit-input-placeholder*/
     ::-webkit-input-placeholder {
       text-align: right;
     }
   }
 }
+
+
+.skill-header{
+  padding-right:20px;
+  .skill-header-cell{
+    display:inline-block; 
+    float:left;
+    padding-left:20px;
+    font-size:14px;
+    &:first-child{
+      padding-left:0px;
+    }
+  }
+ 
+}
+
+.skill-header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+

@@ -178,8 +178,8 @@ export class SignupEmployerPage {
     this.apiService.post('jobposting/experience',
       { experienceEntries: this.experienceEntries, jobPostingId: this.jobPosting.id }
     ).subscribe(
-      (data: any) => {
-        this.userService.setUser(data.data);
+      (result: any) => {
+        this.userService.setUser(result.data);
         this.onNextStep();
       },
       (error: any) => {

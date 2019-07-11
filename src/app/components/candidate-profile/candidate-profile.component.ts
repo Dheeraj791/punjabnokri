@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { JobPosting } from '../../models/job-posting';
+import { User } from '../../models/user';
 
 @Component({
     selector: 'candidate-profile-component',
@@ -11,7 +11,7 @@ import { JobPosting } from '../../models/job-posting';
 export class CandidateProfileComponent implements OnInit {
 
     @Output() searchStringUpdated: EventEmitter<number> = new EventEmitter();
-    @Input() jobPosting: JobPosting;
+    @Input() user: User;
 
     constructor(
         private apiService: ApiService
@@ -23,10 +23,11 @@ export class CandidateProfileComponent implements OnInit {
 
     }
 
+
     onInterested() {
-        this.apiService.put('jobposting/' + this.jobPosting.id, { interested: true }).subscribe(
+        this.apiService.put('jobposting/' + this.user.id, { interested: true }).subscribe(
             (result: any) => {
-                this.jobPosting = new JobPosting(result.data);
+               
             },
             (error: any) => {
 
@@ -36,9 +37,9 @@ export class CandidateProfileComponent implements OnInit {
     }
 
     onNotInterested() {
-        this.apiService.put('jobposting/' + this.jobPosting.id, { interested: false }).subscribe(
+        this.apiService.put('jobposting/' + this.user.id, { interested: false }).subscribe(
             (result: any) => {
-                this.jobPosting = new JobPosting(result.data);
+                
             },
             (error: any) => {
 

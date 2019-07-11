@@ -1,17 +1,4 @@
-<ion-header no-border>
-  <ion-toolbar padding>
-    <ion-buttons slot="start">
-      <img src="./assets/img/hyrskills-logo.png" height="30">
-    </ion-buttons>
-    <ion-buttons slot="end" id="links">
-      <button ion-button routerLink="/tutorial">
-        Tutorial
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-
+<header-public-component [showHome]="true"></header-public-component>
 
 <ion-content *ngIf="step == 1 && loaded" padding>
   <confirm-account *ngIf="user.status === 'unconfirmed'"></confirm-account>
@@ -71,7 +58,7 @@
       <span slot="start" class="dot"></span>
       <ion-label>Minimum Salary</ion-label>
       <ion-input name="minimumSalary" name="minimumSalary" type="text" required
-        [(ngModel)]="user.profile.minDesiredSalary">
+        [(ngModel)]="user.profile.desiredSalaryMin">
       </ion-input>
     </ion-item>
 
@@ -79,7 +66,7 @@
       <span slot="start" class="dot"></span>
       <ion-label>Maximum Salary</ion-label>
       <ion-input name="maximumSalary" name="maximumSalary" type="text" required
-        [(ngModel)]="user.profile.maxDesiredSalary">
+        [(ngModel)]="user.profile.desiredSalaryMax">
       </ion-input>
     </ion-item>
 
@@ -110,7 +97,7 @@
 
   <p text-center bold>My experience</p>
 
-  <div *ngFor="let experience of experienceEntries; let i = index; ">
+  <div *ngFor="let experience of this.user.experience; let i = index; ">
     <div class="inline">
       <ion-select placeholder="Years" [(ngModel)]="experience.numberYears">
         <ion-select-option *ngFor="let year of [1,2,3,4,5,6,7,8,9,10,15,20]" [value]="year">{{year}}
@@ -148,8 +135,9 @@
     <div class="skill-header-cell">Intermediate</div>
     <div class="skill-header-cell">Basic</div>
   </div>
+
   <div *ngFor="let skill of selectedSkills; let i = index;">
-    <rating [rating]="rating" [name]="skill.name" (ratingChange)="ratingChange($event, i)"></rating>
+    <rating [rating]="skill.value" [name]="skill.name" (ratingChange)="ratingChange($event, i)"></rating>
   </div>
 
   <div>
@@ -162,6 +150,7 @@
 <ion-content *ngIf="step == 5" padding>
 
   <h1 text-center> Preview your profile</h1>
+  <job-posting-component></job-posting-component>
   <div padding>
     <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
     <ion-button (click)="onNextStep()" type="submit" expand="block">Next</ion-button>

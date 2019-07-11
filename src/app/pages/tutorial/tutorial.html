@@ -1,24 +1,6 @@
-<ion-header no-border>
-  <ion-toolbar padding>
-    <ion-buttons slot="start">
-      <img src="./assets/img/hyrskills-logo.png" height="30">
-    </ion-buttons>
-    <ion-buttons slot="end" id="links">
-      <button ion-button (click)="onSwitchUserType()" id="user-type" *ngIf="!loggedIn">
-        {{selectedTypes[selectedType]}}
-      </button>
-      <button ion-button (click)="onSignin()" *ngIf="!loggedIn">
-        Sign in
-      </button>
-      <button ion-button (click)="onLogout()" *ngIf="loggedIn">
-        Logout
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<header-public-component [showLogin]="true" (userTypeChange)="changeUserType($event)"></header-public-component>
 
 <ion-content fullscreen id="tutorial">
-
   <div *ngIf="selectedType == 'jobseeker'">
     <ion-slides #slides pager="true">
       <ion-slide>
@@ -72,7 +54,7 @@
       </ion-slide>
     </ion-slides>
   </div>
-  
+
   <div *ngIf="selectedType == 'employer'">
     <ion-slides #slides pager="true">
       <ion-slide>

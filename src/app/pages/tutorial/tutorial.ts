@@ -107,15 +107,8 @@ export class TutorialPage {
 
   }
 
-  onSwitchUserType() {
-
-    this.storage.get('user_type').then(res => {
-      let user_type = (res === 'jobseeker' ? 'employer' : 'jobseeker');
-      this.storage.set('user_type', user_type);
-      this.selectedType = user_type;
-    }
-    );
+  changeUserType($event){
+    this.selectedType = $event;
   }
-
 
 }

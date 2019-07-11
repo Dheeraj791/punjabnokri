@@ -9,6 +9,7 @@ import { JobPosting } from '../../models/job-posting';
 })
 
 export class JobPostingComponent implements OnInit {
+    @Input() jobPosting: JobPosting;
 
     constructor(
         private apiService: ApiService
@@ -17,6 +18,31 @@ export class JobPostingComponent implements OnInit {
     }
 
     ngOnInit() {
+
+    }
+
+
+    onInterested() {
+        this.apiService.put('jobposting/' + this.jobPosting.id, { interested: true }).subscribe(
+            (result: any) => {
+               
+            },
+            (error: any) => {
+
+            }
+        );
+
+    }
+
+    onNotInterested() {
+        this.apiService.put('jobposting/' + this.jobPosting.id, { interested: false }).subscribe(
+            (result: any) => {
+                
+            },
+            (error: any) => {
+
+            }
+        );
 
     }
 

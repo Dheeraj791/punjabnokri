@@ -5,12 +5,15 @@ import { IonicModule } from '@ionic/angular';
 import { TutorialPage } from './tutorial';
 import { TutorialPageRoutingModule } from './tutorial-routing.module';
 import { Storage } from '@ionic/storage';
+import { HyrSkillsModule } from '../../components/components.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
-    TutorialPageRoutingModule
+    TutorialPageRoutingModule,
+    HyrSkillsModule
   ],
   declarations: [TutorialPage],
   entryComponents: [TutorialPage],

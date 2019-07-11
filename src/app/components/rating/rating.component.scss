@@ -1,6 +1,14 @@
-.five-star{
-    ion-icon{
-        padding-right:10px;
-        font-size:30px;
+.five-star-wrapper{
+    padding-top:2px;
+    .five-star{
+        ion-icon{
+            padding-right:10px;
+            font-size:30px;
+        }
+    }
+    border-bottom:1px solid grey;
+    .title{
+        font-size:14px;
+        color:grey;
     }
 }

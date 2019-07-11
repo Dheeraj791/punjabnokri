@@ -1,3 +1,4 @@
+import { Business } from './business';
 
 export class JobPosting {
 
@@ -16,6 +17,7 @@ export class JobPosting {
     interested: boolean = false;
     score: number = 50;
     description: string;
+    business: Business;
 
     constructor(data?: any) {
         if (data) {
@@ -32,16 +34,17 @@ export class JobPosting {
             this.description = data.description;
             this.interested = data.interested;
             this.address = data.address;
+            this.business = new Business();
 
         }
     }
 
     public static initializeArray(objects: any): JobPosting[] {
 
-        let results: JobPosting[] = [];
+        const results: JobPosting[] = [];
 
         for (let i = 0; i < objects.length; i++) {
-            let obj = new JobPosting(objects[i]);
+            const obj = new JobPosting(objects[i]);
             results.push(obj);
         }
 

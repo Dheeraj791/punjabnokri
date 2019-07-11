@@ -1,14 +1,28 @@
 <ion-card>
+
     <ion-card-content>
         <div class="header">
-            <h1>{{jobPosting.title}}</h1>
-            <div class="score">{{jobPosting.score}}</div>
+            <h1>{{user.firstName}} {{user.lastName}}</h1>
+            <div>{{user.email}}</div>
         </div>
         <ion-item>
-            {{jobPosting.description}}
+            {{user.description}}
         </ion-item>
 
         <ion-item>
+            {{user.address}}
+        </ion-item>
+
+        <div *ngFor="let experience of user.experience">
+
+        </div>
+
+
+        <div *ngFor="let skill of user.skills">
+
+            </div>
+
+        <ion-item *ngIf="enableActions">
             <ion-button (click)="onInterested()" [fill]="jobPosting.interested? 'solid': 'outline'">Interested
             </ion-button>
             <ion-button (click)="onNotInterested()" [fill]="!jobPosting.interested? 'solid': 'outline'">Not

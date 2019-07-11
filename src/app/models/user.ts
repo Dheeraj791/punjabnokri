@@ -17,6 +17,8 @@ export class User {
     status: string = 'unconfirmed';
     business: Business;
     jobPosting: JobPosting;
+    experience: Experience[];
+    skills: Skill[];
 
     constructor(data?: any) {
 
@@ -44,11 +46,41 @@ export class User {
             }
             this.business = data.business;
             this.jobPosting = data.jobPosting;
+            this.experience = data.experience;
+            this.skills = data.skills;
         } else {
             this.preferences = new UserPreferences();
             this.profile = new UserProfile();
             this.business = new Business;
             this.jobPosting = new JobPosting;
+            this.experience = [];
+            this.skills = [];
         }
     }
+
+    public addExperience() {
+        const experience = new Experience();
+        this.experience.push(experience);
+    }
+
+    public addExperiencebyNumber(iteration: number) {
+        for (let i = 0; i < iteration; i++) {
+            this.addExperience();
+        }
+    }
+}
+
+
+export class Experience {
+    id: number;
+    categoryId: null;
+    numberYears: number;
+    title: string;
+    industry: string;
+}
+
+
+export class Skill {
+
+
 }

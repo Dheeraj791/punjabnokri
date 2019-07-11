@@ -8,8 +8,8 @@ export class UserProfile {
     evening: boolean;
     weekend: boolean;
     desiredSalary: number;
-    minDesiredSalary: number;
-    maxDesiredSalary: number;
+    desiredSalaryMin: number;
+    desiredSalaryMax: number;
     activelySeekingWork: boolean;
     why: string; 
 
@@ -22,8 +22,8 @@ export class UserProfile {
             this.evening = data.evening;
             this.weekend = data.weekend;
             this.desiredSalary = data.desiredSalary;
-            this.minDesiredSalary = data.minDesiredSalary;
-            this.maxDesiredSalary = data.maxDesiredSalary;
+            this.desiredSalaryMin = data.desiredSalaryMin;
+            this.desiredSalaryMax = data.desiredSalaryMax;
             this.activelySeekingWork = data.activelySeeking;
             this.why = data.why;
         }
