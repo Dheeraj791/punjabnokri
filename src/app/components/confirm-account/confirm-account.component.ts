@@ -15,6 +15,7 @@ export class ConfirmAccount implements OnInit {
     sentCode: boolean = false;
     user: User;
     code: string;
+    openConfirm: boolean = false;
 
     @Output() codeSubmitted: EventEmitter<any> = new EventEmitter();
     constructor(
@@ -61,6 +62,10 @@ export class ConfirmAccount implements OnInit {
             }
 
         );
+    }
+
+    onOpenConfirm() {
+        this.openConfirm = !this.openConfirm;
     }
 
 }

@@ -11,7 +11,7 @@ export class ErrorService {
 
     async showAlert(header, message, buttonText = 'OK', handler?: Function) {
 
-        let buttons = [{
+        const buttons = [{
             text: buttonText,
             handler: null
         }];
@@ -37,7 +37,7 @@ export class ErrorService {
 	*/
 
     async showConfirm(header, message, okText, cancelText) {
-        let alert = await this.alertCtrl.create({
+        const alert = await this.alertCtrl.create({
             header: header,
             message: message,
             buttons: [

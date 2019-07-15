@@ -44,15 +44,18 @@ export class User {
             } else {
                 this.preferences = new UserPreferences();
             }
-            this.business = data.business;
-            this.jobPosting = data.jobPosting;
-            this.experience = data.experience;
-            this.skills = data.skills;
+            this.business = new Business(data.business) || new Business;
+
+            if (data.experience) {
+                this.experience = data.experience;
+            }
+            if (data.skills) {
+                this.skills = data.skills;
+            }
         } else {
             this.preferences = new UserPreferences();
             this.profile = new UserProfile();
             this.business = new Business;
-            this.jobPosting = new JobPosting;
             this.experience = [];
             this.skills = [];
         }

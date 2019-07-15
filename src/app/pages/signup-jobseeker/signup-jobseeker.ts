@@ -80,7 +80,7 @@ export class SignupJobseekerPage {
   }
 
   loadSkills() {
-    this.apiService.get('skills').subscribe(
+    this.apiService.get('skills/user').subscribe(
       (result: any) => {
         this.skills = Skill.initializeArray(result.data);
         this.skillsCategories = this.skillData.getCategories(this.skills);

@@ -56,10 +56,7 @@ export class SignupEmployerPage {
     private skillData: SkillData
   ) {
 
-    this.userService.getUser().then(user => {
-      this.user = user;
-      this.loaded = true;
-    });
+
 
     this.userService.watcher.subscribe((user: User) => {
       this.user = user;
@@ -98,12 +95,17 @@ export class SignupEmployerPage {
 
     this.jobPosting = new JobPosting;
     this.business = new Business;
-    this.loadSkills();
+    this.userService.getUser().then(user => {
+      this.user = user;
+      this.loaded = true;
+      this.loadSkills();
+    });
+
   }
 
   loadSkills() {
 
-    this.apiService.get('skills').subscribe(
+    this.apiService.get('skills/jobposting', { jobPostingId: this.user.business.jobPosting.id }).subscribe(
       (result: any) => {
         this.skills = Skill.initializeArray(result.data);
         this.skillsCategories = this.skillData.getCategories(this.skills);
@@ -147,9 +149,7 @@ export class SignupEmployerPage {
 
     this.apiService.post('business', { business: this.user.business }).subscribe(
       (result: any) => {
-        this.business = new Business(result.data);
-        this.userService.setUser(result.data);
-        this.business = this.user.business;
+        this.user = new User(result.data);
         this.onNextStep();
       },
       (error: any) => {
@@ -161,10 +161,9 @@ export class SignupEmployerPage {
 
   onJobPostingUpdate() {
 
-    this.apiService.post('jobposting', { businessId: this.business.id, jobposting: this.user.jobPosting }).subscribe(
+    this.apiService.post('jobposting', { businessId: this.user.business.id, jobPosting: this.user.business.jobPosting }).subscribe(
       (result: any) => {
-        this.jobPosting = new JobPosting(result.data);
-        this.userService.setUser(result.data);
+        this.user = new User(result.data);
         this.onNextStep();
       },
       (error: any) => {
@@ -176,10 +175,9 @@ export class SignupEmployerPage {
   onExperienceSubmit() {
 
     this.apiService.post('jobposting/experience',
-      { experienceEntries: this.experienceEntries, jobPostingId: this.jobPosting.id }
+      { experienceEntries: this.user.business.jobPosting.experience, jobPostingId: this.user.business.jobPosting.id }
     ).subscribe(
       (result: any) => {
-        this.userService.setUser(result.data);
         this.onNextStep();
       },
       (error: any) => {
@@ -192,10 +190,10 @@ export class SignupEmployerPage {
   onSkillSubmit() {
 
     this.apiService.post('jobposting/skills',
-      { skills: this.selectedSkills, jobPostingId: this.jobPosting.id }
+      { skills: this.selectedSkills, jobPostingId: this.user.business.jobPosting.id }
     ).subscribe(
       (data: any) => {
-        this.userService.setUser(data.data);
+        this.loadSkills();
         this.onNextCategoryStep();
       },
       (error: any) => {
@@ -230,8 +228,7 @@ export class SignupEmployerPage {
           alert("Please rate all of the skills on the screen.");
         }
       */
-    }
-    else {
+    } else {
       this.onNextStep();
     }
   }
@@ -239,9 +236,8 @@ export class SignupEmployerPage {
   onPreviousCategoryStep() {
     if (this.categoryStep > 0) {
       this.categoryStep--;
-      this.loadCategoryContent()
-    }
-    else {
+      this.loadCategoryContent();
+    } else {
       this.onPreviousStep();
     }
   }
@@ -253,17 +249,11 @@ export class SignupEmployerPage {
   }
 
   onAddExperience() {
-    this.experienceEntries.push(
-      {
-        'numberYears': 0,
-        'title': '',
-        'industry': ''
-      }
-    );
+    this.user.business.jobPosting.addExperience();
   }
 
   onRemoveExperience(i) {
-    this.experienceEntries.splice(i, 1);
+    this.user.business.jobPosting.experience.splice(i, 1);
   }
 
   onSeeMatches() {

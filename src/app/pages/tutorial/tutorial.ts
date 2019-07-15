@@ -99,13 +99,6 @@ export class TutorialPage {
     this.router.navigateByUrl('/login');
   }
 
-  onLogout() {
-    this.authService.logout().then(res => {
-      this.router.navigateByUrl('/login');
-    }
-    );
-
-  }
 
   changeUserType($event){
     this.selectedType = $event;

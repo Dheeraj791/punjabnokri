@@ -1,4 +1,6 @@
 import { Business } from './business';
+import { Experience } from './experience';
+import { Skill } from './skill';
 
 export class JobPosting {
 
@@ -18,6 +20,8 @@ export class JobPosting {
     score: number = 50;
     description: string;
     business: Business;
+    experience: Experience[];
+    skills: Skill[];
 
     constructor(data?: any) {
         if (data) {
@@ -34,8 +38,15 @@ export class JobPosting {
             this.description = data.description;
             this.interested = data.interested;
             this.address = data.address;
-            this.business = new Business();
-
+            if (data.experience) {
+                this.experience = data.experience;
+            }
+            if (data.skills) {
+                this.skills = data.skills;
+            }
+        } else {
+            this.experience = [];
+            this.skills = [];
         }
     }
 
@@ -49,5 +60,10 @@ export class JobPosting {
         }
 
         return results;
+    }
+
+    public addExperience() {
+        const experience = new Experience();
+        this.experience.push(experience);
     }
 }

@@ -1,3 +1,4 @@
+import { JobPosting } from './job-posting';
 
 export class Business {
 
@@ -7,6 +8,8 @@ export class Business {
     name: string = '';
     whyJoin: string = '';
     about: string = '';
+    jobPosting: JobPosting;
+    jobPostings: JobPosting[];
 
     constructor(data?: any) {
         if (data) {
@@ -16,6 +19,7 @@ export class Business {
             this.name = data.name;
             this.whyJoin = data.whyJoin;
             this.about = data.about;
+            this.jobPosting = new JobPosting(data.jobPosting) || new JobPosting();
         }
     }
 }

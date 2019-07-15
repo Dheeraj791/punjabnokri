@@ -1,15 +1,22 @@
 <div id="confirm-account">
-    <p>Your email address has not be confirmed. To confirm your email address, check your inbox for a confirmation code.
-    </p>
-    <p>
-        <a (click)="onResend()">Resend email</a>
-    </p>
-    <div>
-        <ion-item>
-            <ion-input name="code" type="text" required [(ngModel)]="code">
-            </ion-input>
-        </ion-item>
-        <ion-button (click)="onSubmit()" type="submit" expand="block">Submit</ion-button>
+    <a (click)="onOpenConfirm()" id="open-confirm">Confirm Email
+        <ion-icon class="toggle" name="arrow-round-forward" *ngIf="!openConfirm"></ion-icon>
+        <ion-icon class="toggle" name="arrow-round-down" *ngIf="openConfirm"></ion-icon>
+    </a>
+    <div *ngIf="openConfirm">
+        <p>Your email address has not be confirmed. To confirm your email address, check your inbox for a confirmation
+            code.
+        </p>
+        <p>
+            <a (click)="onResend()">Resend email</a>
+        </p>
+        <div>
+            <ion-item>
+                <ion-input name="code" type="text" required [(ngModel)]="code">
+                </ion-input>
+            </ion-item>
+            <ion-button (click)="onSubmit()" type="submit" expand="block">Submit</ion-button>
+        </div>
     </div>
 
 </div>

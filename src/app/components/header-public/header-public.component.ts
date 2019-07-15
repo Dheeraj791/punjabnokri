@@ -52,5 +52,13 @@ export class HeaderPublicComponent implements OnInit {
     this.router.navigate(['/tutorial']);
   }
 
+  onLogout() {
+    this.authService.logout().then(res => {
+      this.router.navigateByUrl('/login');
+    }
+    );
+
+  }
+
 
 }

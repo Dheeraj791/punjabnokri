@@ -6,5 +6,15 @@
     a{
         color:white;
         font-weight:bold;
+        .toggle{
+            float:right;
+        }
     }
+    #open-confirm{
+        height:20px;
+        line-height:20px;
+        width:100%;
+        display:block;
+    }
+   
 }

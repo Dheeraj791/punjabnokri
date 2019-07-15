@@ -40,56 +40,56 @@
 
     <ion-item>
       <ion-label position="stacked" color="primary">Job Title</ion-label>
-      <ion-input name="title" type="text" required [(ngModel)]="user.jobPosting.title"></ion-input>
+      <ion-input name="title" type="text" required [(ngModel)]="user.business.jobPosting.title"></ion-input>
     </ion-item>
 
     <h2 text-center>Desired Employment Type</h2>
     <ion-item>
       <span slot="start" class="dot"></span>
       <ion-label>Full Time</ion-label>
-      <ion-toggle name="full-time" color="success" [(ngModel)]="user.jobPosting.fullTime"></ion-toggle>
+      <ion-toggle name="full-time" color="success" [(ngModel)]="user.business.jobPosting.fullTime"></ion-toggle>
     </ion-item>
 
     <ion-item>
       <span slot="start" class="dot"></span>
       <ion-label>Part Time</ion-label>
-      <ion-toggle name="part-time" color="success" [(ngModel)]="user.jobPosting.partTime"></ion-toggle>
+      <ion-toggle name="part-time" color="success" [(ngModel)]="user.business.jobPosting.partTime"></ion-toggle>
     </ion-item>
 
     <h2 text-center>Availability</h2>
     <ion-item>
       <span slot="start" class="dot"></span>
       <ion-label>Mornings</ion-label>
-      <ion-toggle name="morning" color="success" [(ngModel)]="user.jobPosting.morning"></ion-toggle>
+      <ion-toggle name="morning" color="success" [(ngModel)]="user.business.jobPosting.morning"></ion-toggle>
     </ion-item>
 
     <ion-item>
       <span slot="start" class="dot"></span>
       <ion-label>Afternoons</ion-label>
-      <ion-toggle name="afternoon" color="success" [(ngModel)]="user.jobPosting.afternoon"></ion-toggle>
+      <ion-toggle name="afternoon" color="success" [(ngModel)]="user.business.jobPosting.afternoon"></ion-toggle>
     </ion-item>
 
     <ion-item>
       <span slot="start" class="dot"></span>
       <ion-label>Evenings</ion-label>
-      <ion-toggle name="evening" color="success" [(ngModel)]="user.jobPosting.evening"></ion-toggle>
+      <ion-toggle name="evening" color="success" [(ngModel)]="user.business.jobPosting.evening"></ion-toggle>
     </ion-item>
 
     <ion-item>
       <span slot="start" class="dot"></span>
       <ion-label>Weekends</ion-label>
-      <ion-toggle name="weekend" color="success" [(ngModel)]="user.jobPosting.weekend"></ion-toggle>
+      <ion-toggle name="weekend" color="success" [(ngModel)]="user.business.jobPosting.weekend"></ion-toggle>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked" color="primary">Min Salary</ion-label>
-      <ion-input name="min-salary" type="text" required [(ngModel)]="user.jobPosting.minSalary">
+      <ion-input name="min-salary" type="text" required [(ngModel)]="user.business.jobPosting.minSalary">
       </ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked" color="primary">Max Salary</ion-label>
-      <ion-input name="max-salary" type="text" required [(ngModel)]="user.jobPosting.maxSalary">
+      <ion-input name="max-salary" type="text" required [(ngModel)]="user.business.jobPosting.maxSalary">
       </ion-input>
     </ion-item>
 
@@ -105,20 +105,20 @@
 
   <ion-item>
     <ion-label position="stacked" color="primary">Job Address</ion-label>
-    <ion-input type="text" required [(ngModel)]="user.jobPosting.address">
+    <ion-input type="text" required [(ngModel)]="user.business.jobPosting.address">
     </ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked" color="primary">Start date</ion-label>
     <ion-datetime [(ngModel)]="date" display-format="MM DD YYYY" picker-format="MM DD YYYY" placeholder=""
-      [(ngModel)]="user.jobPosting.startDate">
+      [(ngModel)]="user.business.jobPosting.startDate">
     </ion-datetime>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked" color="primary">Job Description</ion-label>
-    <ion-textarea [(ngModel)]="user.jobPosting.description" required></ion-textarea>
+    <ion-textarea [(ngModel)]="user.business.jobPosting.description" required></ion-textarea>
   </ion-item>
 
   <div padding>
@@ -130,8 +130,7 @@
 <ion-content *ngIf="step == 4" padding>
 
   <h1 text-center>Required experience...</h1>
-
-  <div *ngFor="let experience of experienceEntries; let i = index; ">
+  <div *ngFor="let experience of user.business.jobPosting.experience; let i = index; ">
     <div class="inline">
       <ion-select placeholder="Years" [(ngModel)]="experience.numberYears">
         <ion-select-option *ngFor="let year of [1,2,3,4,5,6,7,8,9,10,15,20]" [value]="year">{{year}}
@@ -170,7 +169,7 @@
     <div class="skill-header-cell">Basic</div>
   </div>
   <div *ngFor="let skill of selectedSkills; let i = index;">
-    <rating [rating]="rating" [name]="skill.name" (ratingChange)="ratingChange($event, i)"></rating>
+    <rating [rating]="skill.value" [name]="skill.name" (ratingChange)="ratingChange($event, i)"></rating>
   </div>
 
   <div>
