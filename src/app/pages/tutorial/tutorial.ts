@@ -95,10 +95,6 @@ export class TutorialPage {
   }
 
 
-  onSignin() {
-    this.router.navigateByUrl('/login');
-  }
-
 
   changeUserType($event){
     this.selectedType = $event;
