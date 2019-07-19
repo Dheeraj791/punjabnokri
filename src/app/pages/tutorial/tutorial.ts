@@ -39,23 +39,23 @@ export class TutorialPage {
 
   startApp() {
 
-    if (!this.loggedIn) {
-      this.router.navigateByUrl('/create');
-    } else {
-      let type;
-      if (this.user.type) {
-        type = this.user.type;
-      } else {
-        type = this.selectedType;
+    if (this.loggedIn) {
+      if (this.user) {
+        if (this.user.type === 'jobseeker') {
+          this.router
+            .navigateByUrl('/signup-jobseeker');
+        } else {
+          this.router
+            .navigateByUrl('/signup-employer');
+        }
+      }
+      else {
+        this.router
+          .navigateByUrl('/login');
       }
 
-      if (type === 'jobseeker') {
-        this.router
-          .navigateByUrl('/signup-jobseeker');
-      } else {
-        this.router
-          .navigateByUrl('/signup-employer');
-      }
+    } else {
+      this.router.navigateByUrl('/create');
     }
   }
 
@@ -96,7 +96,7 @@ export class TutorialPage {
 
 
 
-  changeUserType($event){
+  changeUserType($event) {
     this.selectedType = $event;
   }
 

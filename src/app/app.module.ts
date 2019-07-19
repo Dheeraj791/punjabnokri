@@ -18,6 +18,7 @@ import { AuthService } from './services/auth.service';
 import { MessageService } from './services/message.service';
 import { UserService } from './services/user.service';
 import { ErrorService } from './services/error.service';
+import { LogService } from './services/log.service';
 import { AuthGuard } from './guards/auth.guard';
 import { Privacy } from './pages/static/privacy/privacy';
 import { Terms } from './pages/static/terms/terms';
@@ -48,6 +49,7 @@ import { Terms } from './pages/static/terms/terms';
     MessageService,
     UserService,
     ErrorService,
+    LogService,
     AuthGuard,
     Privacy,
     Terms,
