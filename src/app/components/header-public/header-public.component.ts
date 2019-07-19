@@ -33,6 +33,11 @@ export class HeaderPublicComponent implements OnInit {
     this.authService.Authenticator.subscribe((authenticated: boolean) => {
       this.loggedIn = authenticated;
     });
+
+    this.authService.isAuthenticated().then(result => {
+      this.loggedIn = result;
+    });
+
   }
 
 

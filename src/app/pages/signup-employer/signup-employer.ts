@@ -160,6 +160,9 @@ export class SignupEmployerPage {
 
 
   onJobPostingUpdate() {
+    if (!this.user.business.jobPosting.title) {
+      this.errorService.showAlert('Error', 'Please fill in the job title before proceeding.');
+    }
 
     this.apiService.post('jobposting', { businessId: this.user.business.id, jobPosting: this.user.business.jobPosting }).subscribe(
       (result: any) => {

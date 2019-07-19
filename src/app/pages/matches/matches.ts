@@ -83,15 +83,30 @@ export class MatchesPage {
   ionViewDidEnter() {
     this.activeMatches = this.matches;
     //load matches here
-  
 
-    this.apiService.get('jobposting').subscribe(
+    if (this.user.type === 'employer') {
+
+    }
+    else {
+      this.apiService.get('jobposting').subscribe(
+        (result: any) => {
+          this.jobPostings = JobPosting.initializeArray(result.data);
+          this.activeJobPostings = this.jobPostings;
+          this.activeCount = this.activeJobPostings.length;
+          this.totalMatches = this.jobPostings.length;
+          this.isLoaded = true;
+        },
+        (error: any) => {
+          this.isLoaded = true;
+        }
+      );
+    }
+
+
+
+    this.apiService.get('candidates').subscribe(
       (result: any) => {
-        this.jobPostings = JobPosting.initializeArray(result.data);
-        this.activeJobPostings = this.jobPostings;
-        this.activeCount = this.activeJobPostings.length;
-        this.totalMatches = this.jobPostings.length;
-        this.isLoaded = true;
+
       },
       (error: any) => {
         this.isLoaded = true;
@@ -102,17 +117,15 @@ export class MatchesPage {
 
   updateListing() {
 
-    if (this.segment == 'interested') {
+    if (this.segment === 'interested') {
       this.activeJobPostings = this.jobPostings.filter(item => {
         return item.interested == true;
       });
-    }
-    else if (this.segment == 'notinterested') {
+    } else if (this.segment === 'notinterested') {
       this.activeJobPostings = this.jobPostings.filter(item => {
-        return item.interested == false;
+        return item.interested === false;
       });
-    }
-    else {
+    } else {
       this.activeJobPostings = this.jobPostings;
     }
 

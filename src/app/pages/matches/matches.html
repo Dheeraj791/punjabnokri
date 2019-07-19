@@ -28,8 +28,8 @@
     </ion-segment-button>
   </ion-segment>
 
-  <ion-list #scheduleList [hidden]="jobPostings.length === 0">
-    <div *ngIf="user.type == 'employer'">
+  <ion-list #scheduleList [hidden]="jobPostings.length > 0" *ngIf="user.type === 'employer'">
+  
       <ion-item-group *ngFor="let jobPosting of activeJobPostings">
         <ion-item-divider sticky class="listing">
           <div class="match" routerLink="/app/tabs/profile/candidate/{{jobPosting.id}}">
@@ -38,9 +38,10 @@
           </div>
         </ion-item-divider>
       </ion-item-group>
-    </div>
+  
+  </ion-list>
 
-    <div *ngIf="user.type == 'jobseeker'">
+  <ion-list #scheduleList [hidden]="jobPostings.length > 0"  *ngIf="user.type === 'jobseeker'">
       <ion-item-group *ngFor="let jobPosting of activeJobPostings">
         <ion-item-divider sticky class="listing">
           <div class="match" routerLink="/app/tabs/profile/candidate/{{jobPosting.id}}">
@@ -49,8 +50,8 @@
           </div>
         </ion-item-divider>
       </ion-item-group>
-    </div>
-    <!--
+  </ion-list>
+  <!--
           <ion-item-sliding *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase"
             [hidden]="session.hide">
             <ion-item routerLink="/app/tabs/schedule/session/{{session.id}}">
@@ -73,7 +74,7 @@
           </ion-item-sliding>
         </ion-item-group>
       -->
-  </ion-list>
+
 
   <ion-list-header [hidden]="jobPostings.length > 0">
     No Matches Found
