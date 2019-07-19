@@ -9,6 +9,7 @@ import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { ErrorService } from '../../services/error.service';
+import { LogService } from '../../services/log.service';
 
 import { SkillData } from '../../providers/skills';
 
@@ -54,17 +55,14 @@ export class SignupJobseekerPage {
     private authService: AuthService,
     private userService: UserService,
     private errorService: ErrorService,
+    private logService: LogService,
     private skillData: SkillData
   ) {
 
-
-    this.userService.getUser().then(user => {
-      this.user = user;
-      this.loaded = true;
-    });
-
     this.userService.watcher.subscribe((user: User) => {
       this.user = user;
+      this.logService.debug('User changed in signup-jobseeker');
+      this.logService.debug(this.user);
     });
 
     this.industries = [
@@ -97,6 +95,13 @@ export class SignupJobseekerPage {
       this.selectedType = res;
     }
     );
+
+    this.userService.getUser().then(user => {
+      this.user = user;
+      this.loaded = true;
+      this.logService.debug('User fetched in signup-jobseeker');
+      this.logService.debug(this.user);
+    });
     this.loadSkills();
   }
 

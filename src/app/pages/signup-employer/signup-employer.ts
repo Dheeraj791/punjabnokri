@@ -13,6 +13,7 @@ import { ApiService } from '../../services/api.service';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { ErrorService } from '../../services/error.service';
+import { LogService } from '../../services/log.service';
 
 @Component({
   selector: 'page-signup-employer',
@@ -53,6 +54,7 @@ export class SignupEmployerPage {
     private authService: AuthService,
     private userService: UserService,
     private errorService: ErrorService,
+    private logService: LogService, 
     private skillData: SkillData
   ) {
 
@@ -60,6 +62,8 @@ export class SignupEmployerPage {
 
     this.userService.watcher.subscribe((user: User) => {
       this.user = user;
+      this.logService.debug('User changed in signup-employer');
+      this.logService.debug(this.user);
     });
 
     this.experienceEntries = [
@@ -88,10 +92,6 @@ export class SignupEmployerPage {
   }
 
   ionViewWillEnter() {
-    this.storage.get('user_type').then(res => {
-      this.selectedType = res;
-    }
-    );
 
     this.jobPosting = new JobPosting;
     this.business = new Business;
