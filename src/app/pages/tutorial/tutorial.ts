@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'page-tutorial',
@@ -13,7 +14,7 @@ import { User } from '../../models/user';
 })
 export class TutorialPage {
   showSkip = true;
-  selectedType: string = 'jobseeker';
+  selectedType: string ;
   selectedTypes: any = {
     'employer': 'Job Seeker',
     'jobseeker': 'Employers'
@@ -28,13 +29,11 @@ export class TutorialPage {
     private router: Router,
     private storage: Storage,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private logService: LogService
   ) {
     this.loggedIn = false;
-
-    this.userService.getUser().then(user => {
-      this.user = user;
-    });
+    this.selectedType = 'jobseeker';
   }
 
   startApp() {
@@ -73,12 +72,13 @@ export class TutorialPage {
     this.storage.get('user_type').then(res => {
       if (res) {
         this.selectedType = res;
-        this.storage.set('user_type', this.selectedType);
       }
     }
     );
 
-
+    this.userService.getUser().then(user => {
+      this.user = user; 
+    });
   }
 
   ionViewDidLeave() {
