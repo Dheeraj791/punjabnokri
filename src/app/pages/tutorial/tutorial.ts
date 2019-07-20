@@ -48,12 +48,10 @@ export class TutorialPage {
           this.router
             .navigateByUrl('/signup-employer');
         }
-      }
-      else {
+      } else {
         this.router
           .navigateByUrl('/login');
       }
-
     } else {
       this.router.navigateByUrl('/create');
     }
@@ -68,12 +66,6 @@ export class TutorialPage {
   ionViewWillEnter() {
     this.authService.isAuthenticated().then(isLoggedIn => {
       this.loggedIn = isLoggedIn;
-    });
-
-    this.storage.get('ion_did_tutorial').then(res => {
-      if (res === true) {
-        this.router.navigateByUrl('/app/tabs/schedule');
-      }
     });
 
     this.menu.enable(false);

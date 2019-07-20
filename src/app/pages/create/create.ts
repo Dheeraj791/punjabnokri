@@ -46,7 +46,7 @@ export class CreatePage {
     private modalController: ModalController
   ) {
 
-    
+
   }
 
   ionViewWillEnter() {
@@ -73,7 +73,7 @@ export class CreatePage {
             (result: any) => {
               if (result.access_token) {
                 this.authService.authenticate(result.access_token);
-                if (this.userType === 'jobseeker') {
+                if (this.user.type === 'jobseeker') {
                   this.router.navigateByUrl('/signup-jobseeker');
                 }
                 else {
@@ -133,7 +133,7 @@ export class CreatePage {
   }
 
   onChangeRepeat() {
-    if (this.user.password == this.passwordConfirm) {
+    if (this.user.password === this.passwordConfirm) {
       this.passwordConfirmValidate = true;
     }
     else {

@@ -19,6 +19,7 @@ export class HeaderPublicComponent implements OnInit {
   loggedIn: boolean;
   @Input() showLogin: boolean = false;
   @Input() showHome: boolean = false;
+  @Input() userType: string;
   @Output() userTypeChange: EventEmitter<string> = new EventEmitter();
 
   constructor(
@@ -26,10 +27,17 @@ export class HeaderPublicComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
-    this.selectedType = 'jobseeker';
+
+
   }
 
   ngOnInit() {
+
+    if (!this.userType) {
+      this.userType = 'jobseeker';
+    }
+    this.storage.set('user_type', this.userType);
+
     this.authService.Authenticator.subscribe((authenticated: boolean) => {
       this.loggedIn = authenticated;
     });
@@ -42,12 +50,9 @@ export class HeaderPublicComponent implements OnInit {
 
 
   onSwitchUserType() {
-    this.storage.get('user_type').then(res => {
-      this.selectedType = (res === 'jobseeker' ? 'employer' : 'jobseeker');
-      this.storage.set('user_type', this.selectedType);
-      this.userTypeChange.emit(this.selectedType);
-    }
-    );
+      this.userType = (this.userType === 'jobseeker' ? 'employer' : 'jobseeker');
+      this.storage.set('user_type', this.userType);
+      this.userTypeChange.emit(this.userType);
   }
 
   goHome() {

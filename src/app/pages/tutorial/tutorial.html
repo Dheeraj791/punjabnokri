@@ -1,4 +1,4 @@
-<header-public-component [showLogin]="true" (userTypeChange)="changeUserType($event)"></header-public-component>
+<header-public-component [userType]="selectedType" [showLogin]="true" (userTypeChange)="changeUserType($event)"></header-public-component>
 
 <ion-content fullscreen id="tutorial">
   <div *ngIf="selectedType == 'jobseeker'">
