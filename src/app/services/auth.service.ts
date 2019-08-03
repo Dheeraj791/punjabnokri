@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Events } from '@ionic/angular';
 import { Subject } from 'rxjs';
+import { LogService } from 'src/app/services/log.service';
 
 @Injectable()
 export class AuthService {
@@ -11,7 +12,8 @@ export class AuthService {
 
 	constructor(
 		private storage: Storage,
-		private events: Events
+		private events: Events,
+		private logService: LogService
 	) {
 
 	}
@@ -20,6 +22,7 @@ export class AuthService {
 		this.storage.set('accessToken', accessToken);
 
 		this.storage.set('isAuthenticated', true).then(() => {
+			this.logService.debug('authentication set in auth service');
 			this.events.publish('user:login');
 			this.Authenticator.next(true);
 		});

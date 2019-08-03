@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserData } from '../../providers/user-data';
 import { User } from '../../models/user';
@@ -46,7 +46,9 @@ export class SignupJobseekerPage {
 
   start: boolean = false;
   loaded: boolean = false;
-  temp: User; 
+  temp: User;
+  @ViewChild('textarea') myInput: ElementRef;
+
   constructor(
     public router: Router,
     public userData: UserData,
@@ -77,6 +79,7 @@ export class SignupJobseekerPage {
     */
   }
 
+
   loadSkills() {
     this.apiService.get('skills/user').subscribe(
       (result: any) => {
@@ -95,6 +98,13 @@ export class SignupJobseekerPage {
       this.selectedType = res;
     }
     );
+
+    this.storage.get('profile_step_jobseeker').then(res => {
+      if (res) {
+        this.step = res;
+      }
+    }
+    ) ;
 
     this.userService.getUser().then(user => {
       this.user = user;
@@ -172,6 +182,7 @@ export class SignupJobseekerPage {
   onNextStep() {
     if (this.step < this.stepTotalNumber) {
       this.step++;
+      this.storage.set('profile_step_jobseeker', this.step);
     }
   }
 

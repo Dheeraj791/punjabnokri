@@ -12,9 +12,11 @@ import { BusinessProfileComponent } from './business-profile/business-profile.co
 import { CandidateProfileComponent } from './candidate-profile/candidate-profile.component';
 import { JobPostingComponent } from './job-posting/job-posting.component';
 import { SocialComponent } from './social/social.component';
+import { FilterPipe } from '../pipes/filter';
 
 @NgModule({
     declarations: [
+        FilterPipe,
         RatingComponent,
         HeaderComponent,
         HeaderPublicComponent,

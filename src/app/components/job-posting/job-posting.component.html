@@ -1,25 +1,119 @@
 <ion-card>
 
-    <ion-card-content>
-        <div class="header">
-            <h1></h1>
-            <div></div>
-        </div>
-        <ion-item>
+        <ion-card-content (swipe)="swipeEvent($event)">
+            <div class="header">
+                <h1>{{jobPosting.title}}</h1>
 
-        </ion-item>
+                <ion-item>
+                    <ion-label>
+                        Job Address
+                    </ion-label>
+                    {{jobPosting.address}}
+                </ion-item>
 
-        <ion-item>
+                <ion-item>
+                    <ion-label>
+                        Start date
+                    </ion-label>
+                    {{jobPosting.startDate}}
+                </ion-item>
 
-        </ion-item>
+                <ion-item>
+                    <ion-label>
+                       Job Description
+                    </ion-label>
+                    {{jobPosting.description}}
+                </ion-item>
+            
+            </div>
+        
+            <h2 text-center>Desired Employment Type</h2>
+            <ion-item>
+                <ion-label>
+                    Full Time
+                </ion-label>
+                {{jobPosting.fullTime ? 'Yes': 'No'}}
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    Part Time
+                </ion-label>
+                {{jobPosting.partTime ? 'Yes': 'No'}}
+            </ion-item>
 
+            <h2 text-center>Availability</h2>
+            <ion-item>
+                <ion-label>
+                    Mornings
+                </ion-label>
+                {{jobPosting.morning ? 'Yes': 'No'}}
+            </ion-item>
 
-
-        <ion-item *ngIf="enableActions">
-            <ion-button (click)="onInterested()" [fill]="jobPosting.interested? 'solid': 'outline'">Interested
-            </ion-button>
-            <ion-button (click)="onNotInterested()" [fill]="!jobPosting.interested? 'solid': 'outline'">Not
-                Interested</ion-button>
-        </ion-item>
-    </ion-card-content>
-</ion-card>
+            <ion-item>
+                <ion-label>
+                    Afternoons
+                </ion-label>
+                {{jobPosting.afternoons ? 'Yes': 'No'}}
+            </ion-item>
+    
+            <ion-item>
+                <ion-label>
+                    Evenings
+                </ion-label>
+                {{jobPosting.evening ? 'Yes': 'No'}}
+            </ion-item>
+    
+            <ion-item>
+                <ion-label>
+                    Weekend
+                </ion-label>
+                {{jobPosting.weekend ? 'Yes': 'No'}}
+            </ion-item>
+    
+            <ion-item>
+                <ion-label>
+                    Desired salary Min
+                </ion-label>
+                {{jobPosting.minSalary }}
+            </ion-item>
+    
+            <ion-item>
+                <ion-label>
+                    Desired salary Max
+                </ion-label>
+                {{jobPosting.maxSalary }}
+            </ion-item>
+    
+        </ion-card-content>
+    </ion-card>
+    
+    <ion-card>
+        <ion-card-content>
+            <h2>Experience</h2>
+            <div *ngFor="let experience of jobPosting.experience ">
+                <p>In the {{experience.industry}} industry for {{experience.numberYears}}
+                    {{experience.numberYears > 1 ? 'years': 'year'}}</p>
+            </div>
+        </ion-card-content>
+    </ion-card>
+    
+    <ion-card>
+        <ion-card-content>
+            <h2>Skills</h2>
+            <div *ngFor="let skill of jobPosting.skills | filter: 'value': 0: 'notnull'">
+    
+            </div>
+        </ion-card-content>
+    </ion-card>
+    
+    <ion-card *ngIf="enableActions">
+        <ion-card-content>
+    
+            <ion-item>
+                <ion-button (click)="onInterested()" [fill]="jobPosting.interested? 'solid': 'outline'">Interested
+                </ion-button>
+                <ion-button (click)="onNotInterested()" [fill]="!jobPosting.interested? 'solid': 'outline'">Not
+                    Interested</ion-button>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>

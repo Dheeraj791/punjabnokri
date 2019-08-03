@@ -81,7 +81,8 @@
   <h1 text-center>My job seeking profile</h1>
 
   <ion-item>
-    <ion-textarea placeholder="Why you should hire me" [(ngModel)]="user.profile.why"></ion-textarea>
+    <ion-textarea auto-grow="true" placeholder="Why you should hire me" [(ngModel)]="user.profile.why">
+    </ion-textarea>
   </ion-item>
 
   <div padding>
@@ -143,6 +144,7 @@
   <div>
     <ion-button (click)="onPreviousCategoryStep()" type="submit" expand="block">Back</ion-button>
     <ion-button (click)="onSkillSubmit()" type="submit" expand="block">Next</ion-button>
+    <ion-button (click)="onNextStep()" type="submit" expand="block">Skip skills entry</ion-button>
   </div>
 
 </ion-content>
@@ -150,7 +152,7 @@
 <ion-content *ngIf="step == 5" padding>
 
   <h1 text-center> Preview your profile</h1>
-  <job-posting-component></job-posting-component>
+  <candidate-profile-component [user]="user"></candidate-profile-component>
   <div padding>
     <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
     <ion-button (click)="onNextStep()" type="submit" expand="block">Next</ion-button>
@@ -165,6 +167,7 @@
   </p>
 
   <div>
+    <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
     <ion-button (click)="onSeeMatches()" type="submit" expand="block">See Matches</ion-button>
   </div>
 

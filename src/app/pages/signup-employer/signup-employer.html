@@ -182,7 +182,7 @@
 <ion-content *ngIf="step == 6">
 
   <h1 text-center> Preview your profile</h1>
-  <candidate-profile-component></candidate-profile-component>
+  <job-posting-component [jobPosting]="user.business.jobPosting"></job-posting-component>
   <div padding>
     <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
     <ion-button (click)="onNextStep()" type="submit" expand="block">Next</ion-button>
@@ -197,6 +197,7 @@
   </p>
 
   <div padding>
+      <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
     <ion-button (click)="onSeeMatches()" type="submit" expand="block">See Matches</ion-button>
   </div>
 

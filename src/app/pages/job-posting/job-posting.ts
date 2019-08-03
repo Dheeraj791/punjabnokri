@@ -14,7 +14,7 @@ export class JobPostingPage {
   skills: Array<string>;
   loaded: boolean = false;
   jobPosting: JobPosting;
-  profileId: string;
+  jobPostingId: string;
 
   constructor(
     public platform: Platform,
@@ -29,8 +29,8 @@ export class JobPostingPage {
 
   ionViewDidEnter() {
 
-    this.profileId = this.route.snapshot.paramMap.get('profileId');
-    this.apiService.get('jobposting/' + this.profileId, {}).subscribe(
+    this.jobPostingId = this.route.snapshot.paramMap.get('jobPostingId');
+    this.apiService.get('jobposting/' + this.jobPostingId, {}).subscribe(
       (result: any) => {
         this.loaded = true;
         this.jobPosting = new JobPosting(result.data);

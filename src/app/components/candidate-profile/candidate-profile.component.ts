@@ -12,6 +12,8 @@ export class CandidateProfileComponent implements OnInit {
 
     @Output() searchStringUpdated: EventEmitter<number> = new EventEmitter();
     @Input() user: User;
+    @Input() userId: number;
+    @Input() enableActions: boolean = false; 
 
     constructor(
         private apiService: ApiService
@@ -20,14 +22,22 @@ export class CandidateProfileComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (this.userId) {
+            this.apiService.get('user/' + this.userId).subscribe(
+                (result: any) => {
+                    this.user = new User(result.data);
+                },
+                (error: any) => {
 
+                }
+            );
+        }
     }
 
-
     onInterested() {
-        this.apiService.put('jobposting/' + this.user.id, { interested: true }).subscribe(
+        this.apiService.put('candidate/' + this.user.id, { interested: true }).subscribe(
             (result: any) => {
-               
+
             },
             (error: any) => {
 
@@ -37,9 +47,9 @@ export class CandidateProfileComponent implements OnInit {
     }
 
     onNotInterested() {
-        this.apiService.put('jobposting/' + this.user.id, { interested: false }).subscribe(
+        this.apiService.put('candidate/' + this.user.id, { interested: false }).subscribe(
             (result: any) => {
-                
+
             },
             (error: any) => {
 
@@ -47,9 +57,4 @@ export class CandidateProfileComponent implements OnInit {
         );
 
     }
-
-
-
-
-
 }

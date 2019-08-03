@@ -30,7 +30,7 @@ import { Terms } from './pages/static/terms/terms';
     Terms],
   entryComponents: [
     Privacy,
-    Terms
+     Terms
   ],
   imports: [
     AppRoutingModule,

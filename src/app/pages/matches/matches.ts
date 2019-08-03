@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { JobPosting } from '../../models/job-posting';
 import { UserService } from '../../services/user.service';
 import { ApiService } from 'src/app/services/api.service';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'page-matches',
@@ -25,6 +26,7 @@ export class MatchesPage {
   activeJobPostings: JobPosting[] = [];
   totalMatches: number = 0;
   activeCount: number;
+  users: User[];
 
   matches: any = [
     {
@@ -72,10 +74,12 @@ export class MatchesPage {
 
     this.userService.getUser().then((user: User) => {
       this.user = user;
+
     });
 
     this.userService.watcher.subscribe((user: User) => {
       this.user = user;
+    
     });
   }
 
@@ -85,9 +89,19 @@ export class MatchesPage {
     //load matches here
 
     if (this.user.type === 'employer') {
-
-    }
-    else {
+      this.apiService.get('candidates').subscribe(
+        (result: any) => {
+          this.users = User.initializeArray(result.data);
+          this.activeCount = this.activeJobPostings.length;
+          this.totalMatches = this.jobPostings.length;
+          this.isLoaded = true;
+        },
+        (error: any) => {
+          this.isLoaded = true;
+        }
+      );
+    } else {
+    
       this.apiService.get('jobposting').subscribe(
         (result: any) => {
           this.jobPostings = JobPosting.initializeArray(result.data);
@@ -104,14 +118,7 @@ export class MatchesPage {
 
 
 
-    this.apiService.get('candidates').subscribe(
-      (result: any) => {
 
-      },
-      (error: any) => {
-        this.isLoaded = true;
-      }
-    );
 
   }
 

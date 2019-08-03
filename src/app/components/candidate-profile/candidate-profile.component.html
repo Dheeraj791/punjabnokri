@@ -6,23 +6,94 @@
             <div>{{user.email}}</div>
         </div>
         <ion-item>
-            {{user.description}}
-        </ion-item>
-
-        <ion-item>
             {{user.address}}
         </ion-item>
 
-        <div *ngFor="let experience of user.experience">
+        <h2 text-center>Desired Employment Type</h2>
+        <ion-item>
+            <ion-label>
+                Full Time
+            </ion-label>
+            {{user.profile.fullTime ? 'Yes': 'No'}}
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                Part Time
+            </ion-label>
+            {{user.profile.fullTime ? 'Yes': 'No'}}
+        </ion-item>
+
+        <h2 text-center>Availability</h2>
+        <ion-item>
+            <ion-label>
+                Evenings
+            </ion-label>
+            {{user.profile.evening ? 'Yes': 'No'}}
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                Weekend
+            </ion-label>
+            {{user.profile.weekend ? 'Yes': 'No'}}
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                Desired salary Min
+            </ion-label>
+            {{user.profile.desiredSalaryMin }}
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                Desired salary Max
+            </ion-label>
+            {{user.profile.desiredSalaryMax }}
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                Actively seeking work
+            </ion-label>
+            {{user.profile.activelySeekingWork ? 'Yes': 'No'}}
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                Why you should hire me?
+            </ion-label>
+            {{user.profile.why}}
+        </ion-item>
+
+
+
+    </ion-card-content>
+</ion-card>
+
+<ion-card>
+    <ion-card-content>
+        <h2>Experience</h2>
+        <div *ngFor="let experience of user.experience ">
+            <p>In the {{experience.industry}} industry for {{experience.numberYears}}
+                {{experience.numberYears > 1 ? 'years': 'year'}}</p>
+        </div>
+    </ion-card-content>
+</ion-card>
+
+<ion-card>
+    <ion-card-content>
+        <h2>Skills</h2>
+        <div *ngFor="let skill of user.skills | filter: 'value': 0: 'notnull'">
 
         </div>
+    </ion-card-content>
+</ion-card>
 
+<ion-card *ngIf="enableActions">
+    <ion-card-content>
 
-        <div *ngFor="let skill of user.skills">
-
-            </div>
-
-        <ion-item *ngIf="enableActions">
+        <ion-item>
             <ion-button (click)="onInterested()" [fill]="jobPosting.interested? 'solid': 'outline'">Interested
             </ion-button>
             <ion-button (click)="onNotInterested()" [fill]="!jobPosting.interested? 'solid': 'outline'">Not

@@ -8,7 +8,12 @@
             {{business.description}}
         </ion-item>
 
-        <ion-item>
+    </ion-card-content>
+</ion-card>
+
+<ion-card *ngIf="enableActions">
+    <ion-card-content>
+        <ion-item >
             <ion-button (click)="onInterested()" [fill]="business.interested? 'solid': 'outline'">Interested
             </ion-button>
             <ion-button (click)="onNotInterested()" [fill]="!business.interested? 'solid': 'outline'">Not

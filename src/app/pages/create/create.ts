@@ -46,13 +46,12 @@ export class CreatePage {
     private modalController: ModalController
   ) {
 
-
+    this.user = new User;
   }
 
   ionViewWillEnter() {
     this.start = false;
     this.storage.get('user_type').then(res => {
-      this.user = new User;
       this.userType = res;
       this.user.type = this.userType;
     });

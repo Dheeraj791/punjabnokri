@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { JobPosting } from '../../models/job-posting';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'job-posting-component',
@@ -10,9 +11,11 @@ import { JobPosting } from '../../models/job-posting';
 
 export class JobPostingComponent implements OnInit {
     @Input() jobPosting: JobPosting;
+    @Input() enableActions: boolean = false; 
 
     constructor(
-        private apiService: ApiService
+        private apiService: ApiService,
+        private router: Router
     ) {
 
     }
@@ -23,9 +26,10 @@ export class JobPostingComponent implements OnInit {
 
 
     onInterested() {
-        this.apiService.put('jobposting/' + this.jobPosting.id, { interested: true }).subscribe(
+        this.apiService.put('jobposting/interested/' + this.jobPosting.id, { interested: true }).subscribe(
             (result: any) => {
-               
+               this.jobPosting.interested = true;
+               this.onGoBacktoMatches();
             },
             (error: any) => {
 
@@ -35,15 +39,24 @@ export class JobPostingComponent implements OnInit {
     }
 
     onNotInterested() {
-        this.apiService.put('jobposting/' + this.jobPosting.id, { interested: false }).subscribe(
+        this.apiService.put('jobposting/interested/' + this.jobPosting.id, { interested: false }).subscribe(
             (result: any) => {
-                
+                this.jobPosting.interested = false;
+                this.onGoBacktoMatches();
             },
             (error: any) => {
 
             }
         );
 
+    }
+
+    onGoBacktoMatches(){
+        this.router.navigateByUrl('/app/tabs/matches');
+    }
+
+    swipeEvent($event){
+        console.log($event);
     }
 
 }

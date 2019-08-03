@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 
 import { MatchesPage } from './matches';
 import { MatchesPageRoutingModule } from './matches-routing.module';
-import { FilterPipe } from '../../pipes/filter';
 import { HyrSkillsModule } from '../../components/components.module';
 
 @NgModule({
@@ -17,11 +16,10 @@ import { HyrSkillsModule } from '../../components/components.module';
     HyrSkillsModule
   ],
   declarations: [
-    MatchesPage,
-    FilterPipe
+    MatchesPage
   ],
   providers: [
-    FilterPipe
+
   ]
 })
 export class MatchesModule { }

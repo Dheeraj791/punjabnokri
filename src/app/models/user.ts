@@ -61,6 +61,18 @@ export class User {
         }
     }
 
+    public static initializeArray(objects: any): User[] {
+
+        const results: User[] = [];
+
+        for (let i = 0; i < objects.length; i++) {
+            const obj = new User(objects[i]);
+            results.push(obj);
+        }
+
+        return results;
+    }
+
     public addExperience() {
         const experience = new Experience();
         this.experience.push(experience);
