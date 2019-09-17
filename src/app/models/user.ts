@@ -6,6 +6,7 @@ import { JobPosting } from './job-posting';
 export class User {
     id: number;
     username: string = '';
+    name: string = ''; 
     firstName: string = '';
     lastName: string = '';
     email: string = '';
@@ -24,6 +25,7 @@ export class User {
 
         if (data) {
             this.id = data.id;
+            this.name = data.firstName + ' ' + data.lastName;
             this.username = data.username;
             this.firstName = data.firstName;
             this.lastName = data.lastName;

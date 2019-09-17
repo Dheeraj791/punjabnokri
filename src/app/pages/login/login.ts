@@ -63,7 +63,6 @@ export class LoginPage {
           }
         },
         (error: any) => {
-          console.log(error);
           this.errorService.showAlert('Error', error.message);
         }
       );

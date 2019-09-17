@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Platform, LoadingController } from '@ionic/angular';
 import { User } from '../../models/user';
+import { Candidate } from '../../models/candidate';
 import { JobPosting } from '../../models/job-posting';
 import { UserService } from '../../services/user.service';
 import { ApiService } from 'src/app/services/api.service';
@@ -26,43 +27,9 @@ export class MatchesPage {
   activeJobPostings: JobPosting[] = [];
   totalMatches: number = 0;
   activeCount: number;
-  users: User[];
-
-  matches: any = [
-    {
-      name: 'Business 1',
-      interested: false
-    },
-    {
-      name: 'Business 2',
-      interested: false
-    },
-    {
-      name: 'Business 3',
-      interested: false
-    },
-    {
-      name: 'Business 4',
-      interested: true
-    },
-    {
-      name: 'Business 5',
-      interested: true
-    },
-    {
-      name: 'Business 6',
-      interested: true
-    },
-    {
-      name: 'Business 7',
-      interested: false
-    },
-    {
-      name: 'Business 8',
-      interested: false
-    }
-
-  ];
+  candidates: Candidate[];
+  activeCandidates: Candidate[];
+  matches: any = [];
   activeMatches: any = [];
 
   constructor(
@@ -79,7 +46,7 @@ export class MatchesPage {
 
     this.userService.watcher.subscribe((user: User) => {
       this.user = user;
-    
+
     });
   }
 
@@ -87,13 +54,13 @@ export class MatchesPage {
   ionViewDidEnter() {
     this.activeMatches = this.matches;
     //load matches here
-
     if (this.user.type === 'employer') {
       this.apiService.get('candidates').subscribe(
         (result: any) => {
-          this.users = User.initializeArray(result.data);
-          this.activeCount = this.activeJobPostings.length;
-          this.totalMatches = this.jobPostings.length;
+          this.candidates = Candidate.initializeArray(result.data);
+          this.activeCandidates = this.candidates;
+          this.activeCount = this.candidates.length;
+          this.totalMatches = this.candidates.length;
           this.isLoaded = true;
         },
         (error: any) => {
@@ -101,7 +68,6 @@ export class MatchesPage {
         }
       );
     } else {
-    
       this.apiService.get('jobposting').subscribe(
         (result: any) => {
           this.jobPostings = JobPosting.initializeArray(result.data);
@@ -115,30 +81,40 @@ export class MatchesPage {
         }
       );
     }
-
-
-
-
-
   }
 
+  /*
+  * Divided in jobpostings and candidates because we might expand on the listing information
+  * and present some listing info that's unique to one type
+  */
   updateListing() {
-
-    if (this.segment === 'interested') {
-      this.activeJobPostings = this.jobPostings.filter(item => {
-        return item.interested == true;
-      });
-    } else if (this.segment === 'notinterested') {
-      this.activeJobPostings = this.jobPostings.filter(item => {
-        return item.interested === false;
-      });
+    if (this.user.type === 'employer') {
+      if (this.segment === 'interested') {
+        this.activeJobPostings = this.jobPostings.filter(item => {
+          return item.interested === true;
+        });
+      } else if (this.segment === 'notinterested') {
+        this.activeJobPostings = this.jobPostings.filter(item => {
+          return item.interested === false;
+        });
+      } else {
+        this.activeJobPostings = this.jobPostings;
+      }
+      this.activeCount = this.activeJobPostings.length;
     } else {
-      this.activeJobPostings = this.jobPostings;
+      if (this.segment === 'interested') {
+        this.activeCandidates = this.candidates.filter(item => {
+          return item.interested === true;
+        });
+      } else if (this.segment === 'notinterested') {
+        this.activeCandidates = this.candidates.filter(item => {
+          return item.interested === false;
+        });
+      } else {
+        this.activeCandidates = this.candidates;
+      }
+      this.activeCount = this.activeCandidates.length;
     }
-
-    this.activeCount = this.activeJobPostings.length;
-
-
   }
 
   async openSocial(network: string, fab: HTMLIonFabElement) {

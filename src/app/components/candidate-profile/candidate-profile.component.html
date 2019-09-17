@@ -1,5 +1,4 @@
 <ion-card>
-
     <ion-card-content>
         <div class="header">
             <h1>{{user.firstName}} {{user.lastName}}</h1>
@@ -65,13 +64,10 @@
             </ion-label>
             {{user.profile.why}}
         </ion-item>
-
-
-
     </ion-card-content>
 </ion-card>
 
-<ion-card>
+<ion-card *ngIf="user.experience">
     <ion-card-content>
         <h2>Experience</h2>
         <div *ngFor="let experience of user.experience ">
@@ -81,7 +77,7 @@
     </ion-card-content>
 </ion-card>
 
-<ion-card>
+<ion-card *ngIf="user.skills">
     <ion-card-content>
         <h2>Skills</h2>
         <div *ngFor="let skill of user.skills | filter: 'value': 0: 'notnull'">
@@ -94,9 +90,9 @@
     <ion-card-content>
 
         <ion-item>
-            <ion-button (click)="onInterested()" [fill]="jobPosting.interested? 'solid': 'outline'">Interested
+            <ion-button (click)="onInterested()" [fill]="user.interested? 'solid': 'outline'">Interested
             </ion-button>
-            <ion-button (click)="onNotInterested()" [fill]="!jobPosting.interested? 'solid': 'outline'">Not
+            <ion-button (click)="onNotInterested()" [fill]="!user.interested? 'solid': 'outline'">Not
                 Interested</ion-button>
         </ion-item>
     </ion-card-content>

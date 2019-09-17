@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Platform, LoadingController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { JobPosting } from '../../models/job-posting';
-
+import { User } from '../../models/user';
 
 @Component({
   selector: 'page-candidate',
@@ -13,7 +12,7 @@ import { JobPosting } from '../../models/job-posting';
 export class CandidatePage {
   skills: Array<string>;
   loaded: boolean = false;
-  jobPosting: JobPosting;
+  candidate: User;
   profileId: string;
 
   constructor(
@@ -28,10 +27,10 @@ export class CandidatePage {
   ionViewDidEnter() {
 
     this.profileId = this.route.snapshot.paramMap.get('profileId');
-    this.apiService.get('jobposting/' + this.profileId, {}).subscribe(
+    this.apiService.get('candidate/' + this.profileId, {}).subscribe(
       (result: any) => {
         this.loaded = true;
-        this.jobPosting = new JobPosting(result.data);
+        this.candidate = new User(result.data);
       },
       (error: any) => {
 

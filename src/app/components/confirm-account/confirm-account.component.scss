@@ -9,6 +9,13 @@
         .toggle{
             float:right;
         }
+        #alert-icon{
+            float: left;
+            margin-top: -3px;
+            margin-right: 10px;
+            font-size: 25px;
+        }
+
     }
     #open-confirm{
         height:20px;
@@ -16,5 +23,7 @@
         width:100%;
         display:block;
     }
+
+  
    
 }

@@ -22,12 +22,10 @@ const routes: Routes = [
   {
     path: 'signup-jobseeker',
     loadChildren: './pages/signup-jobseeker/signup-jobseeker.module#SignUpJobseekerModule',
-    canActivate: [AuthGuard]
   },
   {
     path: 'signup-employer',
     loadChildren: './pages/signup-employer/signup-employer.module#SignUpEmployerModule',
-    canActivate: [AuthGuard]
   },
   {
     path: 'app',

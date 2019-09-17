@@ -1,4 +1,4 @@
-<header-public-component [showHome]="true"></header-public-component>
+<header-public-component [showHome]="false" [showLogin]="true"></header-public-component>
 
 <ion-content *ngIf="step == 1 && loaded" padding>
   <confirm-account *ngIf="user.status === 'unconfirmed'"></confirm-account>

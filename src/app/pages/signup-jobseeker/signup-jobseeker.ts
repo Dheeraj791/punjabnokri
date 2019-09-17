@@ -63,8 +63,6 @@ export class SignupJobseekerPage {
 
     this.userService.watcher.subscribe((user: User) => {
       this.user = user;
-      this.logService.debug('User changed in signup-jobseeker');
-      this.logService.debug(this.user);
     });
 
     this.industries = [
@@ -109,8 +107,6 @@ export class SignupJobseekerPage {
     this.userService.getUser().then(user => {
       this.user = user;
       this.loaded = true;
-      this.logService.debug('User fetched in signup-jobseeker');
-      this.logService.debug(this.user);
     });
     this.loadSkills();
   }

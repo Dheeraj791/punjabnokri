@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { User } from '../../models/user';
+import { Candidate } from '../../models/candidate';
 
 @Component({
     selector: 'candidate-profile-component',
@@ -10,8 +10,7 @@ import { User } from '../../models/user';
 
 export class CandidateProfileComponent implements OnInit {
 
-    @Output() searchStringUpdated: EventEmitter<number> = new EventEmitter();
-    @Input() user: User;
+    @Input() user: Candidate;
     @Input() userId: number;
     @Input() enableActions: boolean = false; 
 
@@ -25,7 +24,7 @@ export class CandidateProfileComponent implements OnInit {
         if (this.userId) {
             this.apiService.get('user/' + this.userId).subscribe(
                 (result: any) => {
-                    this.user = new User(result.data);
+                    this.user = new Candidate(result.data);
                 },
                 (error: any) => {
 

@@ -1,4 +1,4 @@
-<header-public-component [showHome]="true"></header-public-component>
+<header-public-component [showHome]="false" [showLogin]="true"></header-public-component>
 
 <ion-content *ngIf="step == 1 && loaded" padding>
   <confirm-account *ngIf="user.status === 'unconfirmed'"></confirm-account>
@@ -175,6 +175,7 @@
   <div>
     <ion-button (click)="onPreviousCategoryStep()" type="submit" expand="block">Back</ion-button>
     <ion-button (click)="onSkillSubmit()" type="submit" expand="block">Next</ion-button>
+    <ion-button (click)="onNextStep()" type="submit" expand="block">Skip skills entry</ion-button>
   </div>
 
 </ion-content>

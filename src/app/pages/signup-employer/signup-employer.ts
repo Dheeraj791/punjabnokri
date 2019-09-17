@@ -62,8 +62,6 @@ export class SignupEmployerPage {
 
     this.userService.watcher.subscribe((user: User) => {
       this.user = user;
-      this.logService.debug('User changed in signup-employer');
-      this.logService.debug(this.user);
     });
 
     this.experienceEntries = [

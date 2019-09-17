@@ -1,9 +1,10 @@
 <div id="confirm-account">
-    <a (click)="onOpenConfirm()" id="open-confirm">Confirm Email
+    <a (click)="onOpenConfirm()" id="open-confirm"><ion-icon id="alert-icon" name="alert"></ion-icon> Confirm Email
         <ion-icon class="toggle" name="arrow-round-forward" *ngIf="!openConfirm"></ion-icon>
         <ion-icon class="toggle" name="arrow-round-down" *ngIf="openConfirm"></ion-icon>
     </a>
     <div *ngIf="openConfirm">
+   
         <p>Your email address has not be confirmed. To confirm your email address, check your inbox for a confirmation
             code.
         </p>
