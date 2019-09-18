@@ -28,8 +28,7 @@
     </ion-segment-button>
   </ion-segment>
 
-  <ion-list #scheduleList *ngIf="user.type === 'employer' && candidates.length > 0">
-  
+  <ion-list #scheduleList *ngIf="user.type === 'employer' && activeCandidates.length > 0">
       <ion-item-group *ngFor="let candidate of activeCandidates">
         <ion-item-divider sticky class="listing">
           <div class="match" routerLink="/app/tabs/profile/candidate/{{candidate.id}}">
@@ -40,7 +39,7 @@
       </ion-item-group>
   </ion-list>
 
-  <ion-list #scheduleList *ngIf="user.type === 'jobseeker' && jobPostings.length > 0">
+  <ion-list #scheduleList *ngIf="user.type === 'jobseeker' && activeJobPostings.length > 0">
       <ion-item-group *ngFor="let jobPosting of activeJobPostings">
         <ion-item-divider sticky class="listing">
           <div class="match" routerLink="/app/tabs/profile/job-posting/{{jobPosting.id}}">

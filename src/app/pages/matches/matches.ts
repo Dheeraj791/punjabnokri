@@ -83,12 +83,8 @@ export class MatchesPage {
     }
   }
 
-  /*
-  * Divided in jobpostings and candidates because we might expand on the listing information
-  * and present some listing info that's unique to one type
-  */
   updateListing() {
-    if (this.user.type === 'employer') {
+    if (this.user.type === 'jobseeker') {
       if (this.segment === 'interested') {
         this.activeJobPostings = this.jobPostings.filter(item => {
           return item.interested === true;
