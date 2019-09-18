@@ -33,7 +33,8 @@ export class AppComponent {
     this.checkForAuthentication();
 
     this.authService.Authenticator.subscribe((authenticated: boolean) => {
-			this.checkForAuthentication();
+      this.checkForAuthentication();
+      console.log('authenticator subscribe');
 		});
   }
 
@@ -50,7 +51,7 @@ export class AppComponent {
       if(result){
         this.apiService.get('users/me').subscribe(
           (result: any) => {
-            let user = new User(result.data);
+            const user = new User(result.data);
             this.storage.set('user', user);
           },
           (error: any) => {

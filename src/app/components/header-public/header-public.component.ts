@@ -19,6 +19,7 @@ export class HeaderPublicComponent implements OnInit {
   loggedIn: boolean;
   @Input() showLogin: boolean = false;
   @Input() showHome: boolean = false;
+  @Input() showType: boolean = false;
   @Input() userType: string;
   @Output() userTypeChange: EventEmitter<string> = new EventEmitter();
 

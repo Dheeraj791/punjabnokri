@@ -3,11 +3,11 @@ import { JobPosting } from './job-posting';
 export class Business {
 
     id: number;
-    headOfficeAddress: string = '';
-    telephone: string = '';
-    name: string = '';
-    whyJoin: string = '';
-    about: string = '';
+    headOfficeAddress: string;
+    telephone: string;
+    name: string;
+    whyJoin: string;
+    about: string;
     jobPosting: JobPosting;
     jobPostings: JobPosting[];
 
@@ -19,7 +19,17 @@ export class Business {
             this.name = data.name;
             this.whyJoin = data.whyJoin;
             this.about = data.about;
-            this.jobPosting = new JobPosting(data.jobPosting) || new JobPosting();
+            if (data.jobPosting) {
+                this.jobPosting = new JobPosting(data.jobPosting);
+            } else {
+                this.jobPosting = new JobPosting;
+            }
+        } else {
+            this.headOfficeAddress = '';
+            this.telephone = '';
+            this.name = '';
+            this.whyJoin = '';
+            this.about = '';
         }
     }
 }

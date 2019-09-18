@@ -13,8 +13,12 @@ export class Skill {
             this.name = data.name;
             this.categoryId = data.category_id;
             this.categoryName = data.category_name;
-            this.value = data.value; 
-           
+            this.value = data.value;
+        } else{
+            this.name = '';
+            this.categoryId = null;
+            this.categoryName = '';
+            this.value = 0;
         }
     }
 

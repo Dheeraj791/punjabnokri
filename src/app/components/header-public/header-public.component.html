@@ -7,7 +7,7 @@
       <button ion-button (click)="goHome()" *ngIf="showHome">
         Home
       </button>
-      <button ion-button (click)="onSwitchUserType()" id="user-type" *ngIf="!loggedIn">
+      <button ion-button (click)="onSwitchUserType()" id="user-type" *ngIf="!loggedIn && showType">
         {{selectedTypes[userType]}}
       </button>
       <button ion-button (click)="onSignin()" *ngIf="!loggedIn && showLogin">

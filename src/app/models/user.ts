@@ -5,17 +5,17 @@ import { JobPosting } from './job-posting';
 
 export class User {
     id: number;
-    username: string = '';
-    name: string = ''; 
-    firstName: string = '';
-    lastName: string = '';
-    email: string = '';
-    password: string = '';
-    address: string = '';
+    username: string;
+    name: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    address: string;
     type: string;
     profile: UserProfile;
     preferences: UserPreferences;
-    status: string = 'unconfirmed';
+    status: string;
     business: Business;
     jobPosting: JobPosting;
     experience: Experience[];
@@ -38,15 +38,19 @@ export class User {
             if (data.profile) {
                 this.profile = new UserProfile(data.profile);
             } else {
-                this.profile = new UserProfile();
+                this.profile = new UserProfile;
             }
 
             if (data.preferences) {
                 this.preferences = new UserPreferences(data.preferences);
             } else {
-                this.preferences = new UserPreferences();
+                this.preferences = new UserPreferences;
             }
-            this.business = new Business(data.business) || new Business;
+            if (data.business) {
+                this.business = new Business(data.business);
+            } else {
+                this.business = new Business;
+            }
 
             if (data.experience) {
                 this.experience = data.experience;
@@ -55,8 +59,17 @@ export class User {
                 this.skills = data.skills;
             }
         } else {
-            this.preferences = new UserPreferences();
-            this.profile = new UserProfile();
+            this.name = '';
+            this.username = '';
+            this.firstName = '';
+            this.lastName = '';
+            this.email = '';
+            this.password = '';
+            this.address = '';
+            this.type = '';
+            this.status = 'unconfirmed';
+            this.preferences = new UserPreferences;
+            this.profile = new UserProfile;
             this.business = new Business;
             this.experience = [];
             this.skills = [];
@@ -76,7 +89,7 @@ export class User {
     }
 
     public addExperience() {
-        const experience = new Experience();
+        const experience = new Experience;
         this.experience.push(experience);
     }
 

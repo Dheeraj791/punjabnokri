@@ -44,7 +44,19 @@ export class Candidate {
             } else {
                 this.profile = new UserProfile();
             }
-        } 
+        } else{
+                this.id = null;
+                this.name = '';
+                this.username = '';
+                this.firstName = '';
+                this.lastName = '';
+                this.email = '';
+                this.password = '';
+                this.address = '';
+                this.score = null;
+                this.interested = null;
+                this.profile = new UserProfile;
+        }
     }
 
     public static initializeArray(objects: any): Candidate[] {

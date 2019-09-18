@@ -31,6 +31,7 @@ export class LoginPage {
     private authService: AuthService
   ) {
     this.user = new User;
+    /*
     this.authService.Authenticator.subscribe((authenticated: boolean) => {
 		  if(authenticated){
         this.router.navigateByUrl('/app/tabs/matches');
@@ -42,6 +43,7 @@ export class LoginPage {
         this.router.navigateByUrl('/app/tabs/matches');
       }
     });
+    */
     
   }
 

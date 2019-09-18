@@ -44,10 +44,17 @@ export class AuthService {
 		this.storage.remove('user');
 		return this.storage.remove('isAuthenticated').then(() => {
 			this.events.publish('user:logout');
+			this.clearAll();
 		}).then(() => {
 			this.Authenticator.next(false);
 		});
 
+	}
+
+	clearAll() {
+		this.storage.clear().then(() => {
+		
+		});
 	}
 
 	isAuthenticated(): Promise<any> {

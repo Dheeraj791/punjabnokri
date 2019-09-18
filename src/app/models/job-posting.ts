@@ -16,7 +16,7 @@ export class JobPosting {
     maxSalary: string;
     startDate: string;
     address: string;
-    interested: boolean = false;
+    interested: boolean;
     score: number = 50;
     description: string;
     business: Business;
@@ -35,9 +35,13 @@ export class JobPosting {
             this.weekend = data.weekend;
             this.minSalary = data.minSalary;
             this.maxSalary = data.maxSalary;
-            this.description = data.description;
-            this.interested = data.interested;
             this.address = data.address;
+            if (data.startDate) {
+                this.startDate = new Date(data.startDate).toISOString();
+            }
+            this.score = data.score;
+            this.interested = data.interested;
+            this.description = data.description;
             if (data.experience) {
                 this.experience = data.experience;
             }
@@ -45,6 +49,18 @@ export class JobPosting {
                 this.skills = data.skills;
             }
         } else {
+            this.title = '';
+            this.fullTime = null;
+            this.partTime = null;
+            this.morning = null;
+            this.afternoon = null;
+            this.evening = null;
+            this.weekend = null;
+            this.minSalary = null;
+            this.maxSalary = null;
+            this.description = '';
+            this.interested = false;
+            this.address = '';
             this.experience = [];
             this.skills = [];
         }

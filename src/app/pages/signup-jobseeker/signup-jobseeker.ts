@@ -61,6 +61,11 @@ export class SignupJobseekerPage {
     private skillData: SkillData
   ) {
 
+    this.userService.getUser().then(user => {
+      this.user = user;
+      this.loaded = true;
+    });
+
     this.userService.watcher.subscribe((user: User) => {
       this.user = user;
     });

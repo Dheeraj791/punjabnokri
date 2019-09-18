@@ -26,7 +26,6 @@
   </ion-item>
 
   <div padding>
-    <ion-button (click)="onPreviousStep()" type="submit" expand="block">Back</ion-button>
     <ion-button (click)="onBusinessUpdate()" type="submit" expand="block">Next</ion-button>
   </div>
 
@@ -108,10 +107,9 @@
     <ion-input type="text" required [(ngModel)]="user.business.jobPosting.address">
     </ion-input>
   </ion-item>
-
   <ion-item>
     <ion-label position="stacked" color="primary">Start date</ion-label>
-    <ion-datetime [(ngModel)]="date" display-format="MM DD YYYY" picker-format="MM DD YYYY" placeholder=""
+    <ion-datetime displayFormat="MM DD YYYY" pickerFormat="MM DD YYYY" 
       [(ngModel)]="user.business.jobPosting.startDate">
     </ion-datetime>
   </ion-item>

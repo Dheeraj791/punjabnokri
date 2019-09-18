@@ -11,7 +11,7 @@ export class UserProfile {
     desiredSalaryMin: number;
     desiredSalaryMax: number;
     activelySeekingWork: boolean;
-    why: string; 
+    why: string;
 
     constructor(data?: any) {
         if (data) {
@@ -24,8 +24,20 @@ export class UserProfile {
             this.desiredSalary = data.desiredSalary;
             this.desiredSalaryMin = data.desiredSalaryMin;
             this.desiredSalaryMax = data.desiredSalaryMax;
-            this.activelySeekingWork = data.activelySeeking;
+            this.activelySeekingWork = data.activelySeekingWork;
             this.why = data.why;
+        } else {
+            this.fullTime = false;
+            this.partTime = false;
+            this.morning = false;
+            this.afternoon = false;
+            this.evening = false;
+            this.weekend = false;
+            this.desiredSalary = null;
+            this.desiredSalaryMin = null;
+            this.desiredSalaryMax = null;
+            this.activelySeekingWork = false;
+            this.why = '';
         }
     }
 }
