@@ -30,6 +30,7 @@ export class Business {
             this.name = '';
             this.whyJoin = '';
             this.about = '';
+            this.jobPosting = new JobPosting;
         }
     }
 }

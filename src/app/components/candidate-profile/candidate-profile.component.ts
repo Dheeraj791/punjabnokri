@@ -34,7 +34,7 @@ export class CandidateProfileComponent implements OnInit {
     }
 
     onInterested() {
-        this.apiService.put('candidate/' + this.user.id, { interested: true }).subscribe(
+        this.apiService.put('candidate/interested/' + this.user.id, { interested: true }).subscribe(
             (result: any) => {
 
             },
@@ -46,7 +46,7 @@ export class CandidateProfileComponent implements OnInit {
     }
 
     onNotInterested() {
-        this.apiService.put('candidate/' + this.user.id, { interested: false }).subscribe(
+        this.apiService.put('candidate/interested/' + this.user.id, { interested: false }).subscribe(
             (result: any) => {
 
             },

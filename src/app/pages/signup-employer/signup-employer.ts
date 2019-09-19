@@ -54,7 +54,7 @@ export class SignupEmployerPage {
     private authService: AuthService,
     private userService: UserService,
     private errorService: ErrorService,
-    private logService: LogService, 
+    private logService: LogService,
     private skillData: SkillData
   ) {
 
@@ -103,7 +103,8 @@ export class SignupEmployerPage {
 
   loadSkills() {
 
-    this.apiService.get('skills/jobposting', { jobPostingId: this.user.business.jobPosting.id }).subscribe(
+    const jobPostingId = this.user.business.jobPosting ? this.user.business.jobPosting.id : null;
+    this.apiService.get('skills/jobposting', { jobPostingId: jobPostingId }).subscribe(
       (result: any) => {
         this.skills = Skill.initializeArray(result.data);
         this.skillsCategories = this.skillData.getCategories(this.skills);
