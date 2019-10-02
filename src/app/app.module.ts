@@ -23,14 +23,19 @@ import { AuthGuard } from './guards/auth.guard';
 import { Privacy } from './pages/static/privacy/privacy';
 import { Terms } from './pages/static/terms/terms';
 
+import { Network } from '@ionic-native/network/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { GoogleMaps } from '@ionic-native/google-maps';
+
+
 @NgModule({
   declarations: [
-    AppComponent, 
+    AppComponent,
     Privacy,
     Terms],
   entryComponents: [
     Privacy,
-     Terms
+    Terms
   ],
   imports: [
     AppRoutingModule,
@@ -53,6 +58,10 @@ import { Terms } from './pages/static/terms/terms';
     AuthGuard,
     Privacy,
     Terms,
+    GoogleMaps,
+    Network,
+    Geolocation,
+
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

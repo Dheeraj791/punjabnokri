@@ -12,6 +12,7 @@ import { BusinessProfileComponent } from './business-profile/business-profile.co
 import { CandidateProfileComponent } from './candidate-profile/candidate-profile.component';
 import { JobPostingComponent } from './job-posting/job-posting.component';
 import { SocialComponent } from './social/social.component';
+import { AutoCompleteComponent } from './address-autocomplete/address-autocomplete.component';
 import { FilterPipe } from '../pipes/filter';
 
 @NgModule({
@@ -26,7 +27,8 @@ import { FilterPipe } from '../pipes/filter';
         SocialComponent,
         BusinessProfileComponent,
         CandidateProfileComponent,
-        JobPostingComponent
+        JobPostingComponent,
+        AutoCompleteComponent
     ],
     imports: [
         IonicModule,
@@ -43,7 +45,8 @@ import { FilterPipe } from '../pipes/filter';
         SocialComponent,
         BusinessProfileComponent,
         CandidateProfileComponent,
-        JobPostingComponent
+        JobPostingComponent,
+        AutoCompleteComponent
     ],
     entryComponents: [
         ScheduleFilterPage,
@@ -51,7 +54,8 @@ import { FilterPipe } from '../pipes/filter';
         SocialComponent,
         BusinessProfileComponent,
         CandidateProfileComponent,
-        JobPostingComponent
+        JobPostingComponent,
+        AutoCompleteComponent
     ]
 })
 export class HyrSkillsModule { }

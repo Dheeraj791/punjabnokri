@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { UserData } from '../../providers/user-data';
 import { User } from '../../models/user';
 import { JobPosting } from '../../models/job-posting';
@@ -14,6 +15,7 @@ import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { ErrorService } from '../../services/error.service';
 import { LogService } from '../../services/log.service';
+import { AutoCompleteComponent } from '../../components/address-autocomplete/address-autocomplete.component';
 
 @Component({
   selector: 'page-signup-employer',
@@ -45,6 +47,7 @@ export class SignupEmployerPage {
 
   start: boolean = false;
   loaded: boolean = false;
+  map: any;
 
   constructor(
     public router: Router,
@@ -55,7 +58,9 @@ export class SignupEmployerPage {
     private userService: UserService,
     private errorService: ErrorService,
     private logService: LogService,
-    private skillData: SkillData
+    private skillData: SkillData,
+    private modalCtrl: ModalController
+
   ) {
 
 
@@ -284,6 +289,45 @@ export class SignupEmployerPage {
 
   onReset() {
     this.step = 1;
+  }
+
+  async onAddressBusinessClick() {
+    const modal = await this.modalCtrl.create({
+      component: AutoCompleteComponent,
+      componentProps: {
+        'addressStr': this.user.business.headOfficeAddress
+      }
+    });
+
+    await modal.present();
+
+    await modal.onDidDismiss().then((formData) => {
+      if (formData) {
+        this.user.business.headOfficeAddress = formData.data.location.description;
+      }
+    });
+
+    console.log(this.user.business.headOfficeAddress);
+
+  }
+
+
+  async onAddressJobPostingClick() {
+    const modal = await this.modalCtrl.create({
+      component: AutoCompleteComponent,
+      componentProps: {
+        'addressStr': this.user.business.jobPosting.address
+      }
+    });
+
+    await modal.present();
+
+    await modal.onDidDismiss().then((formData) => {
+      if (formData) {
+        this.user.business.jobPosting.address = formData.data.location.description;
+      }
+    });
+
   }
 
 }

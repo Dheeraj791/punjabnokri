@@ -1,5 +1,6 @@
 <header-public-component [showHome]="false" [showLogin]="true"></header-public-component>
 
+
 <ion-content *ngIf="step == 1 && loaded" padding>
   <confirm-account *ngIf="user.status === 'unconfirmed'"></confirm-account>
 
@@ -11,8 +12,12 @@
 
   <ion-item>
     <ion-label position="stacked" color="primary">Head Office Address</ion-label>
-    <ion-input id="head-office" name="head-office" type="text" required [(ngModel)]="user.business.headOfficeAddress">
+    <ion-input id="head-office" name="head-office" type="text" required [(ngModel)]="user.business.headOfficeAddress"
+      autocomplete="off" autocorrect="off" spellcheck="false">
     </ion-input>
+    <button class="button-icon" ion-button item-right clear icon-only (click)="onAddressBusinessClick()" slot="end">
+      <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+    </button>
   </ion-item>
 
   <ion-item>
@@ -106,6 +111,9 @@
     <ion-label position="stacked" color="primary">Job Address</ion-label>
     <ion-input type="text" required [(ngModel)]="user.business.jobPosting.address">
     </ion-input>
+    <button class="button-icon" ion-button item-right clear icon-only (click)="onAddressJobPostingClick()" slot="end">
+      <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+    </button>
   </ion-item>
   <ion-item>
     <ion-label position="stacked" color="primary">Start date</ion-label>
