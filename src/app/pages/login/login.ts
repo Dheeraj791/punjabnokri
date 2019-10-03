@@ -44,7 +44,7 @@ export class LoginPage {
       }
     });
     */
-    
+
   }
 
   ionViewWillEnter() {
@@ -62,6 +62,11 @@ export class LoginPage {
         (result: any) => {
           if (result.access_token) {
             this.authService.authenticate(result.access_token);
+            if (this.user.type === 'jobseeker') {
+              this.router.navigateByUrl('/signup-jobseeker');
+            } else {
+              this.router.navigateByUrl('/signup-employer');
+            }
           }
         },
         (error: any) => {
