@@ -12,6 +12,9 @@ import { ErrorService } from '../../services/error.service';
 import { LogService } from '../../services/log.service';
 
 import { SkillData } from '../../providers/skills';
+import { ModalController } from '@ionic/angular';
+import { AutoCompleteComponent } from '../../components/address-autocomplete/address-autocomplete.component';
+
 
 @Component({
   selector: 'page-signup-jobseeker',
@@ -58,7 +61,8 @@ export class SignupJobseekerPage {
     private userService: UserService,
     private errorService: ErrorService,
     private logService: LogService,
-    private skillData: SkillData
+    private skillData: SkillData,
+    private modalCtrl: ModalController
   ) {
 
     this.userService.getUser().then(user => {
@@ -107,7 +111,7 @@ export class SignupJobseekerPage {
         this.step = res;
       }
     }
-    ) ;
+    );
 
     this.userService.getUser().then(user => {
       this.user = user;
@@ -266,6 +270,27 @@ export class SignupJobseekerPage {
 
   onReset() {
     this.step = 1;
+  }
+
+  async onAddressClick() {
+
+    const modal = await this.modalCtrl.create({
+      component: AutoCompleteComponent,
+      componentProps: {
+        'addressStr': this.user.profile.address
+      }
+    });
+
+    await modal.present();
+
+    await modal.onDidDismiss().then((formData) => {
+      if (formData) {
+        this.user.profile.address = formData.data.location.description;
+        console.log(this.user.profile.address);
+        console.log(this.user.profile);
+      }
+    });
+
   }
 
 }

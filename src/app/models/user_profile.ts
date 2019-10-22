@@ -27,7 +27,7 @@ export class UserProfile {
             this.desiredSalaryMax = data.desiredSalaryMax;
             this.activelySeekingWork = data.activelySeekingWork;
             this.why = data.why;
-            this.address = data.address; 
+            this.address = data.address;
         } else {
             this.fullTime = false;
             this.partTime = false;

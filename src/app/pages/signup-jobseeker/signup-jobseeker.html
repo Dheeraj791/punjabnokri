@@ -53,7 +53,7 @@
     </ion-item>
 
     <p text-center>Salary expectations</p>
-  <!--
+    <!--
       <ion-item>
         <span slot="start" class="dot"></span>
         <ion-label position="stacked">Minimum Salary</ion-label>
@@ -75,12 +75,12 @@
       <ion-input name="max-salary" type="text" required [(ngModel)]="user.profile.hourlyRate">
       </ion-input>
     </ion-item>
-
+  
     <ion-item (click)="onAddressClick()">
-      <ion-label position="stacked" color="primary">Address</ion-label>
-      <ion-input type="text" required [(ngModel)]="user.profile.address">
+      <ion-label for="address" position="stacked" color="primary">Address</ion-label>
+      <ion-input name="address" type="text" required [(ngModel)]="user.profile.address">
       </ion-input>
-      <button class="button-icon" ion-button item-right clear icon-only  slot="end">
+      <button class="button-icon" ion-button item-right clear icon-only slot="end">
         <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
       </button>
     </ion-item>
