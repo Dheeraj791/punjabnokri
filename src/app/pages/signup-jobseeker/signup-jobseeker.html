@@ -53,20 +53,26 @@
     </ion-item>
 
     <p text-center>Salary expectations</p>
+  <!--
+      <ion-item>
+        <span slot="start" class="dot"></span>
+        <ion-label position="stacked">Minimum Salary</ion-label>
+        <ion-input name="minimumSalary" name="minimumSalary" type="text" required
+          [(ngModel)]="user.profile.desiredSalaryMin">
+        </ion-input>
+      </ion-item>
 
+      <ion-item>
+        <span slot="start" class="dot"></span>
+        <ion-label position="stacked">Maximum Salary</ion-label>
+        <ion-input name="maximumSalary" name="maximumSalary" type="text" required
+          [(ngModel)]="user.profile.desiredSalaryMax">
+        </ion-input>
+      </ion-item>
+  -->
     <ion-item>
-      <span slot="start" class="dot"></span>
-      <ion-label position="stacked">Minimum Salary</ion-label>
-      <ion-input name="minimumSalary" name="minimumSalary" type="text" required
-        [(ngModel)]="user.profile.desiredSalaryMin">
-      </ion-input>
-    </ion-item>
-
-    <ion-item>
-      <span slot="start" class="dot"></span>
-      <ion-label position="stacked">Maximum Salary</ion-label>
-      <ion-input name="maximumSalary" name="maximumSalary" type="text" required
-        [(ngModel)]="user.profile.desiredSalaryMax">
+      <ion-label position="stacked" color="primary">Hourly Rate</ion-label>
+      <ion-input name="max-salary" type="text" required [(ngModel)]="user.profile.hourlyRate">
       </ion-input>
     </ion-item>
 

@@ -48,6 +48,7 @@ export class AutoCompleteComponent {
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = '';
     this.autocompleteItems = [];
+    
   }
 
 

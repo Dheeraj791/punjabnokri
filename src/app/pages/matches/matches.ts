@@ -38,10 +38,11 @@ export class MatchesPage {
     private loadingController: LoadingController,
     private apiService: ApiService
   ) {
-
+    
+    this.isLoaded = false; 
     this.userService.getUser().then((user: User) => {
       this.user = user;
-
+      this.getData();
     });
 
     this.userService.watcher.subscribe((user: User) => {
@@ -52,6 +53,10 @@ export class MatchesPage {
 
 
   ionViewDidEnter() {
+
+  }
+
+  getData() {
     this.activeMatches = this.matches;
     //load matches here
     if (this.user.type === 'employer') {

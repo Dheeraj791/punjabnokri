@@ -166,6 +166,7 @@ export class SignupEmployerPage {
   onJobPostingUpdate() {
     if (!this.user.business.jobPosting.title) {
       this.errorService.showAlert('Error', 'Please fill in the job title before proceeding.');
+      return;
     }
 
     this.apiService.post('jobposting', { businessId: this.user.business.id, jobPosting: this.user.business.jobPosting }).subscribe(
@@ -307,10 +308,7 @@ export class SignupEmployerPage {
       }
     });
 
-    console.log(this.user.business.headOfficeAddress);
-
   }
-
 
   async onAddressJobPostingClick() {
     const modal = await this.modalCtrl.create({

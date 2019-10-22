@@ -12,6 +12,7 @@ export class BusinessProfileComponent implements OnInit {
 
     @Output() searchStringUpdated: EventEmitter<number> = new EventEmitter();
     @Input() business: Business;
+    enableActions: boolean;
 
     constructor(
         private apiService: ApiService

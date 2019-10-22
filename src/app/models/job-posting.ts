@@ -14,6 +14,7 @@ export class JobPosting {
     weekend: boolean;
     minSalary: string;
     maxSalary: string;
+    hourlyRate: string; 
     startDate: string;
     address: string;
     interested: boolean;
@@ -35,6 +36,7 @@ export class JobPosting {
             this.weekend = data.weekend;
             this.minSalary = data.minSalary;
             this.maxSalary = data.maxSalary;
+            this.hourlyRate = data.hourlyRate; 
             this.address = data.address;
             if (data.startDate) {
                 this.startDate = new Date(data.startDate).toISOString();

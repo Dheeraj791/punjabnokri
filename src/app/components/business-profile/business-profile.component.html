@@ -13,7 +13,7 @@
 
 <ion-card *ngIf="enableActions">
     <ion-card-content>
-        <ion-item >
+        <ion-item>
             <ion-button (click)="onInterested()" [fill]="business.interested? 'solid': 'outline'">Interested
             </ion-button>
             <ion-button (click)="onNotInterested()" [fill]="!business.interested? 'solid': 'outline'">Not

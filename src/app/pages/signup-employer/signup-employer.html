@@ -10,12 +10,12 @@
     </ion-input>
   </ion-item>
 
-  <ion-item>
+  <ion-item (click)="onAddressBusinessClick()">
     <ion-label position="stacked" color="primary">Head Office Address</ion-label>
     <ion-input id="head-office" name="head-office" type="text" required [(ngModel)]="user.business.headOfficeAddress"
       autocomplete="off" autocorrect="off" spellcheck="false">
     </ion-input>
-    <button class="button-icon" ion-button item-right clear icon-only (click)="onAddressBusinessClick()" slot="end">
+    <button class="button-icon" ion-button item-right clear icon-only slot="end">
       <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
     </button>
   </ion-item>
@@ -84,7 +84,7 @@
       <ion-label>Weekends</ion-label>
       <ion-toggle name="weekend" color="success" [(ngModel)]="user.business.jobPosting.weekend"></ion-toggle>
     </ion-item>
-
+    <!--
     <ion-item>
       <ion-label position="stacked" color="primary">Min Salary</ion-label>
       <ion-input name="min-salary" type="text" required [(ngModel)]="user.business.jobPosting.minSalary">
@@ -96,7 +96,14 @@
       <ion-input name="max-salary" type="text" required [(ngModel)]="user.business.jobPosting.maxSalary">
       </ion-input>
     </ion-item>
+  -->
+    <p text-center>Salary expectations</p>
 
+    <ion-item>
+      <ion-label position="stacked" color="primary">Hourly Rate</ion-label>
+      <ion-input name="max-salary" type="text" required [(ngModel)]="user.business.jobPosting.hourlyRate">
+      </ion-input>
+    </ion-item>
   </form>
 
   <div padding>
@@ -107,11 +114,11 @@
 
 <ion-content *ngIf="step == 3" padding>
 
-  <ion-item>
+  <ion-item (click)="onAddressJobPostingClick()">
     <ion-label position="stacked" color="primary">Job Address</ion-label>
     <ion-input type="text" required [(ngModel)]="user.business.jobPosting.address">
     </ion-input>
-    <button class="button-icon" ion-button item-right clear icon-only (click)="onAddressJobPostingClick()" slot="end">
+    <button class="button-icon" ion-button item-right clear icon-only  slot="end">
       <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
     </button>
   </ion-item>

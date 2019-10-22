@@ -10,10 +10,15 @@ export class Business {
     about: string;
     jobPosting: JobPosting;
     jobPostings: JobPosting[];
+    title: string;
+    description: SVGAnimatedString;
+    score: number;
 
     constructor(data?: any) {
         if (data) {
             this.id = data.id;
+            this.title = data.title;
+            this.description = data.description;
             this.headOfficeAddress = data.headOfficeAddress;
             this.telephone = data.telephone;
             this.name = data.name;
@@ -24,6 +29,7 @@ export class Business {
             } else {
                 this.jobPosting = new JobPosting;
             }
+            this.score = data.score;
         } else {
             this.headOfficeAddress = '';
             this.telephone = '';

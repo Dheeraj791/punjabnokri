@@ -8,7 +8,7 @@ import { Platform } from '@ionic/angular';
 })
 export class BusinessPage {
   skills: Array<string>;
-
+  loaded: boolean;
 
   constructor(
     public platform: Platform
