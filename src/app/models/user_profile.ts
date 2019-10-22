@@ -11,6 +11,7 @@ export class UserProfile {
     desiredSalaryMin: number;
     desiredSalaryMax: number;
     activelySeekingWork: boolean;
+    address: string;
     why: string;
 
     constructor(data?: any) {
@@ -26,6 +27,7 @@ export class UserProfile {
             this.desiredSalaryMax = data.desiredSalaryMax;
             this.activelySeekingWork = data.activelySeekingWork;
             this.why = data.why;
+            this.address = data.address; 
         } else {
             this.fullTime = false;
             this.partTime = false;
@@ -38,6 +40,7 @@ export class UserProfile {
             this.desiredSalaryMax = null;
             this.activelySeekingWork = false;
             this.why = '';
+            this.address = '';
         }
     }
 }
