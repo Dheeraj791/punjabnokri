@@ -284,10 +284,11 @@ export class SignupJobseekerPage {
     await modal.present();
 
     await modal.onDidDismiss().then((formData) => {
-      if (formData) {
+      try {
         this.user.profile.address = formData.data.location.description;
-        console.log(this.user.profile.address);
-        console.log(this.user.profile);
+      }
+      catch (err) {
+        this.logService.debug('Address never returned');
       }
     });
 

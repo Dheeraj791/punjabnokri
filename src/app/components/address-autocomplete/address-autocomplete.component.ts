@@ -98,7 +98,6 @@ export class AutoCompleteComponent {
     geocoder.geocode({ 'address': address }, (results, status) => {
       this.latitude = results[0].geometry.location.lat();
       this.longitude = results[0].geometry.location.lng();
-      alert("lat: " + this.latitude + ", long: " + this.longitude);
     });
   }
 
