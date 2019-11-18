@@ -3,8 +3,6 @@
 <ion-content *ngIf="step == 1 && loaded" padding>
   <confirm-account *ngIf="user.status === 'unconfirmed'"></confirm-account>
 
-  <h1 text-center>My job seeking profile</h1>
-
   <form #seekingprofile="ngForm" novalidate>
     <p text-center>Desired Employment Type</p>
 

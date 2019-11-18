@@ -5,14 +5,11 @@
     </a>
     <div *ngIf="openConfirm">
    
-        <p>Your email address has not be confirmed. To confirm your email address, check your inbox for a confirmation
-            code.
-        </p>
+        <p>Your email address has not been confirmed. To confirm your email address, please check your inbox for a confirmation code and enter it below.</p>
         <p>
             <a (click)="onResend()">Click to resend email</a>
         </p>
 
-        <h2>Enter received confirmation code below</h2>
         <div>
             <ion-item>
                 <ion-input name="code" type="text" required [(ngModel)]="code">

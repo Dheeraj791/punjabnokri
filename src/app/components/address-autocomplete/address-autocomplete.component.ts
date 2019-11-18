@@ -173,7 +173,7 @@ export class AutoCompleteComponent {
     return new Promise((resolve, reject) => {
       this.service.nearbySearch(request, function (results, status) {
 
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
           resolve(results.map(b => {
             return results;
           }));
