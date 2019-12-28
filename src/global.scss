@@ -9,7 +9,27 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap');
 
+* {
+  font-family: 'Poppins', sans-serif;
+}
+:root {
+  --ion-color-hyrblue: #69c7bc;
+  --ion-color-hyrblue-rgb: 105, 199, 188;
+  --ion-color-hyrblue-contrast: #ffffff;
+  --ion-color-hyrblue-contrast-rgb: 0, 0, 0;
+  --ion-color-hyrblue-shade: #7FD1C6;
+  --ion-color-hyrblue-tint: #82dcd0;
+}
+.ion-color-hyrblue {
+  --ion-color-base: var(--ion-color-hyrblue) !important;
+  --ion-color-base-rgb: var(--ion-color-hyrblue-rgb) !important;
+  --ion-color-contrast: var(--ion-color-hyrblue-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-hyrblue-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-hyrblue-shade) !important;
+  --ion-color-tint: var(--ion-color-hyrblue-tint) !important;
+}
 ion-toolbar {
     // TODO test transparent and fullscreen
     --background: transparent;

@@ -1,6 +1,6 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController, IonSlides } from '@ionic/angular';
+import { MenuController, IonSlides} from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
@@ -12,6 +12,7 @@ import { LogService } from 'src/app/services/log.service';
   templateUrl: 'tutorial.html',
   styleUrls: ['./tutorial.scss'],
 })
+                          
 export class TutorialPage {
   showSkip = true;
   selectedType: string ;
@@ -31,12 +32,14 @@ export class TutorialPage {
     private authService: AuthService,
     private userService: UserService,
     private logService: LogService
-  ) {
+  )
+  
+  {
     this.loggedIn = false;
     this.selectedType = 'jobseeker';
   }
 
-  startApp() {
+    startApp() {
 
     if (this.loggedIn) {
       if (this.user) {
@@ -86,10 +89,8 @@ export class TutorialPage {
     this.menu.enable(true);
   }
 
-
-
   changeUserType($event) {
     this.selectedType = $event;
   }
-
+  
 }

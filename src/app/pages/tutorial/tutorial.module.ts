@@ -7,7 +7,6 @@ import { TutorialPageRoutingModule } from './tutorial-routing.module';
 import { Storage } from '@ionic/storage';
 import { HyrSkillsModule } from '../../components/components.module';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -19,4 +18,5 @@ import { HyrSkillsModule } from '../../components/components.module';
   entryComponents: [TutorialPage],
   providers: []
 })
+
 export class TutorialModule { }
