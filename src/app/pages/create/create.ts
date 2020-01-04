@@ -9,10 +9,8 @@ import { ErrorService } from 'src/app/services/error.service';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-
 import { Privacy } from '../static/privacy/privacy';
 import { Terms } from '../static/terms/terms';
-
 
 @Component({
   selector: 'page-create',
@@ -45,16 +43,17 @@ export class CreatePage {
     private router: Router,
     private modalController: ModalController
   ) {
-
     this.user = new User;
+    this.userType = 'jobseeker';
   }
 
   ionViewWillEnter() {
     this.start = false;
     this.storage.get('user_type').then(res => {
       this.userType = res;
-      this.user.type = this.userType;
-    });
+      this.user.type = res;
+      console.log('chat user', this.userType);
+        });
   }
 
   ionViewDidLeave() {
@@ -165,6 +164,11 @@ export class CreatePage {
     });
     await modal.present();
 
+  }
+
+  changeUserType($event) {
+    this.userType = $event;
+    console.log('chat change user', this.userType);
   }
 
   onStart() {

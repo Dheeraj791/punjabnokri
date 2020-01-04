@@ -75,6 +75,7 @@ export class TutorialPage {
     this.storage.get('user_type').then(res => {
       if (res) {
         this.selectedType = res;
+        console.log('tutorial user----->', this.selectedType);
       }
     }
     );

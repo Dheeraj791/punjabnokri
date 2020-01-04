@@ -1,15 +1,4 @@
-<ion-header no-border>
-  <ion-toolbar padding>
-    <ion-buttons slot="start">
-      <img src="./assets/img/hyrskills-logo.png" height="30">
-    </ion-buttons>
-    <ion-buttons slot="end" id="links">
-      <button ion-button routerLink="/tutorial">
-        Home
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<header-public-component [userType]="userType" [showLogin]="false" [showType]="true" (userTypeChange)="changeUserType($event)"></header-public-component>
 
 <ion-content *ngIf="!start">
   <chat-component [type]="userType" (chatFinished)="onStart()"></chat-component>
@@ -27,7 +16,7 @@
     <ion-list>
 
       <ion-item>
-        <ion-label position="stacked" color="primary">Fist Name</ion-label>
+        <ion-label position="stacked" color="primary">First Name</ion-label>
         <ion-input [(ngModel)]="user.firstName" name="firstname" type="text" #firstname="ngModel" required>
         </ion-input>
       </ion-item>

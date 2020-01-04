@@ -23,12 +23,12 @@ export class HeaderPublicComponent implements OnInit {
   @Input() userType: string;
   @Output() userTypeChange: EventEmitter<string> = new EventEmitter();
 
+
   constructor(
     private storage: Storage,
     private authService: AuthService,
     private router: Router
   ) {
-
 
   }
 
@@ -46,14 +46,19 @@ export class HeaderPublicComponent implements OnInit {
     this.authService.isAuthenticated().then(result => {
       this.loggedIn = result;
     });
-
   }
-
 
   onSwitchUserType() {
       this.userType = (this.userType === 'jobseeker' ? 'employer' : 'jobseeker');
+      console.log("switchusr" +this.userType)
       this.storage.set('user_type', this.userType);
-      this.userTypeChange.emit(this.userType);
+      
+      //if(this.userType == 'employer')
+      //this.userTypeChange.emit(this.userType);
+      
+       if(this.userType == 'jobseeker') this.goHome();
+       
+       
   }
 
   goHome() {
@@ -70,5 +75,4 @@ export class HeaderPublicComponent implements OnInit {
   onSignin() {
     this.router.navigateByUrl('/login');
   }
-
 }

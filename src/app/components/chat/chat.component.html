@@ -1,14 +1,16 @@
-
 <div id="chat-messages" padding>
     <div class="chat-message" *ngFor="let chatString of chatStrings; let i =index" [hidden]="i > currentMessage">
-        <img class="avatar" aria-hidden="false" src="./assets/img/lauren.png" >
+        <img class="avatar" aria-hidden="false" src="./assets/img/lauren.png">
         <span flex="" class="ng-hide flex" aria-hidden="true"></span>
         <div class="hs-chat-message hs-chat-message-bubble" ng-bind="message.text">{{chatString}}</div>
+      </div>
+  
+    <div class="ticontainer" *ngIf="!finished">
+        <div class="tiblock">
+          <div class="tidot"></div>
+          <div class="tidot"></div>
+          <div class="tidot"></div>
+          
+        </div>
+      </div>
     </div>
-    <div class="load-more" *ngIf="showLoadMore">...</div>
-</div>
-
-<div padding>
-    <ion-button expand="block" (click)="onFinish()" *ngIf="finished">Next</ion-button>
-    <a (click)="onFinish()" *ngIf="!finished">Skip</a>
-</div>

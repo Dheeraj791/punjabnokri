@@ -9,7 +9,6 @@ import { Storage } from '@ionic/storage';
 
 export class ChatComponent implements OnInit, OnDestroy {
 
-
     chatStringsJobSeeker: Array<string> = [
         'Hey! I\'m Lauren from HyrSkills.',
         'As you know, we focus on the things that matter like your skills, experience, availability, and salary expectations.',
@@ -63,18 +62,19 @@ export class ChatComponent implements OnInit, OnDestroy {
             if (res === 'employer') {
                 this.chatStrings = this.chatStringsEmployer;
                 this.maxMessage = 5;
-                this.showChatMessage(1500);
-                this.showChatMessage(3500);
+                this.showChatMessage(2500);
+                this.showChatMessage(4500);
                 this.showChatMessage(5500);
-                this.showChatMessage(7500, true);
-
+                this.showChatMessage(17500, true);
+                this.onFinish(7500);
 
             } else {
                 this.chatStrings = this.chatStringsJobSeeker;
                 this.maxMessage = 4;
-                this.showChatMessage(1500);
+                this.showChatMessage(2500);
                 this.showChatMessage(3500);
-                this.showChatMessage(5500, true);
+                this.showChatMessage(4500, true);
+                this.onFinish(17500);
 
             }
         });
@@ -104,8 +104,9 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.showLoadMore = show;
     }
 
-    onFinish() {
-        this.chatFinished.emit();
+    onFinish(interval) {
+        let nextScreenTimeout = setTimeout( () => {
+            this.chatFinished.emit();
+        }, interval);
     }
-
 }
