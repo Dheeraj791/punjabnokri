@@ -1,0 +1,36 @@
+.footer{
+
+    font-size: smaller;
+}
+
+ion-col{
+    ion-input{
+       border: solid 1px rgb(12, 12, 12);
+    }
+}
+
+h1, p{ 
+    padding: 0px 16px 16px;
+  }
+
+.wrap.button{
+
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+.center {
+    text-align:right;
+    font-size: x-small;
+    margin:none;
+    animation: slide-up 0.4s ease;
+    
+}
+
+ion-item {
+    --highlight-color-valid: transparent;
+    --highlight-color-invalid: transparent;
+    --highlight-color-focused: var(--ion-color-light);
+}
+
+::ng-deep .item > .item-highlight {
+    display: none !important;
+}

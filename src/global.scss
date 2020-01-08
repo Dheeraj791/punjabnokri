@@ -68,7 +68,6 @@ ion-toolbar {
   }
 }
 
-
 .skill-header{
   padding-right:20px;
   .skill-header-cell{
@@ -80,15 +79,13 @@ ion-toolbar {
       padding-left:0px;
     }
   }
- 
-}
+ }
 
 .skill-header:after {
   content: "";
   display: table;
   clear: both;
 }
-
 
 .button-icon{
   font-size:30px;

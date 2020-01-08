@@ -92,7 +92,6 @@ export class CreatePage {
         }
       );
     }
-
   }
 
   validateEmail(value) {
