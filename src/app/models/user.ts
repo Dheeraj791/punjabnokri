@@ -10,6 +10,7 @@ export class User {
     firstName: string;
     lastName: string;
     email: string;
+    telephone: string;
     password: string;
     address: string;
     type: string;
@@ -30,6 +31,7 @@ export class User {
             this.firstName = data.firstName;
             this.lastName = data.lastName;
             this.email = data.email;
+            this.telephone = data.telephone;
             this.password = data.password;
             this.address = data.address;
             this.type = data.type;
@@ -64,6 +66,7 @@ export class User {
             this.firstName = '';
             this.lastName = '';
             this.email = '';
+            this.telephone = '';
             this.password = '';
             this.address = '';
             this.type = '';

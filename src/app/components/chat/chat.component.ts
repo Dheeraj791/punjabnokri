@@ -65,8 +65,8 @@ export class ChatComponent implements OnInit, OnDestroy {
                 this.showChatMessage(2500);
                 this.showChatMessage(4500);
                 this.showChatMessage(5500);
-                this.showChatMessage(17500, true);
-                this.onFinish(7500);
+                this.showChatMessage(7500, true);
+                this.onFinish(8500);
 
             } else {
                 this.chatStrings = this.chatStringsJobSeeker;
@@ -74,7 +74,7 @@ export class ChatComponent implements OnInit, OnDestroy {
                 this.showChatMessage(2500);
                 this.showChatMessage(3500);
                 this.showChatMessage(4500, true);
-                this.onFinish(17500);
+                this.onFinish(5500);
 
             }
         });

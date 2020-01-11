@@ -4,7 +4,6 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
-import { Router } from '@angular/router';
 import { User } from './models/user';
 import { ApiService} from './services/api.service';
 import { AuthService } from './services/auth.service';
@@ -26,12 +25,11 @@ export class AppComponent {
     private authService: AuthService,
     private apiService: ApiService,
     private storage: Storage,
-    private router: Router
+    
   ) {
 
     this.initializeApp();
     this.checkForAuthentication();
-
     this.authService.Authenticator.subscribe((authenticated: boolean) => {
       this.checkForAuthentication();
       console.log('authenticator subscribe');

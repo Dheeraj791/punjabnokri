@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Privacy } from '../static/privacy/privacy';
 import { Terms } from '../static/terms/terms';
+import { Events } from '@ionic/angular';
 
 @Component({
   selector: 'page-create',
@@ -32,8 +33,10 @@ export class CreatePage {
   confirmEmail: string;
   start: boolean = false;
   show: boolean = false;
-
-  constructor(
+  loading: HTMLIonLoadingElement =null;
+  
+  
+    constructor(
     private platform: Platform,
     private apiService: ApiService,
     private userService: UserService,
@@ -41,19 +44,30 @@ export class CreatePage {
     private errorService: ErrorService,
     private storage: Storage,
     private router: Router,
-    private modalController: ModalController
-  ) {
+    private modalController: ModalController,
+    public  events: Events,
+    public loadingCtrl: LoadingController,
+    
+  ) 
+  
+  {
     this.user = new User;
     this.userType = 'jobseeker';
   }
 
   ionViewWillEnter() {
-    this.start = false;
+    //this.start = false;
+    this.user = new User;
+    this.submitted = false;
+    this.passwordConfirm = '';
+    this.authService.logout();
+    this.userService.setUser(this.user);
     this.storage.get('user_type').then(res => {
-      this.userType = res;
-      this.user.type = res;
-      console.log('chat user', this.userType);
-        });
+    this.userType = res;
+    this.user.type = res;
+    
+    });
+
   }
 
   ionViewDidLeave() {
@@ -61,18 +75,21 @@ export class CreatePage {
   }
 
   onSignup(form: NgForm) {
+
     this.submitted = true;
     if (form.valid) {
+      this.presentLoadingDefault();
       const password = this.user.password;
       this.apiService.post('users', this.user).subscribe(
         (result: any) => {
           this.userService.setUser(result.data);
           this.apiService.authenticate(result.data.email, password).subscribe(
             (result: any) => {
+              this.loading.dismiss();
               if (result.access_token) {
                 this.authService.authenticate(result.access_token);
                 if (this.user.type === 'jobseeker') {
-                  this.router.navigateByUrl('/signup-jobseeker');
+                  this.router.navigateByUrl('/signup-jobseeker');   
                 }
                 else {
                   this.router.navigateByUrl('/signup-employer');
@@ -83,16 +100,18 @@ export class CreatePage {
               }
             },
             (error: any) => {
+              this.loading.dismiss();
               this.errorService.showAlert('Error', error.message);
             }
           );
         },
         (error: any) => {
+          this.loading.dismiss();
           this.errorService.showAlert('Error', error.message);
         }
       );
     }
-  }
+   }
 
   validateEmail(value) {
     const reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -154,7 +173,6 @@ export class CreatePage {
       component: Terms
     });
     await modal.present();
-
   }
 
   async onPrivacy() {
@@ -162,17 +180,24 @@ export class CreatePage {
       component: Privacy
     });
     await modal.present();
-
   }
 
   changeUserType($event) {
     this.userType = $event;
-    console.log('chat change user', this.userType);
+   }
+
+   async presentLoadingDefault() {
+    let loading = await this.loadingCtrl.create({
+      spinner: 'crescent',
+      translucent: true,
+      cssClass: 'custom-ion-loader',
+      message: 'Please wait...',
+    });
+    this.loading = loading;
+    return await loading.present();
   }
 
   onStart() {
     this.start = true;
   }
-
 }
-
