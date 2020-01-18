@@ -23,6 +23,7 @@ import { AutoCompleteComponent } from '../../components/address-autocomplete/add
   styleUrls: ['./signup-employer.scss'],
 })
 export class SignupEmployerPage {
+  
   user: User;
   submitted = false;
   passwordConfirm: string;
@@ -50,8 +51,8 @@ export class SignupEmployerPage {
   map: any;
 
   constructor(
-    public router: Router,
-    public userData: UserData,
+    public  router: Router,
+    public  userData: UserData,
     private storage: Storage,
     private apiService: ApiService,
     private authService: AuthService,
@@ -59,11 +60,9 @@ export class SignupEmployerPage {
     private errorService: ErrorService,
     private logService: LogService,
     private skillData: SkillData,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
 
   ) {
-
-
 
     this.userService.watcher.subscribe((user: User) => {
       this.user = user;

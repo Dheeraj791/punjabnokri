@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
 import { User } from './models/user';
 import { ApiService} from './services/api.service';
 import { AuthService } from './services/auth.service';
-
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 @Component({
   selector: 'app-root',

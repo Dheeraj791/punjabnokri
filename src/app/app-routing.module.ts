@@ -31,7 +31,12 @@ const routes: Routes = [
     path: 'app',
     loadChildren: './pages/tabs-page/tabs-page.module#TabsModule',
     canActivate: [AuthGuard]
-  } 
+  },
+  {
+    path: 'user-form', 
+    loadChildren: './pages/user-form/user-form.module#UserFormPageModule'
+  }
+
 ];
 
 @NgModule({

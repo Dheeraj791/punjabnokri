@@ -7,7 +7,6 @@ import { SignupJobseekerPage } from './signup-jobseeker';
 import { SignupJobSeekerPageRoutingModule } from './signup-jobseeker-routing.module';
 import { HyrSkillsModule } from '../../components/components.module';
 
-
 @NgModule({
   imports: [
     CommonModule,

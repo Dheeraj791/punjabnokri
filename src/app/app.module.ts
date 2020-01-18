@@ -26,6 +26,8 @@ import { Terms } from './pages/static/terms/terms';
 import { Network } from '@ionic-native/network/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { Camera } from '@ionic-native/camera/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 
 @NgModule({
@@ -61,6 +63,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     GoogleMaps,
     Network,
     Geolocation,
+    Camera,
+    ImagePicker,
 
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

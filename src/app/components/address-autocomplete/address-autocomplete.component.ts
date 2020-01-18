@@ -1,5 +1,7 @@
 import { Component, NgZone, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation/ngx';
 import {
   GoogleMaps,
@@ -34,12 +36,20 @@ export class AutoCompleteComponent {
   geo: any
   service: any;
   googleMaps: any;
+  user: User;
 
   constructor(
     public modalCtrl: ModalController,
     private zone: NgZone,
-    private geoLocation: Geolocation) {
+    private geoLocation: Geolocation,
+    private userService: UserService) {
     this.autocompleteItems = [];
+    this.userService.getUser().then(user => {
+      this.user = user;
+    });
+    this.userService.watcher.subscribe((user: User) => {
+      this.user = user;
+    });
 
   }
 
@@ -50,7 +60,6 @@ export class AutoCompleteComponent {
     this.autocompleteItems = [];
     
   }
-
 
   dismiss() {
     this.modalCtrl.dismiss();
@@ -89,6 +98,8 @@ export class AutoCompleteComponent {
   }
 
   selectSearchResult(item) {
+    console.log('selected add-->',item.description);
+    this.user.address = item.description;
     this.modalCtrl.dismiss({ location: item });
   }
 

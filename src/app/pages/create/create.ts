@@ -1,25 +1,24 @@
-import { Component } from '@angular/core';
-import { Platform, LoadingController } from '@ionic/angular';
-import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
-import { ApiService } from 'src/app/services/api.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { NgForm } from '@angular/forms';
-import { ErrorService } from 'src/app/services/error.service';
-import { Storage } from '@ionic/storage';
-import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
-import { Privacy } from '../static/privacy/privacy';
-import { Terms } from '../static/terms/terms';
-import { Events } from '@ionic/angular';
+import { Component } from "@angular/core";
+import { Platform, LoadingController } from "@ionic/angular";
+import { User } from "../../models/user";
+import { UserService } from "../../services/user.service";
+import { ApiService } from "src/app/services/api.service";
+import { AuthService } from "src/app/services/auth.service";
+import { NgForm } from "@angular/forms";
+import { ErrorService } from "src/app/services/error.service";
+import { Storage } from "@ionic/storage";
+import { Router } from "@angular/router";
+import { ModalController } from "@ionic/angular";
+import { Privacy } from "../static/privacy/privacy";
+import { Terms } from "../static/terms/terms";
+import { Events } from "@ionic/angular";
 
 @Component({
-  selector: 'page-create',
-  templateUrl: 'create.html',
-  styleUrls: ['./create.scss']
+  selector: "page-create",
+  templateUrl: "create.html",
+  styleUrls: ["./create.scss"]
 })
 export class CreatePage {
-
   submitted: boolean = false;
   user: User;
   password: string;
@@ -33,10 +32,9 @@ export class CreatePage {
   confirmEmail: string;
   start: boolean = false;
   show: boolean = false;
-  loading: HTMLIonLoadingElement =null;
-  
-  
-    constructor(
+  loading: HTMLIonLoadingElement = null;
+
+  constructor(
     private platform: Platform,
     private apiService: ApiService,
     private userService: UserService,
@@ -45,29 +43,24 @@ export class CreatePage {
     private storage: Storage,
     private router: Router,
     private modalController: ModalController,
-    public  events: Events,
-    public loadingCtrl: LoadingController,
-    
-  ) 
-  
-  {
-    this.user = new User;
-    this.userType = 'jobseeker';
+    public events: Events,
+    public loadingCtrl: LoadingController
+  ) {
+    this.user = new User();
+    this.userType = "jobseeker";
   }
 
   ionViewWillEnter() {
     //this.start = false;
-    this.user = new User;
+    this.user = new User();
     this.submitted = false;
-    this.passwordConfirm = '';
+    this.passwordConfirm = "";
     this.authService.logout();
     this.userService.setUser(this.user);
-    this.storage.get('user_type').then(res => {
-    this.userType = res;
-    this.user.type = res;
-    
+    this.storage.get("user_type").then(res => {
+      this.userType = res;
+      this.user.type = res;
     });
-
   }
 
   ionViewDidLeave() {
@@ -75,12 +68,13 @@ export class CreatePage {
   }
 
   onSignup(form: NgForm) {
-
     this.submitted = true;
+    // if (this.user.type === 'jobseeker') {
+    //   this.router.navigateByUrl('/user-form');
     if (form.valid) {
       this.presentLoadingDefault();
       const password = this.user.password;
-      this.apiService.post('users', this.user).subscribe(
+      this.apiService.post("users", this.user).subscribe(
         (result: any) => {
           this.userService.setUser(result.data);
           this.apiService.authenticate(result.data.email, password).subscribe(
@@ -88,30 +82,28 @@ export class CreatePage {
               this.loading.dismiss();
               if (result.access_token) {
                 this.authService.authenticate(result.access_token);
-                if (this.user.type === 'jobseeker') {
-                  this.router.navigateByUrl('/signup-jobseeker');   
-                }
-                else {
-                  this.router.navigateByUrl('/signup-employer');
-                }
-              }
-              else {
-                this.errorService.showAlert('Error', 'Something went wrong. Please try again.');
+                this.router.navigateByUrl("/user-form");
+              } else {
+                this.errorService.showAlert(
+                  "Error",
+                  "Something went wrong. Please try again."
+                );
               }
             },
             (error: any) => {
               this.loading.dismiss();
-              this.errorService.showAlert('Error', error.message);
+              this.errorService.showAlert("Error", error.message);
             }
           );
         },
         (error: any) => {
           this.loading.dismiss();
-          this.errorService.showAlert('Error', error.message);
+          this.errorService.showAlert("Error", error.message);
         }
       );
     }
-   }
+    //  }
+  }
 
   validateEmail(value) {
     const reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -119,8 +111,7 @@ export class CreatePage {
     if (RegularExp.test(value)) {
       this.emailValidate = true;
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -131,19 +122,16 @@ export class CreatePage {
     if (RegularExp.test(value)) {
       this.passwordValidate = true;
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
-
 
   onChangePassword() {
     const validate = this.validatePassword(this.user.password);
     if (validate) {
       this.passwordValidate = true;
-    }
-    else {
+    } else {
       this.passwordValidate = false;
     }
   }
@@ -151,22 +139,21 @@ export class CreatePage {
   onChangeRepeat() {
     if (this.user.password === this.passwordConfirm) {
       this.passwordConfirmValidate = true;
-    }
-    else {
+    } else {
       this.passwordConfirmValidate = false;
     }
   }
 
-  onChangeEmail($event) {
-    const validate = this.validateEmail(this.user.email);
+  // onChangeEmail($event) {
+  //   const validate = this.validateEmail(this.user.email);
 
-    if (validate) {
-      this.emailValidate = true;
-    }
-    else {
-      this.emailValidate = false;
-    }
-  }
+  //   if (validate) {
+  //     this.emailValidate = true;
+  //   }
+  //   else {
+  //     this.emailValidate = false;
+  //   }
+  // }
 
   async onTerms() {
     const modal = await this.modalController.create({
@@ -184,14 +171,14 @@ export class CreatePage {
 
   changeUserType($event) {
     this.userType = $event;
-   }
+  }
 
-   async presentLoadingDefault() {
+  async presentLoadingDefault() {
     let loading = await this.loadingCtrl.create({
-      spinner: 'crescent',
+      spinner: "crescent",
       translucent: true,
-      cssClass: 'custom-ion-loader',
-      message: 'Please wait...',
+      cssClass: "custom-ion-loader",
+      message: "Please wait..."
     });
     this.loading = loading;
     return await loading.present();

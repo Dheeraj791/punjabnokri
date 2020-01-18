@@ -86,7 +86,6 @@ export class SignupJobseekerPage {
     */
   }
 
-
   loadSkills() {
     this.apiService.get('skills/user').subscribe(
       (result: any) => {
