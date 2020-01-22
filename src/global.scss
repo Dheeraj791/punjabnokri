@@ -14,22 +14,6 @@
 * {
   font-family: 'Poppins', sans-serif;
 }
-:root {
-  --ion-color-hyrblue: #69c7bc;
-  --ion-color-hyrblue-rgb: 105, 199, 188;
-  --ion-color-hyrblue-contrast: #ffffff;
-  --ion-color-hyrblue-contrast-rgb: 0, 0, 0;
-  --ion-color-hyrblue-shade: #7FD1C6;
-  --ion-color-hyrblue-tint: #82dcd0;
-}
-.ion-color-hyrblue {
-  --ion-color-base: var(--ion-color-hyrblue) !important;
-  --ion-color-base-rgb: var(--ion-color-hyrblue-rgb) !important;
-  --ion-color-contrast: var(--ion-color-hyrblue-contrast) !important;
-  --ion-color-contrast-rgb: var(--ion-color-hyrblue-contrast-rgb) !important;
-  --ion-color-shade: var(--ion-color-hyrblue-shade) !important;
-  --ion-color-tint: var(--ion-color-hyrblue-tint) !important;
-}
 ion-toolbar {
     // TODO test transparent and fullscreen
     --background: transparent;

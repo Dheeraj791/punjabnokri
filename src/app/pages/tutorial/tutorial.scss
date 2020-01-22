@@ -46,12 +46,8 @@ height: calc(100vh - 100px) !important;
 }
 
 ::ng-deep.swiper-pagination-bullet {
-  
   width: 20px !important;
   height: 20px !important;
-  border: 2px solid #025a50;
-  background: #69c7bc;
-    
 }
 ::ng-deep #tutorial .button-native {
   background: #69c7bc;
